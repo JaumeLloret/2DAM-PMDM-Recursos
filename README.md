@@ -45,3 +45,7 @@ Consulta las licencias y condiciones de cada herramienta y dependencia en sus fu
 - [PM9](PM9/README.md)
 
 La actualización completa está disponible en esta rama de revisión. La PR requiere fusión docente; los candidatos Moodle fijan el commit público comprobado y conservan ZIP locales completos.
+
+## Preparación de la prueba global
+
+[Formato y entrenamiento público diferente](Preparacion_global/README.md). Las pruebas oficiales se distribuyen por el docente en su momento; estos materiales permiten preparar el formato.
