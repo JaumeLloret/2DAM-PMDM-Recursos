@@ -86,7 +86,7 @@ Medir exige condiciones comparables: mismo equipo, versión, resolución, render
 
 Usa profiler/monitores del editor según entorno y captura datos saneados del recorrido. Repite para reducir el efecto de arranque/carga; distingue un pico de una tendencia. Un contador estable de nodos tras reinicio no demuestra ausencia de toda fuga de memoria, solo que no se acumulan esos nodos en el ensayo. Una tasa de frames de CI software no representa el móvil del alumnado.
 
-En Clasificador orbital se limita a cuatro objetos simultáneos y se eliminan tras captura/salida; esa política evita crecimiento indefinido. En Balizas se reutilizan tres instancias al reiniciar. G07 explica la hipótesis, evidencia, cambio y límite; no inventa números para completar una tabla.
+En un juego de captura se limita a cuatro objetos simultáneos y se eliminan tras captura/salida; esa política evita crecimiento indefinido. En Balizas se reutilizan tres instancias al reiniciar. G07 explica la hipótesis, evidencia, cambio y límite; no inventa números para completar una tabla.
 
 ## 12. Android, documentación y defensa
 
