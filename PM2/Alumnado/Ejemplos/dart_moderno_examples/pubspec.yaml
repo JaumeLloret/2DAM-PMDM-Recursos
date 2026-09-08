@@ -1,0 +1,12 @@
+name: dart_moderno_examples
+description: Ejemplos pure Dart para PM2.
+publish_to: none
+version: 1.0.0
+
+environment:
+  sdk: ">=3.13.0 <4.0.0"
+
+dev_dependencies:
+  test: ^1.25.0
+
+
