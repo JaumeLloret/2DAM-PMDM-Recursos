@@ -1,0 +1,16 @@
+name: quality_gate
+description: Laboratorio docente controlado PM6, sin servicios ni datos reales.
+publish_to: none
+version: 1.0.0+1
+environment:
+  sdk: '>=3.13.2 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+flutter:
+  uses-material-design: true
