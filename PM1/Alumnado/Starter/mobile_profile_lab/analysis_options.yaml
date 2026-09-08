@@ -1,0 +1,13 @@
+analyzer:
+  language:
+    strict-casts: true
+  errors:
+    unused_import: error
+
+linter:
+  rules:
+    - avoid_print
+    - prefer_const_constructors
+    - prefer_const_declarations
+
+
