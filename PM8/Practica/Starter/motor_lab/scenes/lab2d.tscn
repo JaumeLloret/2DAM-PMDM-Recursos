@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://scripts/lab2d.gd" id="1"]
+[sub_resource type="RectangleShape2D" id="GroundShape"]
+size = Vector2(520, 30)
+[sub_resource type="CircleShape2D" id="BallShape"]
+radius = 20.0
+[node name="Lab2D" type="Node2D"]
+script = ExtResource("1")
+[node name="Pivot" type="Node2D" parent="."]
+position = Vector2(600, 200)
+[node name="Probe" type="Polygon2D" parent="Pivot"]
+position = Vector2(80, 0)
+polygon = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
+color = Color(0.9, 0.55, 0.2, 1)
+[node name="Platform" type="StaticBody2D" parent="."]
+position = Vector2(680, 450)
+[node name="Shape" type="CollisionShape2D" parent="Platform"]
+shape = SubResource("GroundShape")
+[node name="Visual" type="Polygon2D" parent="Platform"]
+polygon = PackedVector2Array(-260, -15, 260, -15, 260, 15, -260, 15)
+color = Color(0.2, 0.5, 0.6, 1)
+[node name="SampleBody" type="RigidBody2D" parent="."]
+position = Vector2(500, 140)
+[node name="Shape" type="CollisionShape2D" parent="SampleBody"]
+shape = SubResource("BallShape")
+[node name="Visual" type="Polygon2D" parent="SampleBody"]
+polygon = PackedVector2Array(-20, 0, -14, -14, 0, -20, 14, -14, 20, 0, 14, 14, 0, 20, -14, 14)
+color = Color(0.4, 0.9, 0.5, 1)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+[node name="Panel" type="PanelContainer" parent="HUD"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 352.0
+offset_bottom = 326.0
+[node name="Rows" type="VBoxContainer" parent="HUD/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+[node name="Title" type="Label" parent="HUD/Panel/Rows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Motor Lab · 2D"
+[node name="Status" type="Label" parent="HUD/Panel/Rows"]
+custom_minimum_size = Vector2(320, 86)
+layout_mode = 2
+autowrap_mode = 2
+text = "Observa jerarquía y coordenadas"
+[node name="Rotate" type="Button" parent="HUD/Panel/Rows"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Iniciar / detener giro"
+[node name="Switch" type="Button" parent="HUD/Panel/Rows"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Volver a laboratorio 3D"
+[node name="Reset" type="Button" parent="HUD/Panel/Rows"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Restablecer escena"
+
+[node name="Game" type="Button" parent="HUD/Panel/Rows"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Analizar minijuego existente"

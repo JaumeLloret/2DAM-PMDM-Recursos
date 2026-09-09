@@ -22,10 +22,10 @@ git clone https://github.com/JaumeLloret/2DAM-PMDM-Recursos.git
 | [PM3](PM3/README.md) | Interfaz, navegación, estado y arquitectura | Disponible |
 | [PM4](PM4/README.md) | API, autenticación y persistencia | Disponible, con API local didáctica |
 | [PM5](PM5/README.md) | Dispositivo, permisos y multimedia | Disponible, con starter DEMO |
-| PM6 | Testing, calidad, DevTools y CI | Pendiente de incorporación |
-| PM7 | Flutter con agentes de IA y SDD | Pendiente de incorporación |
-| PM8 | Motores de juego: análisis y selección | Pendiente de incorporación |
-| PM9 | Juego 2D/3D móvil | Pendiente de incorporación |
+| [PM6](PM6/README.md) | Testing, calidad, DevTools y CI | Disponible |
+| [PM7](PM7/README.md) | Flutter con agentes de IA y SDD | Disponible |
+| [PM8](PM8/README.md) | Motores de juego: análisis y selección | Disponible |
+| [PM9](PM9/README.md) | Juego 2D/3D móvil | Disponible |
 
 ## GitHub y AULES
 
@@ -36,3 +36,16 @@ Los ejemplos usan datos ficticios `DEMO-*`. Trabaja en una copia y conserva regi
 La biblioteca de [Proyecto Intermodular II](https://github.com/JaumeLloret/2DAM-PI2-Recursos) reúne las guías y plantillas de coordinación de AulaFlow 2.0.
 
 Consulta las licencias y condiciones de cada herramienta y dependencia en sus fuentes oficiales. Esta publicación no añade una licencia nueva a materiales de terceros.
+
+## Unidades finales · edición 2026/27
+
+- [PM6](PM6/README.md)
+- [PM7](PM7/README.md)
+- [PM8](PM8/README.md)
+- [PM9](PM9/README.md)
+
+La actualización completa está disponible en esta rama de revisión. La PR requiere fusión docente; los candidatos Moodle fijan el commit público comprobado y conservan ZIP locales completos.
+
+## Preparación de la prueba global
+
+[Formato y entrenamiento público diferente](Preparacion_global/README.md). Las pruebas oficiales se distribuyen por el docente en su momento; estos materiales permiten preparar el formato.
