@@ -1,0 +1,28 @@
+# PM6 · Ruta: de un fallo reproducible a un despliegue demostrado
+
+**Reto.** Mejorarás una app DEMO que muestra trabajos y parece funcionar, pero cuenta mal, publica respuestas antiguas y deja la carga encendida tras un error. Antes de corregirla, demostrarás el defecto con una prueba que pueda fallar de la manera prevista. Después separarás cuatro evidencias: host, emulador/DevTools, CI/build y dispositivo real.
+
+**Tiempo único:** 8 h = 480 min: **390 min autónomos + dos misiones de 45 min efectivos**. La franja presencial nominal sigue siendo 19:30–20:25 (55 min); sus 10 min restantes son margen de acceso, arranque y transición, no una segunda tarea. Los 20 min efectivos liberados del diseño anterior pasan a A04 (+10) y A05 (+10). Haz cada bloque una sola vez: taller **o** misión desde casa, nunca ambas. T1 es el **12/01/2027** y T2 el **19/01/2027**. Si I3 necesita supervisión, la cita/tutoría individual se reprograma sin exigir asistencia a esa fecha. Las fechas de los talleres no son plazos de entrega.
+
+**Calendario operativo de esta edición.** Apertura de PM6, entrega objetivo y cierre técnico/de la unidad: **pendientes de confirmación docente**. No inventes esas fechas ni confundas el 19/01 con la entrega. Antes de abrir PM6 en AULES, deben figurar aquí, en la portada, en la sección de la unidad y en la tarea evaluable.
+
+Primero lee [Empieza aquí](../AULES/01_EMPIEZA_AQUI_PM6.html). Usa [Entorno y fuentes](06_ENTORNO_Y_FUENTES_PM6.md) para abrir la carpeta correcta. Guarda un único [dossier de calidad](01_REGISTRO_CALIDAD_PM6.md); Q01–Q05 son sus apartados, no cinco entregas.
+
+| Bloque | Paso humano: lee, haz, comprueba y conserva | Min | Modalidad | Ventana |
+|---|---|---:|---|---|
+| A01 | **1. Arranca y conoce el fallo.** Prepara la copia del starter; `flutter pub get`, `flutter analyze --fatal-infos`, `flutter test`. Verde de humo = arranca, no lógica correcta. Conserva versión, comando y salida. | 30 | AUTONOMA | Inicio |
+| A02 | **2. Aprende a probar lo que importa.** Lee [teoría](../Unidad/02_CONTENIDOS_PM6.md) §§1–6 y el mapa de niveles; predice contador/error/orden. Escribe en Q01 qué conducta debe distinguir tu test. | 65 | AUTONOMA | Antes de E1 |
+| A03 | **3. Provoca el rojo esperado.** Sigue [ejemplos](../Unidad/03_EJEMPLOS_GUIADOS_PM6.md) E1–E2 y [entrenamiento](../Unidad/04_ENTRENAMIENTO_PM6.md) K1–K3. Ejecuta el caso aislado; conserva expected/actual. Si no compila, es rojo de entorno: [debugging](../Unidad/05_DEBUGGING_PM6.md). | 45 | AUTONOMA | Antes de T1 |
+| T1 | **4. Diseña con fakes.** Taller opcional o [misión desde casa](../Unidad/10_TALLERES_Y_EQUIVALENCIAS_PM6.md): fallo, aserción, corrección mínima y regresión. Cierra Q01 y un primer Q02. | 45 | COLECTIVA | 2027-01-12 |
+| A04 | **5. Corrige sin romper.** Completa [laboratorio](../Unidad/06_LABORATORIO_PM6.md) hitos de async, error/retry, dispose, identidad y retención; usa K4–K7. Repite host y registra en Q02 qué no demuestra. Incluye 10 min antes atribuidos a T1. | 80 | AUTONOMA | Después de T1 |
+| A05 | **6. Observa la interacción y mide.** Sigue [DevTools](../Unidad/08_DEVTOOLS_Y_CI_PM6.md) y K8–K9: Inspector, Performance en profile, Memory. Guarda Q03 con protocolo, entorno y observaciones reales o `PENDIENTE_DEVTOOLS`. Incluye 10 min antes atribuidos a T2. | 70 | AUTONOMA | Antes de Android |
+| A06 | **7. Prepara Android y automatiza calidad.** Con [Entorno](06_ENTORNO_Y_FUENTES_PM6.md) genera plataforma, comprueba destinos, construye APK y crea workflow en repositorio de práctica autorizado. Anota SHA, run/step o `PENDIENTE_CI`; un build no es despliegue. | 55 | AUTONOMA | Antes de T2 |
+| T2 | **8. Demuestra en destino y explica.** Taller opcional o [misión desde casa](../Unidad/10_TALLERES_Y_EQUIVALENCIAS_PM6.md). Separa emulador RA2.g, APK y dispositivo real RA2.h. I3 mantiene 22 min de cambio sin agente + 10 min de explicación individual supervisada, con cita reprogramada si corresponde. | 45 | COLECTIVA | 2027-01-19 |
+| A07 | **9. Cierra regresión y dossier.** Repite pruebas sobre corte final, compara SHA de CI, completa Q01–Q05, usa [autoevaluación](../Unidad/12_AUTOEVALUACION_PM6.md). Declara observaciones pendientes sin sustituirlas por capturas ajenas. | 30 | AUTONOMA | Después de T2 |
+| A08 | **10. Entrega y atiende feedback.** Entrega código/tests, dossier único y evidencias saneadas por canal indicado por docente. Registra acuerdos para observación física o recuperación si faltan CE. | 15 | AUTONOMA | Cierre |
+
+En la columna «COLECTIVA», T1/T2 identifican el bloque de taller de la planificación, **no una asistencia obligatoria**: la misión desde casa ocupa los mismos 45 min efectivos y deja evidencia equivalente. La supervisión individual de I3 se concierta por cita y se integra en la vía de T2, sin añadir otra misión.
+
+**Cuatro capas que no se sustituyen entre sí.** Capa A: host/fakes/unit/widget demuestra lógica; capa B: emulador y DevTools observa interacción RA2.g; capa C: CI/build sobre SHA demuestra corte reproducible y APK construible; capa D: instalación, arranque y recorrido en dispositivo móvil real es necesaria para completar RA2.h. [Guía de entrega](../Unidad/07_EVALUACION_PM6.md). Si falta B/D por acceso, continúa A/C y solicita un turno real: no cambies la etiqueta de evidencia.
+
+**Rescate.** Primer error → [Debugging](../Unidad/05_DEBUGGING_PM6.md); falta de herramienta, destino o Actions → [Ayuda por síntomas](../Unidad/11_AYUDA_PM6.md). La recuperación «Museo Access Queue» se abre únicamente a quienes se asigne en la zona restringida de AULES; no se enlaza desde la ruta pública. [Ampliación](../Unidad/09_AMPLIACION_PM6.md) es opcional y no entra en 480 min. PM7/SDD/agentes no se inician aquí.

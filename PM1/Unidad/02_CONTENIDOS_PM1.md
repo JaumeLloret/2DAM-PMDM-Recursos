@@ -97,7 +97,7 @@ Para PMDM elegimos Flutter porque ofrece una base común móvil, feedback rápid
 
 ### 3.2 Modelo mental mínimo
 
-\`\`\`text
+```text
 tu código Dart
     ↓
 framework Flutter y árbol de widgets
@@ -105,7 +105,7 @@ framework Flutter y árbol de widgets
 motor/renderizado + integración de plataforma
     ↓
 Android, iOS u otro target soportado
-\`\`\`
+```
 
 Un **widget** describe una parte de la interfaz/configuración. En PM1 solo reconoceremos los que ya aparecen; PM3 enseñará UI, estado y arquitectura.
 
@@ -177,25 +177,25 @@ El emulador ofrece repetibilidad y perfiles controlados; el real aporta fidelida
 
 El recorrido de nuestro starter es:
 
-\`\`\`text
+```text
 main()
   → runApp(ProfileLabApp)
     → MaterialApp
       → ProfileScreen(profile)
         → buildDecisionText(profile)
-\`\`\`
+```
 
 ## 6. Dart mínimo para leer el starter
 
 No es el temario de PM2. Solo un diccionario:
 
-\`\`\`dart
+```dart
 final profile = MobileProfile(
   name: 'Perfil de laboratorio',
   memoryGb: 4,
   meteredNetwork: false,
 );
-\`\`\`
+```
 
 - `final`: la referencia no se reasigna.
 - `MobileProfile(...)`: crea un objeto de esa clase.
@@ -210,24 +210,24 @@ No necesitas dominar tipos, null safety, clases o colecciones todavía.
 
 Ejecuta desde terminal:
 
-\`\`\`bash
+```bash
 flutter --version
 dart --version
 flutter doctor -v
 flutter doctor --android-licenses
 flutter emulators
 flutter devices
-\`\`\`
+```
 
 Después, dentro de cada starter:
 
-\`\`\`bash
+```bash
 flutter create . --platforms=android --org es.aulaflow.lab
 flutter pub get
 flutter analyze
 flutter test
 flutter run
-\`\`\`
+```
 
 `flutter create .` materializa la carpeta Android reproducible usando el SDK instalado. Hazlo en una **copia de trabajo**; conserva el starter original para comparar.
 
@@ -261,14 +261,14 @@ flutter run
 
 Una tecnología no se elige por moda. Se elige tras relacionar:
 
-\`\`\`text
+```text
 necesidad de la app
   + perfil de usuarios/dispositivos
   + capacidades y límites
   + equipo y mantenimiento
   + evidencia de ejecución
 = decisión técnica justificable
-\`\`\`
+```
 
 En PM1 harás esa relación sobre una app pequeña. Las unidades posteriores añadirán lenguaje, UI, arquitectura, datos, dispositivo y calidad cuando curricularmente corresponda.
 
