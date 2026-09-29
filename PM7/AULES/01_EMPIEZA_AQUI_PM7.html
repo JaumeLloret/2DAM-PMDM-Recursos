@@ -1,12 +1,36 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PM7 · Empieza aquí</title><style>body{font:1.1rem/1.6 system-ui;max-width:70ch;margin:2rem auto;padding:0 1rem;color:#17212b;background:#fff}a{color:#0645ad}a:focus{outline:3px solid #9a4c00}li{margin:.7rem 0}</style></head><body><main><h1>PM7 · Empieza aquí</h1><p>Comienza por la guía del alumnado. Consulta la ruta y registra tus evidencias en el espacio autorizado. Los cuestionarios sirven para practicar; la calificación se decide desde RA/CE y evidencia auténtica.</p><nav aria-label="Materiales de aprendizaje"><ul><li><a href="../Unidad/01_GUIA_ALUMNADO_PM7.md">01 GUIA ALUMNADO PM7</a></li>
-<li><a href="../Unidad/02_CONTENIDOS_PM7.md">02 CONTENIDOS PM7</a></li>
-<li><a href="../Unidad/03_EJEMPLOS_GUIADOS_PM7.md">03 EJEMPLOS GUIADOS PM7</a></li>
-<li><a href="../Unidad/04_ENTRENAMIENTO_PM7.md">04 ENTRENAMIENTO PM7</a></li>
-<li><a href="../Unidad/05_SPEC_Y_DECISIONES_PM7.md">05 SPEC Y DECISIONES PM7</a></li>
-<li><a href="../Unidad/06_LABORATORIO_PM7.md">06 LABORATORIO PM7</a></li>
-<li><a href="../Unidad/07_EVALUACION_PM7.md">07 EVALUACION PM7</a></li>
-<li><a href="../Unidad/09_AMPLIACION_PM7.md">09 AMPLIACION PM7</a></li>
-<li><a href="../Alumnado/00_RUTA_PM7.md">00 RUTA PM7</a></li>
-<li><a href="../Alumnado/01_DOSSIER_SDD_PM7.md">01 DOSSIER SDD PM7</a></li>
-<li><a href="../Alumnado/02_ENTORNO_Y_FUENTES_PM7.md">02 ENTORNO Y FUENTES PM7</a></li>
-<li><a href="../Practica/Starter/spec_search/README.md">README</a></li></ul></nav></main></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PM7 · Empieza aquí</title>
+  <style>
+    body{font:1rem/1.6 system-ui,sans-serif;max-width:74rem;margin:auto;padding:1rem;color:#17212b;background:#fff}
+    h1,h2{line-height:1.25}a{color:#0645ad}a:focus{outline:3px solid #a04c00;outline-offset:3px}
+    .card{border:2px solid #325b77;border-radius:.5rem;padding:.8rem 1rem;margin:1rem 0}
+    .note{border-left:5px solid #a04c00;padding:.6rem 1rem;background:#fff7e7}
+    code{overflow-wrap:anywhere}
+    @media(prefers-color-scheme:dark){body{color:#eef3f8;background:#15202b}a{color:#a6d5ff}.note{background:#352919}}
+  </style>
+</head>
+<body><main>
+  <h1>PM7 · De una petición vaga a una feature que puedes explicar</h1>
+  <p>En <strong>Consulta DEMO</strong> partirás de una lista Flutter con cuatro entradas. Documentarás por qué y cómo añades una búsqueda por título y estado, comprobarás el resultado y revisarás tu propio diff. El producto es una feature pequeña y <strong>un único dossier D01–D08</strong>. Puedes trabajar en modo <strong>MANUAL</strong> con la misma evidencia; no necesitas una cuenta de pago ni un proveedor de agente.</p>
+  <section class="card" aria-labelledby="inicio">
+    <h2 id="inicio">Tus primeros 20 minutos · A01</h2>
+    <ol>
+      <li>Obtén la carpeta completa <a href="../Practica/Starter/spec_search/README.md">Practica/Starter/spec_search/</a>, haz una copia propia y abre <strong>la carpeta que contiene <code>pubspec.yaml</code></strong> en VS Code o Android Studio. No abras solamente <code>main.dart</code>. Si todavía no tienes Flutter, empieza por <a href="../Alumnado/02_ENTORNO_Y_FUENTES_PM7.md">Entorno y fuentes</a>.</li>
+      <li>En una terminal situada en esa carpeta ejecuta <code>flutter --version</code>, <code>flutter pub get</code>, <code>flutter analyze --fatal-infos</code> y <code>flutter test</code>. Esperas Flutter 3.47.2/Dart 3.13.2, dependencias disponibles, análisis sin errores y un test de humo verde. Abre <code>lib/catalog.dart</code> y comprueba que hay cuatro entradas DEMO-A–D. El humo verde <strong>no prueba todavía la búsqueda</strong>.</li>
+      <li>En tu <a href="../Alumnado/01_DOSSIER_SDD_PM7.md">dossier único</a>, inicia D05 con versión, carpeta, comandos, resultado real y límite del humo. Lee la petición inicial de <a href="../Unidad/05_SPEC_Y_DECISIONES_PM7.md">Consulta DEMO</a> y escribe dos preguntas propias antes de mirar la tarjeta de decisiones.</li>
+    </ol>
+    <p class="note"><strong>Checkpoint:</strong> puedes señalar <code>pubspec.yaml</code> y <code>lib/catalog.dart</code>, ves cuatro entradas, y distingues «el starter arranca» de «la feature funciona». Si un comando falla, registra el primer error y usa <a href="../Unidad/11_AYUDA_PM7.md">Ayuda por síntomas</a>; no inventes un resultado verde.</p>
+  </section>
+  <h2>Calendario y tiempo de esta edición</h2>
+  <p><strong>6 h = 360 min por estudiante:</strong> 270 min autónomos + T1 y T2 de 45 min efectivos cada uno. T1 es el <strong>26/01/2027</strong> y T2 el <strong>02/02/2027</strong>, martes 19:30–20:25. Los 10 min restantes de cada franja son margen operativo. En cada T eliges <strong>taller presencial o misión equivalente desde casa</strong>; nunca hagas ambas. La supervisión individual de I3 puede concertarse en otra cita dentro del tiempo de T2.</p>
+  <p class="note"><strong>Fechas pendientes:</strong> apertura de PM7, entrega objetivo y cierre/cutoff no están confirmados. Los días de taller no son plazos de entrega. Antes de abrir la unidad en AULES, el docente incorporará las fechas confirmadas aquí, en la <a href="../Alumnado/00_RUTA_PM7.md">Ruta</a>, en la sección y en la tarea de entrega.</p>
+  <nav aria-label="Continúa desde aquí">
+    <h2>Cómo continuar</h2>
+    <p>1. Sigue la <a href="../Alumnado/00_RUTA_PM7.md">Ruta paso a paso</a>. 2. Lee <a href="../Unidad/02_CONTENIDOS_PM7.md">teoría</a> y prueba los <a href="../Unidad/03_EJEMPLOS_GUIADOS_PM7.md">ejemplos</a>. 3. Haz el <a href="../Unidad/06_LABORATORIO_PM7.md">laboratorio</a> con la <a href="../Unidad/10_TALLERES_Y_EQUIVALENCIAS_PM7.md">vía de taller o casa</a>. 4. Comprueba el <a href="../Unidad/12_AUTOEVALUACION_PM7.md">autocontrol</a> y la <a href="../Unidad/07_EVALUACION_PM7.md">evaluación</a>.</p>
+    <p>Si te bloqueas: <a href="../Unidad/11_AYUDA_PM7.md">Ayuda por síntomas</a>. La recuperación es un carril restringido cuando el docente lo asigne; <a href="../Unidad/09_AMPLIACION_PM7.md">ampliación</a> es opcional.</p>
+  </nav>
+</main></body></html>

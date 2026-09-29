@@ -14,8 +14,10 @@ Trabaja desde Starter/beacon_dock, conservando baseline. No copies la solución.
 
 **Android y mejora, T3/A08/A09.** Configura templates/preset/JDK/SDK, exporta APK debug y registra hash/corte. Instala y prueba en dispositivo autorizado cuando exista acceso, con estados pendientes hasta observación. Mide un recorrido comparable, cambia una variable y conserva regresión/legibilidad. No conviertas un build o una captura de CI en instalación física.
 
-**Cierre, T4/A10/A11.** Realiza cambio nuevo individual sin ayuda generativa, explica diff y ejecuta prueba. Corrige hallazgo, repite lo necesario en el corte final y entrega dossier/recursos/fuentes, sin APK ni claves dentro del repositorio de fuentes si la política del espacio no los admite. Usa el canal autorizado para artefactos de QA. Mantén límites y evidencia pendientes explícitos.
+**Cierre, M4/A10/A11.** Realiza cambio nuevo individual sin ayuda generativa, explica diff y ejecuta prueba. Corrige hallazgo, repite lo necesario en el corte final y entrega dossier/recursos/fuentes, sin APK ni claves dentro del repositorio de fuentes si la política del espacio no los admite. Usa el canal autorizado para artefactos de QA. Mantén límites y evidencia pendientes explícitos.
 
 ## Evidencia mínima suficiente del producto
 
 El juego puede iniciarse, jugarse, pausarse, ganar/perder por sus condiciones y reiniciarse sin acumular objetos o conservar progreso incorrecto. Tres balizas tienen identidades distintas. El personaje colisiona y responde a input móvil/teclado en destinos observados. Materiales, audio, cámara/iluminación y HUD tienen propósito y configuración propia explicada. Hay pruebas/optimización/documentación auténticas y seguimiento de Android real. G01–G08 enlazan todo con CE; no se concede automáticamente un CE por recibir el componente ya preparado en el starter.
+
+La Ruta vigente reserva T1 16/02, T2 23/02 y T3 02/03/2027 con alternativa de casa equivalente, y M4 autónoma de 45 min. Los checkpoints son feedback; una única tarea recoge fuente y dossier G01–G08. No añadas 55 min históricos a esta práctica.

@@ -1,22 +1,15 @@
-# Laboratorio · Una feature con proceso defendible
+# Laboratorio · Consulta DEMO con proceso defendible
 
-## Entrada y resultado
+Trabaja en **tu copia** de `Practica/Starter/spec_search/`, abierta en VS Code o Android Studio con `pubspec.yaml` en la raíz. Usa terminal integrada en esa carpeta. La [Ruta](../Alumnado/00_RUTA_PM7.md) asigna A01–A07 y T1/T2; este laboratorio concreta archivos, comandos y salidas. Producto: búsqueda y estado para cuatro entradas DEMO según [S1–S7](05_SPEC_Y_DECISIONES_PM7.md), más **un dossier D01–D08**. PM6 enseñó tests/CI; aquí documentas decisiones, ejecución y revisión (RA2.i).
 
-Parte del starter spec_search, que muestra cuatro entradas sintéticas. No parte de la solución. Implementa S1–S7 de la tarjeta mediante un proceso documentado; entrega código, tests y D01–D08. Conserva el diseño sencillo: política de selección separada, estado local de texto/estado y UI legible. PM6 aporta las técnicas de comprobación; esta práctica documenta su uso y revisión.
+| Corte | Explicación y acción | Archivo/herramienta | Comprueba y conserva | Rescate |
+|---|---|---|---|---|
+| Baseline A01 | Ejecuta `flutter --version`, `flutter pub get`, `flutter analyze --fatal-infos`, `flutter test`. Abre el starter con `flutter run` si hay dispositivo. | `pubspec.yaml`, `lib/main.dart`, `test/smoke_test.dart`; terminal Flutter | Flutter 3.47.2/Dart 3.13.2, humo verde y cuatro entradas; D05 indica corte y límite: aún no prueba búsqueda. | [Entorno](../Alumnado/02_ENTORNO_Y_FUENTES_PM7.md) para SDK/AVD; conserva primer error, nunca escribas verde inventado. |
+| Contrato A02–A03 | Lee petición, formula preguntas **antes** de tarjeta; después cierra D01/D02, divide en política y UI en D03/D04. | `Unidad/05_SPEC_Y_DECISIONES_PM7.md`, `Alumnado/01_DOSSIER_SDD_PM7.md`; editor | Para «cámara + pendientes» predices A, para «REVISION» A/C; una tarea nombra archivo y prueba. | Si falta decisión, marca abierta y pide aclaración; sigue una tarea independiente. |
+| Política T1 | Sigue el [ejemplo rojo/verde](03_EJEMPLOS_GUIADOS_PM7.md): crea `test/search_test.dart`, stub temporal en `lib/catalog.dart`, ejecuta `flutter test test/search_test.dart`, implementa S1–S5 y repite. | Editor Dart y terminal en starter | Rojo **de aserción** esperado con stub, verde después de implementar; D04/D05 con before/after y diff. | Si no compila, revisa import/nombre/llaves; si falla aserción, revisa AND, acentos y estado con [Ayuda](11_AYUDA_PM7.md). |
+| UI A04 | Conecta consulta, selector y contador en `lib/main.dart`; añade pruebas de interacción en `test/` para S6/S7. Aplica `dart format lib test`, `flutter analyze --fatal-infos`, `flutter test`. | Editor/IDE y Flutter | Vacío y estado, limpiar texto conservando estado, orden/contador; D05 corresponde al corte. | Aísla primero política pura; si no hay emulador, tests y análisis siguen disponibles; marca `PENDIENTE_DISPOSITIVO` para UI visual. |
+| Diff/PR A05 | Ejecuta `git status --short`, `git diff --stat`, `git diff` en **tu repositorio de práctica autorizado**. Si ya creaste commit, revisa `git diff <base>..<head>` sustituyendo esos nombres por tus SHA reales. Contrasta S1–S7 y archivos inesperados. | Git, D06/D07 | Hallazgo localizado o comprobación concreta sin hallazgo, corte/resultado real, PR con enlace real o `PENDIENTE_PUBLICACION_PR`. | Sin Git autorizado, conserva patch local y borrador; solicita vía de publicación al docente, sin fingir PR. |
+| I3 T2 | Ante variante nueva docente, predice; cambia `lib/` y `test/` **sin agente**, ejecuta prueba pertinente y muestra diff. Actualiza D01/D02/D08. | Editor/terminal y cita supervisada | Predicción, diff, resultado, regla/documento, observación individual real. | Si aún no hubo supervisión, `PENDIENTE_SUPERVISION` y cita dentro de T2; no atribuyas observación a un trabajo doméstico. |
+| Cierre A06–A07 | Revisa [autoevaluación](12_AUTOEVALUACION_PM7.md) y dossier; tras cualquier corrección repite `dart format --output=none --set-exit-if-changed lib test`, `flutter analyze --fatal-infos`, `flutter test`. | Dossier, código, terminal | Dos cadenas Sx→decisión→tarea→diff→prueba→resultado→revisión; handoff y límites vinculados al corte final. | Registra primer fallo y siguiente acción; un resultado anterior no valida el nuevo corte. |
 
-## Cortes de trabajo
-
-1. A01: ejecuta baseline y guarda el estado inicial. Identifica versión y archivos; todavía no declares aceptada la feature.
-2. A02/A03: escribe spec, preguntas, decisiones, plan y tareas. Marca qué proviene de tarjeta y qué es una duda nueva. Aísla normalización/selección antes de UI.
-3. T1/A04: realiza un incremento por tarea con herramienta autorizada o MANUAL. Revisa permisos/archivos, ejecuta pruebas pertinentes y registra resultado real. No aceptes dependencias o rediseños que no pide la spec.
-4. A05: revisa el diff contra S1–S7, no solo contra tests. Anota hallazgo real o comprobación sin hallazgo; prepara PR completa en el repositorio autorizado. Si falta acceso, deja borrador y estado pendiente verificable.
-5. T2: modifica una condición nueva sin agente, explica efecto/documentos y ejecuta una comprobación. El docente recoge evidencia individual.
-6. A06/A07: incorpora feedback, corrige y cierra el dossier coherente con el corte entregado. Mantén los resultados de cortes anteriores como históricos.
-
-## Condiciones de revisión
-
-La feature cumple S1–S7; no modifica datos de entrada ni añade servicios. Los tests distinguen al menos vacío, normalización, AND, identidad y limpiar. Analyzer y formato corresponden al corte final. Cada decisión importante tiene una razón y cada afirmación de ejecución tiene fuente. Una respuesta de agente sin log no se convierte en test ejecutado.
-
-El dossier permite seguir dos criterios de extremo a extremo y reconstruir todo el proceso sin revisar cientos de mensajes. D08 es individual y auténtico. Si usas código sugerido, debes comprenderlo y poder cambiarlo. No se requiere publicar conversaciones completas ni revelar datos de cuenta. La cantidad de prompts o commits no es un criterio de éxito.
-
-La entrega técnica es una propuesta revisable. No concede aceptación contractual, AT ni puertas de AulaFlow, y no sustituye la prueba presencial global PMDM. Los pendientes de entorno se declaran y el docente facilita oportunidad de resolverlos.
+La herramienta de agente es opcional y solo en entorno autorizado; **MANUAL** produce igual spec, código, tests, diff y dossier. No se añaden servicios, dependencias ni datos reales. Una respuesta de agente no es una ejecución. La cantidad de prompts, commits o archivos no da puntos. La PR de práctica no concede aceptación contractual ni reemplaza la prueba práctica presencial global PMDM.

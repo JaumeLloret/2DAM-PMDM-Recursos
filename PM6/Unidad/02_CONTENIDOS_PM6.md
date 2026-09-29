@@ -1,5 +1,19 @@
 # Calidad observable en Flutter
 
+Empieza con una predicción: A abierta, B terminada y C abierta deben producir **2 pendientes**. El starter muestra **1**. Un test de humo verde dice que el proyecto arranca; una aserción discriminante compara esta conducta y puede mostrar un rojo útil. Antes de cambiar código, escribe qué salida esperas y qué observarías si la causa fuese otra. Después utiliza el [ejemplo E1](03_EJEMPLOS_GUIADOS_PM6.md). Si el test no compila, sigue [Debugging](05_DEBUGGING_PM6.md): todavía no has demostrado el defecto.
+
+| Evidencia | Qué haces aquí | Qué demuestra | Qué no demuestra |
+|---|---|---|---|
+| Unit en host | Controlas `TaskStore` y compruebas contador, orden y estados | Lógica bajo entradas determinadas | UI Android o un toque real |
+| Widget en host | Montas Flutter, pulsas un control y lees salida | Interacción acotada en el árbol de widgets | Instalación Android |
+| `integration_test` en emulador | Ejecutas la app en Android virtual y recorres error, retry y toggle | Flujo en destino y RA2.g cuando se observa/justifica mejora | Dispositivo físico RA2.h |
+| CI sobre SHA | Repite formato, analyze, pruebas y build | Reproducibilidad del corte/artefacto | Medición DevTools o despliegue |
+| Dispositivo real | Instalas APK, arrancas y recorres la app | Evidencia necesaria de RA2.h | Que toda variante esté libre de defectos |
+
+El rojo **esperado** es una diferencia de comportamiento que tu caso predijo: «esperaba 2, obtuve 1». El rojo **inesperado** es no compilar, paquete ausente, timeout ajeno al escenario o una aserción distinta. El primero permite pensar en la corrección; el segundo exige reparar el montaje y volver a ejecutar el mismo caso. Si el test pensado para fallar está verde en el starter, revisa primero que ejecutaste el archivo correcto, que las entradas distinguen el bug y que la aserción no adopta el valor incorrecto.
+
+Cuando la parte conceptual quede clara, abre el [protocolo operativo de DevTools y CI](08_DEVTOOLS_Y_CI_PM6.md). Sus pasos indican cómo iniciar la herramienta, repetir un recorrido y registrar los límites de cada observación. Lee cada sección de esta teoría al llegar a su fase, no como una lista para memorizar de golpe.
+
 ## 1. Fallo, defecto y prueba
 
 Un fallo es un comportamiento observado que no coincide con el esperado; un defecto es la causa en el código o diseño. Una prueba crea condiciones y compara resultados. No empieces cambiando código al azar: fija versión, entrada, acción y salida esperada/obtenida. «No funciona» no permite reproducir. «Con dos trabajos abiertos y uno terminado, el contador muestra1 en lugar de 2» ya distingue un comportamiento concreto.

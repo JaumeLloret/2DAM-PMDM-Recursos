@@ -32,7 +32,7 @@ En 3D de Motor Lab, Pivot está en (2,0,0) y Probe local en (1,1,0): sin giro, g
 
 En 2D del laboratorio, Pivot (600,200) y Probe local (80,0) dan global (680,200). La pantalla 2D habitual tiene Y creciente hacia abajo. Una rotación cambia la dirección del desplazamiento; una escala del padre cambia distancias heredadas. Estos cálculos sirven como predicción y se contrastan con valores reales, no solo con un dibujo aproximado.
 
-La cámara cambia el punto de vista; no necesariamente mueve los objetos. En un visor 3D la cámara es hija de Orbit y la maqueta es hermana de Orbit: girar Orbit cambia la vista y deja fija la maqueta. Si metieras la maqueta bajo Orbit también giraría; esa sería otra arquitectura y debe justificarse.
+La cámara cambia el punto de vista; no necesariamente mueve los objetos. En Expo Lab la cámara es hija de Orbit y la maqueta es hermana de Orbit: girar Orbit cambia la vista y deja fija la maqueta. Si metieras la maqueta bajo Orbit también giraría; esa sería otra arquitectura y debe justificarse.
 
 ## 5. Visual, física y detección
 

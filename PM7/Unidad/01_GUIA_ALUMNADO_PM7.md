@@ -1,27 +1,31 @@
-# Guía del alumnado · PM7
+# PM7 · Guía del alumnado · una feature y un proceso explicable
 
-Tu entrega es una feature pequeña que puedes explicar de principio a fin. Recibes una lista Flutter funcional; entregarás búsqueda por título y estado más documentación que conecte necesidad, decisión, cambios y comprobaciones. No cuenta cuántos prompts utilices. Debes poder modificarla sin agente y reconocer una desviación aunque los tests estén verdes.
+Recibes una lista Flutter con cuatro entradas DEMO. Añadirás búsqueda por título y filtro de estado, y demostrarás cómo llegaste a ese resultado. Lee primero [Empieza aquí](../AULES/01_EMPIEZA_AQUI_PM7.html) y sigue la [Ruta](../Alumnado/00_RUTA_PM7.md). Si estudias solo, empieza por la carpeta `Practica/Starter/spec_search/` y sus cuatro comandos de baseline: en los primeros **20 min** debes poder mostrar los cuatro datos y un test de humo verde, aclarando que aún no existe la feature.
 
-## Ruta de 360 min
+**Presupuesto por estudiante:** 6 h = **360 min**: 270 autónomos y dos misiones T1/T2 de 45 min efectivos. T1 **26/01/2027**, T2 **02/02/2027**, martes 19:30–20:25 (10 min de margen operativo). Taller presencial y [misión desde casa](10_TALLERES_Y_EQUIVALENCIAS_PM7.md) son **alternativas**: realiza una sola vía de cada T. I3 puede supervisarse en cita reprogramada dentro de T2, sin añadir otra tarea.
 
-| Bloque | Qué haces | Salida y comprobación |
-|---|---|---|
-| A01 · 20 min | Abre starter, ejecuta baseline y anota herramientas | D05 inicial; distingue lo que existe de la feature nueva |
-| A02 · 45 min | Lee teoría, escribe spec provisional y preguntas concretas | D01/D02; cada criterio admite un ejemplo que podría fallar |
-| A03 · 40 min | Consulta tarjeta de decisiones después de preguntar; prepara plan y tareas | D01 cerrado, D03/D04; ninguna duda de comportamiento escondida |
-| T1 · 55 min | Contrasta contrato y realiza primer incremento acotado | Política de selección y registro real de su comprobación |
-| A04 · 50 min | Implementa UI y verificaciones por tareas | D04/D05 enlazan archivo, criterio y comando |
-| A05 · 35 min | Revisa diff, corrige desviaciones y prepara PR | D06/D07; explica al menos un hallazgo real o una comprobación sin hallazgo |
-| T2 · 55 min | Modifica una condición nueva sin agente y explica el cambio | D08 individual con prueba y diff |
-| A06 · 40 min | Completa dossier, recibe feedback y comprueba coherencia | Cada afirmación tiene evidencia o está marcada pendiente |
-| A07 · 20 min | Corrige un hallazgo y redacta handoff de feature | Corte final y límites reproducibles |
+**Calendario de AULES pendiente:** apertura, entrega objetivo y cierre/cutoff aún no confirmados. Las fechas de taller no son fechas de entrega. Antes de abrir PM7, aparecerán en portada, Ruta, sección y tarea.
 
-Talleres 19/01 y 26/01/2027, 19:30–20:25. Si faltas, realiza la equivalencia del taller: T1 8+12+10+18+7 min de diagnóstico/comparación/decisiones/incremento/registro; T2 8+22+10+10+5 min de preparación/cambio supervisado/pruebas/revisión/feedback. Pide cita para la parte supervisada; ocupa tiempo del bloque, no trabajo añadido. Tutoría bajo demanda sirve para desbloquear, no añade entregables.
+## Qué abrir y qué conservar
 
-## Regla de trabajo
+| Paso | Material y acción | Comprobación | Evidencia |
+|---|---|---|---|
+| A01 | [Entorno](../Alumnado/02_ENTORNO_Y_FUENTES_PM7.md): copia el starter completo y corre baseline | Cuatro DEMO y humo verde, sin búsqueda | D05 inicial |
+| A02–A03 | [Teoría](02_CONTENIDOS_PM7.md), [ejemplos](03_EJEMPLOS_GUIADOS_PM7.md), [entrenamiento](04_ENTRENAMIENTO_PM7.md); pregunta **antes** de la [tarjeta](05_SPEC_Y_DECISIONES_PM7.md) | Regla S3 y alternativas explicables | D01–D04 |
+| T1–A04 | [Taller/casa](10_TALLERES_Y_EQUIVALENCIAS_PM7.md) y [laboratorio](06_LABORATORIO_PM7.md): política, UI y pruebas | AND, normalización acotada, vacío, limpiar | Código/tests y D04–D05 |
+| A05 | Revisa `git diff` y prepara PR o borrador | Alcance y S1–S7 contrastados | D06–D07 |
+| T2 | Predice y modifica regla nueva sin agente, con supervisión individual reprogramable | Diff, test y explicación reales o `PENDIENTE_SUPERVISION` | D08 |
+| A06–A07 | [Autoevaluación](12_AUTOEVALUACION_PM7.md), feedback, corrección y corte final | Dossier y código cuentan la misma historia | Entrega única y handoff |
 
-Usa la spec como contrato de la feature, no como autorización contractual de AulaFlow. Antes de implementar, concreta búsqueda, combinación, orden, vacío y datos. Divide el trabajo en cambios revisables. Si utilizas agente, dale únicamente archivos y permisos necesarios, limita el incremento y revisa el resultado. Si trabajas manualmente, conserva exactamente la misma trazabilidad y anota MANUAL. Nunca rellenes una conversación o ejecución que no ha sucedido.
+El producto es **Consulta DEMO**. Sigue Spec → Clarificación → Plan → Tasks → Implementación incremental → Tests/análisis → Revisión de diff → PR → Defensa. PM6 ya enseñó tests/CI; aquí documentas cuándo y por qué los aplicaste. PI4 gobierna el proyecto, mientras PM7 evalúa el proceso técnico documentado. Si falta una herramienta de agente autorizada, trabaja **MANUAL** y registra el mismo alcance, tareas, diff, pruebas y límites.
 
-Entrega D01 spec, D02 decisiones, D03 plan, D04 tareas, D05 registro, D06 revisión, D07 PR y D08 defensa. Puedes usar un único dossier con esas secciones; no es obligatorio crear ocho documentos extensos. Los ejemplos resueltos son material de consulta posterior al intento, no evidencia de tu proceso.
+## Cuatro conceptos que no se confunden
 
-El código debe funcionar, pero una app correcta con documentación inventada no demuestra RA2.i. Tampoco un dossier elegante justifica afirmar pruebas que no has ejecutado. Un resultado pendiente se registra con causa y próximo paso. No incluyas soluciones docentes, datos reales, claves ni mensajes de otras personas en el contexto del agente o en tu repositorio público.
+- **RA2.i** es el criterio curricular: «Se han documentado los procesos necesarios para el desarrollo de las aplicaciones». No se crean CE por contar prompts, tests o documentos.
+- **S3** es un criterio del **producto**: con «cámara» y «pendientes» se ve solo DEMO-A. S1–S7 son ejemplos verificables del caso, no notas independientes.
+- Una **tarea** dice qué archivo cambias y con qué límite: «implementar selección en `lib/catalog.dart`». Una **prueba** contrasta el resultado: consulta + pendientes devuelve el ID DEMO-A. Un test verde con otra entrada no basta para S3.
+- D01–D08 son **ocho apartados de un solo [dossier](../Alumnado/01_DOSSIER_SDD_PM7.md)**, no ocho entregas ni ocho porcentajes. Entrega código, tests y dossier por el canal que confirme el docente; un borrador de PR se marca como tal.
+
+La [evaluación](07_EVALUACION_PM7.md) combina I1, I2 e I3 sin modificar RA2 35 % global, mínimos ni prueba práctica presencial global separada. Para I3: predicción, cambio propio sin agente, diff, comprobación y actualización documental supervisados. Si falta observación, escribe `PENDIENTE_SUPERVISION` y solicita cita; no simules defensa. La recuperación Préstamo DEMO se abre solo al alumnado asignado y la [ampliación](09_AMPLIACION_PM7.md) es opcional.
+
+**Si te bloqueas:** [Ayuda por síntomas](11_AYUDA_PM7.md). No entregues un historial inventado: D05 distingue EJECUTADO, PROPUESTO y PENDIENTE, y cada comando se vincula al corte que realmente comprobaste.

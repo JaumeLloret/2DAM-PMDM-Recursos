@@ -4,6 +4,8 @@
 
 “La lista de consulta necesita encontrar lo que interesa por título y estado. Debe ser fácil volver a ver la información y reconocer que no hay resultados”. Antes de abrir la tarjeta siguiente, redacta una spec provisional y al menos dos preguntas que cambien comportamiento. No implementes reglas ambiguas por intuición.
 
+**Pausa antes de seguir leyendo:** deja escritas en D02 dos preguntas propias con alternativas y efecto sobre el código. La tarjeta siguiente resuelve el caso sintético; no es un diálogo real ni una ejecución tuya. Si ya la viste, conserva tus preguntas como intento y anota honestamente que consultaste la tarjeta antes de cerrarlas.
+
 ## Tarjeta autorizada de entrenamiento
 
 Autoridad: consigna docente del caso sintético, no cliente ni contrato real. Datos: DEMO-A Revisión de cámara/pendiente; DEMO-B Preparar documentación/terminada; DEMO-C Revision de cámara/terminada; DEMO-D Plan de mañana/pendiente. Se mantienen esos IDs y orden.

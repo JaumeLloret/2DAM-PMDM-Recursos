@@ -19,16 +19,16 @@ RA5 mantiene 20 % global PMDM. Distribución global RA1 10 %, RA2 35 %, RA3 20 %
 
 | CE | Evidencia | Instrumento | Autenticidad | Recuperación nueva |
 |---|---|---|---|---|
-| RA5.a | G01/G03 reglas y estados implementados | I2 diseño/código/recorridos | Predicción y cambio de condición individual | Nueva evidencia equivalente asignada por el docente en AULES restringido |
-| RA5.b | G02 objetos creados/configurados con identidad | I2 escenas y diff propio | Mostrar creación de B/C y explicar propiedades | Nueva evidencia equivalente asignada por el docente en AULES restringido |
-| RA5.c | G02 distribución y relaciones de escenas | I2 escena ejecutable | Modificar posición/relación y explicar efecto | Nueva evidencia equivalente asignada por el docente en AULES restringido |
-| RA5.d | G02 materiales propios y asignación | I2 recurso/usuarios/observación | Cambiar propiedad justificada sin confundir física | Nueva evidencia equivalente asignada por el docente en AULES restringido |
-| RA5.e | G04 formas/capas/velocidad/gravedad/colisión | I2 configuración y recorrido motor | Diagnosticar una colisión/propiedad en su corte | Nueva evidencia equivalente asignada por el docente en AULES restringido |
-| RA5.f | G05 audio de eventos y silencio | I2 código/recurso/QA auditiva | Explicar disparo único y modificar un evento | Nueva evidencia equivalente asignada por el docente en AULES restringido |
-| RA5.g | G05 cámara e iluminación configuradas | I2 escena y comparación visual | Ajuste y explicación del encuadre/luz | Nueva evidencia equivalente asignada por el docente en AULES restringido |
-| RA5.h | G06 fuente→APK→implantación móvil observada | I2 registro auténtico de destino | Recorrido individual en dispositivo autorizado | Nueva evidencia equivalente asignada por el docente en AULES restringido |
-| RA5.i | G07 pruebas y mejora contrastada | I2 fallos/regresión/profiling | Explicar datos, repetir caso y cambio nuevo | Nueva evidencia equivalente asignada por el docente en AULES restringido |
-| RA5.j | G01–G08 fases y documentación reproducible | I2 dossier; I3 actualización tras cambio | Explicar diff y registrar proceso propio | Nueva evidencia equivalente asignada por el docente en AULES restringido |
+| RA5.a | G01/G03 reglas y estados implementados | I2 diseño/código/recorridos | Predicción y cambio de condición individual | Clasificador: recepción, pérdidas y final distintos |
+| RA5.b | G02 objetos creados/configurados con identidad | I2 escenas y diff propio | Mostrar creación de B/C y explicar propiedades | Paquete móvil/categorías, prefab y características propias |
+| RA5.c | G02 distribución y relaciones de escenas | I2 escena ejecutable | Modificar posición/relación y explicar efecto | Carriles/flujo de objetos, distribución distinta |
+| RA5.d | G02 materiales propios y asignación | I2 recurso/usuarios/observación | Cambiar propiedad justificada sin confundir física | Materiales/forma de carga y peligro, lectura redundante |
+| RA5.e | G04 formas/capas/velocidad/gravedad/colisión | I2 configuración y recorrido motor | Diagnosticar una colisión/propiedad en su corte | Movimiento X y detección de objetos en avance |
+| RA5.f | G05 audio de eventos y silencio | I2 código/recurso/QA auditiva | Explicar disparo único y modificar un evento | Captura/peligro/victoria/derrota del nuevo juego |
+| RA5.g | G05 cámara e iluminación configuradas | I2 escena y comparación visual | Ajuste y explicación del encuadre/luz | Visión de carriles y objetos en movimiento |
+| RA5.h | G06 fuente→APK→implantación móvil observada | I2 registro auténtico de destino | Recorrido individual en dispositivo autorizado | APK y nueva implantación del juego de recuperación |
+| RA5.i | G07 pruebas y mejora contrastada | I2 fallos/regresión/profiling | Explicar datos, repetir caso y cambio nuevo | Colisiones, pérdidas, límite de instancias y reinicio |
+| RA5.j | G01–G08 fases y documentación reproducible | I2 dossier; I3 actualización tras cambio | Explicar diff y registrar proceso propio | Documentación nueva del clasificador y defensa |
 
 ## Rúbrica analítica por CE
 
@@ -49,6 +49,6 @@ La rúbrica orienta juicio por CE; no se promedian diez filas para crear un peso
 
 ## I3 y devolución
 
-T4: 22 min de cambio nuevo sin ayuda generativa, 10 de prueba/explicación y contraste focal; resto de orales por cita que sustituye tiempo equivalente de A10. Registrar predicción, diff, comando/resultado, documento afectado y observación docente. Si falta supervisión, PENDIENTE_SUPERVISION. La prueba presencial global sigue separada y sin ayuda generativa.
+M4 autónoma de 45 min: recorrido 8 min, predicción 10, cambio individual nuevo 15, prueba/explicación 8 y registro 4. La cita observada sustituye el tramo correspondiente de M4, sin sumar tiempo. Otras verificaciones individuales se reprograman por tutoría. Registrar predicción, diff, comando/resultado, documento afectado y observación docente. Si falta supervisión, PENDIENTE_SUPERVISION. La prueba presencial global sigue separada y sin ayuda generativa.
 
 Feedback: CE afectado, evidencia que falta o error concreto, acción de corrección y nueva comprobación. No exigir toda la recuperación cuando la insuficiencia es focal, pero mantener evidencia suficiente del criterio. Tardanza ≤72 h no recorta automáticamente nota; después se aplica recuperación canónica. No usar cantidad de prompts, commits, tests o arte como nota.

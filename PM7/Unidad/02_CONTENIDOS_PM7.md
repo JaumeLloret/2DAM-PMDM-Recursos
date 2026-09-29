@@ -14,6 +14,10 @@ Los criterios de la feature no son CE curriculares. Se identifican S1–S7 para 
 
 Una spec pequeña puede caber en una página. Incluye límites negativos que eviten expansión: sin backend, cuentas, telemetría, persistencia o rediseño global. Describe los estados vacíos y las reglas de identidad. “No hay resultados” es un estado válido de búsqueda, no una excepción. Preservar identidad evita fusionar dos elementos de igual título.
 
+### RA2.i, criterio de producto, tarea y prueba en una sola cadena
+
+El **CE RA2.i** pide documentar el proceso necesario para desarrollar aplicaciones. En este caso **S3** no es otro CE: es una regla de producto («cámara» + pendientes → solo DEMO-A). La **decisión C3** elige AND en lugar de OR. Una **tarea D04** acota `lib/catalog.dart` y `test/search_test.dart`. La **prueba** ejecuta esa entrada y contrasta `['DEMO-A']`; D05 guarda comando, corte y resultado; D06 revisa que el diff no amplió alcance. Si el test verde solo usó consulta vacía, no contrastó C3. Repite esta cadena con S7 y el botón limpiar antes de llamar «terminada» a la feature.
+
 ## 3. Clarificar antes de implementar
 
 Una buena pregunta propone el desacuerdo concreto y su consecuencia: “¿buscar solo en título o también por ID? Añadir ID permite resultados que el usuario no ve en la etiqueta”. Evita “¿está bien?” o pedir al agente que invente reglas. Registra pregunta, decisión, responsable, motivo y criterios afectados. Si el docente entrega una tarjeta con respuestas para el caso, esa tarjeta es la autoridad de entrenamiento; no simules que la firmó un cliente real.

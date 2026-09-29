@@ -1,6 +1,6 @@
 # Gimnasio graduado · PM6
 
-Dentro de A03/A04/A05/A07. No son horas añadidas. Registra predicción, acción, resultado y límite.
+Dentro de A03/A04/A05/A07. No son horas añadidas ni diez entregas. Trabaja en **un cuaderno** (o en Q01/Q02/Q03 según el caso): para cada kata **lee → predice → escribe/cambia una prueba → ejecuta → explica** qué detecta y qué no. Usa el mismo starter y reutiliza tests cuando sea posible. Si una kata exige DevTools o Android y no dispones del destino, registra protocolo y pendiente, luego solicita la observación; no conviertas la simulación host en evidencia física.
 
 | Kata | Nivel / encargo | Criterio de autocontrol |
 |---|---|---|
@@ -15,4 +15,4 @@ Dentro de A03/A04/A05/A07. No son horas añadidas. Registra predicción, acción
 | K9 | Medir: repite cargas y examina history/Memory | Separa retención lógica, heap y memoria del proceso |
 | K10 | Integrar: una modificación invalida run anterior | Vincula SHA, tests ejecutados, APK y destino realmente observado |
 
-Las claves de corrección quedan reservadas. El cuestionario de práctica se incluye en A07 y no tiene peso propio. Si K8/K9 no son ejecutables en tu equipo, prepara el protocolo y acuerda su observación docente; no pegues cifras del ejemplo como si fueran mediciones.
+Para K1 escribe una frase que contraste humo y contador. Para K2–K6 conserva al menos una aserción discriminante antes/después, el comando aislado y una regresión. En K7 observa el árbol/estado, no infieras un overflow sin verlo. Para K8/K9 usa el [protocolo de DevTools](08_DEVTOOLS_Y_CI_PM6.md) con misma carga y modo; anota datos solo si los mediste. K10 enlaza SHA y capas de evidencia sin atribuir instalación al build. Las claves de corrección quedan reservadas. El cuestionario de práctica se incluye en A07 y no tiene peso propio.

@@ -2,7 +2,7 @@
 
 ## Encargo
 
-Analiza el proyecto existente motor_lab y produce L01–L06. Identifica arquitectura 2D/3D, componentes del motor, entorno de desarrollo, comparación de motores, bloques del minijuego y representación lógica/espacial. Realiza dos cambios pequeños y reversibles: giro de Pivot +90° Y y roughness de copper.tres a 0.8, en cortes separados con predicción. No desarrolles un juego nuevo ni añadas assets.
+Analiza el proyecto existente motor_lab y produce **un único dossier** L01–L06. Los checkpoints parciales reciben feedback, sin tareas calificadas duplicadas. Identifica arquitectura 2D/3D, componentes del motor, entorno de desarrollo, comparación de motores, bloques del minijuego y representación lógica/espacial. Realiza dos cambios pequeños y reversibles: giro de Pivot +90° Y y roughness de copper.tres a 0.8, en cortes separados con predicción. No desarrolles un juego nuevo ni añadas assets.
 
 ## Evidencias y condiciones
 

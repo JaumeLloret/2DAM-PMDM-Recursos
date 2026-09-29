@@ -1,11 +1,46 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PM6 · Empieza aquí</title><style>body{font:1.1rem/1.6 system-ui;max-width:70ch;margin:2rem auto;padding:0 1rem;color:#17212b;background:#fff}a{color:#0645ad}a:focus{outline:3px solid #9a4c00}li{margin:.7rem 0}</style></head><body><main><h1>PM6 · Empieza aquí</h1><p>Comienza por la guía del alumnado. Consulta la ruta y registra tus evidencias en el espacio autorizado. Los cuestionarios sirven para practicar; la calificación se decide desde RA/CE y evidencia auténtica.</p><nav aria-label="Materiales de aprendizaje"><ul><li><a href="../Unidad/01_GUIA_ALUMNADO_PM6.md">01 GUIA ALUMNADO PM6</a></li>
-<li><a href="../Unidad/02_CONTENIDOS_PM6.md">02 CONTENIDOS PM6</a></li>
-<li><a href="../Unidad/03_EJEMPLOS_GUIADOS_PM6.md">03 EJEMPLOS GUIADOS PM6</a></li>
-<li><a href="../Unidad/04_ENTRENAMIENTO_PM6.md">04 ENTRENAMIENTO PM6</a></li>
-<li><a href="../Unidad/06_LABORATORIO_PM6.md">06 LABORATORIO PM6</a></li>
-<li><a href="../Unidad/07_EVALUACION_PM6.md">07 EVALUACION PM6</a></li>
-<li><a href="../Unidad/09_AMPLIACION_PM6.md">09 AMPLIACION PM6</a></li>
-<li><a href="../Alumnado/00_RUTA_PM6.md">00 RUTA PM6</a></li>
-<li><a href="../Alumnado/01_REGISTRO_CALIDAD_PM6.md">01 REGISTRO CALIDAD PM6</a></li>
-<li><a href="../Alumnado/06_ENTORNO_Y_FUENTES_PM6.md">06 ENTORNO Y FUENTES PM6</a></li>
-<li><a href="../Practica/Starter/quality_gate/README.md">README</a></li></ul></nav></main></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PM6 · Empieza aquí</title>
+  <style>
+    body{font:1rem/1.6 system-ui,sans-serif;max-width:74rem;margin:auto;padding:1rem;color:#17212b;background:#fff}a{color:#0645ad}a:focus{outline:3px solid #a04c00;outline-offset:3px}h1,h2,h3{line-height:1.25}.card{border:2px solid #325b77;border-radius:.5rem;padding:.8rem 1rem;margin:1rem 0}.note{border-left:5px solid #a04c00;padding:.6rem 1rem;background:#fff7e7}table{border-collapse:collapse;width:100%}th,td{border:1px solid #536575;padding:.5rem;text-align:left;vertical-align:top}code{overflow-wrap:anywhere}@media(max-width:48rem){table{font-size:.85rem}th,td{padding:.3rem}}@media(prefers-color-scheme:dark){body{color:#eef3f8;background:#15202b}a{color:#a6d5ff}.note{background:#352919}}
+  </style>
+</head>
+<body>
+<main>
+  <h1>PM6 · Una app que arranca también puede estar equivocada</h1>
+  <p>Mejorarás <strong>AulaFlow Mobile Quality Gate</strong>, una app de trabajos ficticios. El primer test de humo pasa, pero el contador da un resultado incorrecto. Tu reto es <strong>predecir, probar, observar el rojo correcto, corregir y dejar una regresión</strong>. Después distinguirás lo observado en ordenador, emulador, CI y móvil real.</p>
+  <section class="card" aria-labelledby="inicio">
+    <h2 id="inicio">Tus primeros 20 minutos</h2>
+    <ol>
+      <li>Descarga el <a href="../Practica/Starter/quality_gate/README.md">starter Quality Gate</a> completo y haz una copia de trabajo. Busca <code>Practica/Starter/quality_gate/</code>; abre <strong>esa carpeta, la que contiene <code>pubspec.yaml</code></strong>, en VS Code o Android Studio. No abras solo <code>main.dart</code>.</li>
+      <li>En la terminal de esa carpeta ejecuta, por orden, <code>flutter --version</code>, <code>flutter pub get</code>, <code>flutter analyze --fatal-infos</code> y <code>flutter test</code>. Esperas Flutter 3.47.2 / Dart 3.13.2, dependencias recuperadas, análisis sin error y humo verde. Guarda comando, versión, salida y corte inicial.</li>
+      <li>Abre <code>lib/quality.dart</code> y busca <code>pendingCount</code>. Para A abierta, B terminada y C abierta, escribe tu predicción antes de cambiar nada: <strong>2 pendientes</strong>. Lee el <a href="../Unidad/03_EJEMPLOS_GUIADOS_PM6.md">primer ejemplo guiado</a> y ejecuta su prueba. El starter debería mostrar <strong>1 en lugar de 2</strong>: ese rojo es la primera evidencia útil.</li>
+    </ol>
+    <p class="note"><strong>Decide qué rojo ves.</strong> «Esperaba 2 y obtuve 1» con la prueba ejecutada es <strong>rojo esperado</strong> del bug. «flutter no se reconoce», import ausente o test que no compila es <strong>rojo inesperado</strong> de entorno; resuélvelo con <a href="../Unidad/05_DEBUGGING_PM6.md">Debugging</a> antes de corregir la lógica. Si la prueba ya es verde, comprueba archivo, datos, aserción y versión; un verde de humo no prueba el contador.</p>
+    <p>Conserva una copia inicial, predicción, nombre/comando del test y diferencia esperada/real en <a href="../Alumnado/01_REGISTRO_CALIDAD_PM6.md">un solo dossier, apartado Q01</a>. Todavía no necesitas Android.</p>
+  </section>
+  <h2>Recorrido completo · 480 minutos</h2>
+  <p><strong>390 min autónomos y dos bloques de 45 min efectivos.</strong> T1 (12/01/2027) y T2 (19/01/2027), franja nominal 19:30–20:25, ofrecen taller o misión desde casa: eliges una vía por bloque. Los 10 min restantes de cada franja presencial son margen de arranque y transición; los 20 min de aprendizaje pasan a corregir/regresar y observar/medir (A04 y A05). El microcambio individual I3 de T2 exige supervisión, con cita reprogramada si no asistes en la fecha ordinaria.</p>
+  <p><strong>Calendario pendiente:</strong> apertura de PM6, entrega objetivo y cierre técnico/de la unidad aún no están confirmados. Las fechas de los talleres no son fechas de entrega. Antes de abrir la unidad en AULES aparecerán aquí y en la actividad de entrega.</p>
+  <p><small>Última actualización · 25/09/2026: talleres 12 y 19 de enero; misiones efectivas de 45 min, con vía desde casa.</small></p>
+  <table>
+    <caption>Orden de aprendizaje y salida principal</caption>
+    <thead><tr><th>Ahora</th><th>Haz y comprueba</th><th>Guarda</th></tr></thead>
+    <tbody>
+      <tr><td>1. Arrancar y probar</td><td>Smoke verde; contador rojo esperado; unit/widget</td><td>Q01</td></tr>
+      <tr><td>2. Corregir con control</td><td>Futures fuera de orden, retry, dispose, identidad y retención</td><td>Q02 y regresiones</td></tr>
+      <tr><td>3. Observar y medir</td><td>Inspector, Performance profile y Memory; emulador si disponible</td><td>Q03 y estado real</td></tr>
+      <tr><td>4. Android y CI</td><td>Workflow, SHA, APK; interacción en emulador; instalación en móvil</td><td>Q04–Q05 e I3</td></tr>
+    </tbody>
+  </table>
+  <p>Una prueba host verifica lógica; el emulador permite observar interacción para RA2.g; CI valida un SHA y construye APK; solo el despliegue y recorrido observado en un <strong>dispositivo móvil real</strong> completa la evidencia de RA2.h. Si faltan emulador, DevTools, Actions o móvil, conserva <code>PENDIENTE_EMULADOR</code>, <code>PENDIENTE_DEVTOOLS</code>, <code>PENDIENTE_CI</code> o <code>PENDIENTE_DISPOSITIVO</code> y solicita el acceso correspondiente. Nunca sustituyas una observación por una gráfica ajena.</p>
+  <nav aria-label="Continúa desde aquí">
+    <h2>Siguiente paso y ayuda</h2>
+    <p><a href="../Alumnado/00_RUTA_PM6.md">Ruta paso a paso</a> · <a href="../Alumnado/06_ENTORNO_Y_FUENTES_PM6.md">Entorno e IDE</a> · <a href="../Unidad/03_EJEMPLOS_GUIADOS_PM6.md">Primera prueba</a> · <a href="../Unidad/05_DEBUGGING_PM6.md">Debugging</a> · <a href="../Unidad/11_AYUDA_PM6.md">Ayuda por síntomas</a></p>
+  </nav>
+</main>
+</body>
+</html>

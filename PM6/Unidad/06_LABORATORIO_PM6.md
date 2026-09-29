@@ -1,28 +1,35 @@
 # Laboratorio · AulaFlow Mobile Quality Gate
 
-## Encargo y condiciones
+Recibes el [starter](../Practica/Starter/quality_gate/README.md), una app DEMO con `TaskStore` inyectable, lista de trabajos, contador, recarga y toggle por ID. Tu producto mejora su calidad con pruebas que distinguen errores reales. No se crea un backend ni una aceptación global de AulaFlow 2.0. Usa el [dossier único Q01–Q05](../Alumnado/01_REGISTRO_CALIDAD_PM6.md) y la [ruta de 480 min](../Alumnado/00_RUTA_PM6.md): cada hito consume minutos de A01–A08/T1–T2 ya previstos.
 
-Corrige la app de consulta DEMO conservando el contrato público TaskStore y la UI recuperable. Producto acotado: listado con contador de pendientes, toggle por ID, recarga y recuperación de errores. No añadas backend, autenticación o hardware nuevo. Se trabajan RA2.g/h; PM7 reserva el proceso formal SDD.
+En cada hito trabaja así: **problema → predicción → test/acción → rojo esperado → corrección mínima → verde → regresión → límite**. Un error de entorno se resuelve con [Debugging](05_DEBUGGING_PM6.md) antes de atribuirlo a la app.
 
-## Criterios del producto
+## Hito 1 · El verde que no detecta el contador (A01–A03, capa A)
 
-1. Contador representa trabajos abiertos, incluidos vacío/todos terminados.
-2. La última solicitud iniciada gobierna datos/error/loading cuando llegan respuestas fuera de orden.
-3. Error finaliza carga y permite retry; una carga posterior correcta elimina el error.
-4. Desmontar pantalla invalida respuestas y no notifica a un controlador desechado.
-5. Historial de snapshots respeta una política de retención acotada explicada; producto de referencia 20.
-6. La UI ofrece vacío/error legibles y toggle por ID estable.
-7. Formato, analyzer y pruebas pertinentes pasan sobre el código entregado.
-8. Interacción se observa en emulador; APK se empaqueta y se instala/prueba en dispositivo real con registro diferenciado.
+**Entrada:** copia inicial, Flutter 3.47.2 y `pubspec.yaml`. Ejecuta `flutter pub get`, `flutter analyze --fatal-infos`, `flutter test test/smoke_test.dart`; ese verde solo verifica arranque. En `lib/quality.dart` lee `pendingCount`. Predice 2 para A abierta, B terminada, C abierta. Copia el [test guiado E1](03_EJEMPLOS_GUIADOS_PM6.md) y ejecútalo aislado. **Resultado esperado del starter:** aserción que esperaba 2 y obtiene 1. Corrige solo la selección de abiertas, repite y añade vacío/todos terminados. Conserva baseline, diferencia y regresión en Q01/Q02. Si no compila, revisa carpeta/imports; no «corrijas» expected a 1.
 
-## Desarrollo por cortes
+## Hito 2 · Dos Futures y una política (T1/A04, capa A)
 
-En A01 guarda baseline. A03/T1 crea un fallo discriminante; A04 corrige por incrementos y añade regresiones de las condiciones anteriores. No copies la solución docente ni reescribas toda la arquitectura para evitar entender el bug. Conserva un diff acotado y explica por qué el guard de generación no es cancelación de red.
+**Entrada:** `ControlledStore` del ejemplo. Inicia dos `load()` sin esperar el primero, completa la respuesta nueva antes de la vieja. La política es «la última solicitud **iniciada** gobierna». **Rojo esperado del starter:** OLD sobrescribe NEW; también prueba que un error de la vigente no es borrado por el éxito antiguo. Identifica el lugar de publicación, usa un guard de generación en éxito, error y finalización; no lo confundas con cancelar la operación externa. Repite orden normal y orden inverso. Guarda test, diff, versión y límite: son Futures controlados en host, no latencia de red real.
 
-En A05 sigue el protocolo DevTools de Q03. No cambies a la vez carga, dispositivo, modo y estructura de lista: no podrías atribuir el resultado. En A06 prepara Android y workflow en el repositorio de práctica autorizado. El workflow requiere lectura del código; no necesita secretos de producción. Si se comparte un runner o móvil, confirma permisos y borra solo el artefacto temporal propio cuando proceda.
+## Hito 3 · Error, retry, identidad y dispose (A04, capa A)
 
-T2 aporta microcambio individual sin agente. A07 repite pruebas del corte corregido, completa evidencia Android y Q05; A08 entrega tras feedback. Si falta hardware, programa la evidencia real y conserva PENDIENTE_DISPOSITIVO, sin declarar adquirido RA2.h por build. Las condiciones de entorno no se convierten en culpa académica del alumno; el docente ofrece acceso y recuperación.
+Completa una solicitud con error. Predice `error` visible y `loading == false`; el starter deja loading activo. Ejecuta un widget test con `pump` controlado, pulsa *Reintentar*, completa con lista vacía y comprueba mensaje y acción disponible. No aumentes un timeout de `pumpAndSettle` para ocultar el spinner. Después alterna un trabajo por **ID**, no índice. Inicia una solicitud, libera el controlador y completa el Future: no debe avisar ni publicar estado tras dispose. Ejecuta un caso normal tras cada corrección. Conserva salidas y regresiones; el host no acredita Android.
 
-## Dossier mínimo
+## Hito 4 · Retención y observación (A04–A05, capas A y B)
 
-Q01 estrategia y fallos; Q02 pruebas/analyzer; Q03 DevTools; Q04 emulador/APK/dispositivo; Q05 SHA/CI/límites y explicación individual. Adjunta solo evidencias necesarias, con datos saneados. Un enlace debe permitir al docente acceder al corte correcto; no publicar el serial físico, cuentas personales o registros de otras apps.
+Carga 25 snapshots de prueba con IDs distinguibles. La política de referencia conserva **20**: comprueba longitud y qué entrada antigua sale. Esto mide referencias lógicas. Sigue [Inspector, Performance y Memory](08_DEVTOOLS_Y_CI_PM6.md) con destino real de trabajo: mismo dataset/recorrido, calentamiento, tres repeticiones comparables de eager/builder en profile y cortes de memoria. Conserva Q03 con traza/protocolo y límite. Si DevTools no se ejecutó, `PENDIENTE_DEVTOOLS` y turno de observación; no calcules MB imaginarios.
+
+## Hito 5 · Android, CI y cuatro capas (A06/T2, capas B, C y D)
+
+Prepara Android en una copia, verifica `flutter devices`, ejecuta `integration_test/flow_test.dart` en un **emulador** y recorre visiblemente error → retry → lista → toggle. Registra entorno y mejora justificada para **RA2.g**; analiza el resultado real, pues el starter original puede agotar `pumpAndSettle`. Construye `app-debug.apk`, guarda SHA del código y hash del archivo, y lee el run de CI del **mismo commit** en Q05. Build y CI son capa C, no despliegue.
+
+En un **móvil real autorizado** instala esa APK de práctica, arranca y ejecuta el mismo recorrido; registra resultado con destino saneado para **RA2.h**. Si falta AVD, móvil o Actions, continúa las capas disponibles y acuerda turno; marca cada pendiente distinto. En T2 (19/01/2027) realiza I3: 22 min de modificación no preparada sin agente + 10 min de explicación individual supervisada, dentro de **45 min efectivos**, en taller o por cita reprogramada de la vía desde casa. Nunca publiques la variante reservada.
+
+## Hito 6 · Un corte defendible (A07–A08)
+
+Repite formato, análisis y pruebas pertinentes sobre el corte final. Comprueba que el run y el SHA entregado coinciden; si el código cambió, el run anterior ya es histórico. Entrega fuente/tests, diff, **un** dossier Q01–Q05, evidencias reales disponibles y pendientes explícitos. Usa [¿Estoy listo?](12_AUTOEVALUACION_PM6.md). No publiques seriales, cuentas, keystores, logs crudos ni datos de terceros.
+
+## Criterios conservados
+
+Contador de abiertas; última solicitud iniciada gobierna datos/error/loading; error termina carga y permite retry; dispose invalida respuestas; history acotado a 20; vacío/error legibles y toggle por ID; controles sobre el corte; interacción de emulador; APK e instalación/recorrido físico. La cantidad de tests, cobertura, CI verde o APK aislada no asigna nota.

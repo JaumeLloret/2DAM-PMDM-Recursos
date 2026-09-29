@@ -1,5 +1,7 @@
 # Evaluación PM6
 
+Aquí importa **qué comportamiento puedes demostrar y explicar**, no cuántos tests acumulas. RA2.g pide pruebas de interacción usuario-aplicación para optimizar la app desde emuladores; RA2.h pide empaquetarla y desplegarla en un dispositivo móvil real. El [dossier único Q01–Q05](../Alumnado/01_REGISTRO_CALIDAD_PM6.md) acompaña código y observación; [la autoevaluación](12_AUTOEVALUACION_PM6.md) te ayuda a detectar pendientes antes de entregar.
+
 | CE | Literal canónico |
 |---|---|
 | RA2.g | Se han realizado pruebas de interacción usuario-aplicación para optimizar las aplicaciones desarrolladas a partir de emuladores. |
@@ -7,10 +9,10 @@
 
 | CE | Evidencia | Instrumento | Autenticidad | Recuperación |
 |---|---|---|---|---|
-| RA2.g | Q01/Q02 y corrección; Q03 inspección; Q04 interacción en emulador con entorno/recorrido | Revisión de producto/dossier y observación estructurada | I3: fallo o cambio no preparado sin agente, prueba y explicación del diff | Nueva evidencia equivalente asignada por el docente en AULES restringido |
-| RA2.h | Q04 APK identificada e instalación/recorrido en dispositivo móvil real | Checklist de empaquetado/despliegue y observación docente o evidencia según procedimiento institucional | Explicar artefacto/versión/destino y repetir paso acotado | Nueva evidencia equivalente asignada por el docente en AULES restringido |
+| RA2.g | Q01/Q02 y corrección; Q03 inspección; Q04 interacción en emulador con entorno/recorrido | Revisión de producto/dossier y observación estructurada | I3: fallo o cambio no preparado sin agente, prueba y explicación del diff | Museo: aforo/FIFO/identidad, nueva interacción en emulador |
+| RA2.h | Q04 APK identificada e instalación/recorrido en dispositivo móvil real | Checklist de empaquetado/despliegue y observación docente o evidencia según procedimiento institucional | Explicar artefacto/versión/destino y repetir paso acotado | Nueva APK Museo y despliegue físico observado |
 
-I1: entrenamiento/cuestionario formativos. I2: desempeño/producto y dossier. I3: verificación individual22 min+explicación supervisada. La prueba presencial práctica global es familia separada y obligatoria≥5; no se sustituye por un test online o este microcambio. RA2 conserva35% global; todos los RA≥5 y evidencia auténtica suficiente. Sin pesos internos por tests, práctica, pipeline, cobertura, agente o dispositivo.
+I1: entrenamiento/cuestionario formativos. I2: desempeño del producto y dossier. I3: **22 min de microcambio no preparado sin agente + 10 min de explicación individual supervisada**, dentro de T2 de **45 min efectivos**; si faltas al taller del 19/01/2027, existe cita/tutoría supervisada reprogramada dentro de la vía equivalente. La prueba presencial práctica global es familia separada y obligatoria ≥5; no se sustituye por un test online o este microcambio. RA2 conserva 35 % global; todos los RA ≥5 y evidencia auténtica suficiente. Sin pesos internos por tests, práctica, pipeline, cobertura, agente o dispositivo.
 
 | CE | Consolidada | Suficiente | Parcial | Sin evidencia suficiente |
 |---|---|---|---|---|

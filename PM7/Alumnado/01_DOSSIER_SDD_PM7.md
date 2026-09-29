@@ -1,6 +1,6 @@
 # Plantilla D01–D08 · Proceso SDD
 
-Rellena sobre tu trabajo. Los ejemplos sintéticos no son historial propio. Puedes mantener un archivo con ocho secciones. Usa datos saneados; no adjuntes tokens, seriales, conversaciones ajenas o soluciones docentes.
+Rellena sobre tu trabajo. Los ejemplos sintéticos no son historial propio. Entrega **un único dossier con ocho apartados**, en un archivo con ocho secciones o una carpeta organizada bajo una sola entrega. D01–D08 no son ocho plazos, tareas calificadas ni documentos independientes. Cada apartado informa del mismo proceso y corte; enlaza al archivo de código/prueba cuando corresponda. Usa datos saneados; no adjuntes tokens, seriales, conversaciones ajenas o soluciones docentes.
 
 ## D01 · Spec
 
@@ -30,7 +30,7 @@ Las tareas locales de ejercicio no son catálogo contractual ni AulaTokens. No u
 |---|---|---|---|---|---|
 | __ | __ | __ | __ | __ | __ |
 
-Etiqueta cada fila EJECUTADO, PROPUESTO o PENDIENTE. Conserva fallo y reparación. Mientras no hay commit, di corte local; no inventes SHA. Al crear el commit vincula la verificación a ese corte y repite lo necesario si cambió.
+Etiqueta cada fila **EJECUTADO**, **PROPUESTO** o **PENDIENTE**: un comando de ejemplo es PROPUESTO hasta que lo ejecutes; un resultado pendiente no se convierte en verde por aparecer en el modelo. Conserva fallo y reparación. Mientras no hay commit, di corte local; no inventes SHA. Al crear el commit vincula la verificación a ese corte y repite lo necesario si cambió.
 
 ## D06 · Revisión de diff
 

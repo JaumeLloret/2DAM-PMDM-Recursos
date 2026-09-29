@@ -1,47 +1,51 @@
-# Dossier G01–G08 · plantilla de evidencia propia
+# Dossier único G01–G08 · plantilla de evidencia propia
 
-No rellenes observaciones con resultados de la solución docente. Separa CALCULADO, EJECUTADO_REGLAS, EJECUTADO_MOTOR, OBSERVADO_EDITOR, BUILD_APK, OBSERVADO_DISPOSITIVO_REAL y PENDIENTE_*. Datos e identificadores saneados; no seriales, cuentas ni claves.
+Conserva **un solo documento final** junto con la fuente de tu juego, en la única tarea calificada «PM9 · Juego y dossier final». Los cortes parciales son para feedback y se actualizan en este mismo dossier. No copies resultados de la solución docente ni inventes una ejecución. **En cada G01–G08** escribe: autoría/aportación propia concreta; versión o SHA/corte y fecha del ensayo; archivo/escena y pasos para reproducir; **modo de evidencia** (DOCUMENTADO, CALCULADO, EJECUTADO_REGLAS, EJECUTADO_HEADLESS, EJECUTADO_MOTOR, OBSERVADO_EDITOR, AUDIO_ESCUCHADO, BUILD_APK u OBSERVADO_DISPOSITIVO_REAL); esperado/observado cuando corresponda; **límite o PENDIENTE_*** y siguiente comprobación. Una captura o test verde aislados no prueban visibilidad, sonido, tacto, autoría o RA5.h. Sanea identificadores, logs, seriales, cuentas y claves.
 
-## G01 · Diseño y lógica
+## G01 · Idea, lógica y estados
 
-Objetivo/acciones/restricciones: __. Estados y transiciones: __. Casos éxito/tiempo/vidas/pausa/reinicio: __. Alcance y no objetivos: __. Decisiones propias y motivo: __. Versión de diseño y corte: __.
+**Aportación/corte/modo/límite:** __. Objetivo, acciones y restricciones: __. READY/PLAY/PAUSED/WON/LOST y transiciones: __. Casos éxito, tiempo, vidas, pausa, reinicio y entrega prematura: entrada __, esperado __, observado propio __. Decisión de alcance y motivo: __. Si es solo diseño, marca DOCUMENTADO, no ejecutado.
 
 ## G02 · Objetos, escenas y materiales
 
-| Objeto/recurso creado o configurado | Tipo/ruta | Identidad/posición/propiedades | Motivo | Evidencia propia y corte |
+**Aportación/corte/modo/límite:** __. No atribuyas como creación propia CellA ni componentes recibidos sin modificación.
+
+| Objeto/recurso propio | Tipo/ruta y propiedad | ID/posición/usuarios | Motivo y lectura accesible | Observación propia y límite |
 |---|---|---|---|---|
 | CellB/CellC | __ | __ | __ | __ |
-| Materiales baliza/peligro | __ | __ | __ | __ |
+| Material baliza/peligro | __ | __ | __ | __ |
 | Escena/relaciones | __ | __ | __ | __ |
 
-No atribuir como creación propia lo que solo venía en el starter. Explica qué aportaste y cómo configuraste los elementos necesarios para el juego.
+Conserva diff o pasos de edición y explica qué es una escena reutilizable y qué cambia por instancia.
 
-## G03 · Reglas y estados
+## G03 · Reglas y estados ejecutados
 
-Regla→método→caso discriminante: __. Duplicados/ID desconocido: __. Entrega prematura/terminal: __. Daño/inmunidad: __. Pausa/reinicio: __. Fallo real/corrección o comprobación sin hallazgo: __.
+**Aportación/corte/modo/límite:** __. Regla→archivo/método→entrada→esperado→observado: __. Comprueba ID duplicado/desconocido, entrega antes de tres, daño/inmunidad, pausa/terminal y reinicio. Fallo real, corrección/regresión o comprobación sin hallazgo: __. Distingue EJECUTADO_REGLAS de juego observado en ventana.
 
 ## G04 · Física e input
 
-Formas, capas/máscaras, velocidad/gravedad y su función: __. Recorrido de pared/peligro/recogida: __. Teclado/táctil, pulsación/liberación/foco/pausa: __. Modo de evidencia y limitación: __. No confundir simulación de motor con dedo/dispositivo físico.
+**Aportación/corte/modo/límite:** __. Formas, capas/máscaras, velocidad/gravedad y efecto: __. Recorrido de pared, peligro y recogida con esperado/observado: __. Teclado, táctil, pulsar/soltar, foco y pausa en qué destino: __. Una acción simulada por motor no es un dedo en dispositivo real. Próxima comprobación: __.
 
 ## G05 · Audio, cámara, luz y HUD
 
-Eventos y tonos: __. Silencio y feedback visual: __. Audición real o pendiente: __. Cámara/encuadre/iluminación configurados: __. Legibilidad y controles en tamaños observados: __. Procedencia de recursos y avisos: __.
+**Aportación/corte/modo/límite:** __. Evento→tono→texto/forma redundante: __. Silencio y no repetir win cada frame: __. Escuché audio en __ con resultado __, o PENDIENTE_AUDIO_REAL. Cámara/encuadre/iluminación y comparación propia: __. Resolución, legibilidad y límites: __. Licencias de recursos: __. Un recurso de audio generado no demuestra cómo suena.
 
-## G06 · Android
+## G06 · Android e implantación
 
-Godot/templates/JDK/SDK y sistema: __. Preset/arquitecturas/paquete: __. Comando o acción de exportación: __. Resultado/código y log saneado: __. SHA fuente y SHA256 APK: __. Instalación real con fecha y etiqueta no identificadora del equipo: __ o PENDIENTE_DISPOSITIVO_REAL. Recorrido inicio/recogida/daño/pausa/final/reinicio/táctil/audio: __. Fallos, corrección y repetición: __. No usar clave de publicación ni guardar secretos en fuentes.
+**Aportación/corte/modo/límite:** __. Sistema, Godot/templates/JDK/SDK, preset y ABIs: __. Comando/acción, salida o error, SHA fuente y SHA256 APK: __. Marca BUILD_APK solo si se construyó y comprobó. Instalación real con fecha y etiqueta no identificadora del dispositivo autorizado: __ o **PENDIENTE_DISPOSITIVO_REAL**. Recorrido inicio/recogida/daño/pausa/final/reinicio/táctil/audio, observado por __: __. Emulador/CI/captura no cuentan como instalación física ni acreditan RA5.h.
 
-## G07 · Pruebas y optimización
+## G07 · Pruebas, fallos y profiling
 
-| Caso/hipótesis | Entrada/condiciones | Esperado | Observado y modo | Corte/log | Decisión/límite |
+**Aportación/corte/modo/límite:** __.
+
+| Caso/hipótesis | Entrada y condiciones | Esperado | Observado y modo | Corte/log | Corrección/regresión/límite |
 |---|---|---|---|---|---|
 | __ | __ | __ | __ | __ | __ |
 
-Comparación: mismo equipo, modo, renderer, resolución y recorrido; tres repeticiones por variante cuando el ensayo lo permita. Base: __. Una variable cambiada: __. Datos reales: __. Resultado, incertidumbre y regresión: __. Si no se observó mejora o no hubo entorno, declararlo, sin fabricar FPS.
+Profiler abierto explícitamente en editor/destino: __ o PENDIENTE_PROFILING. Mantén equipo, renderer, resolución y recorrido; repite una base, cambia **una** variable y repite. Datos reales, incertidumbre, legibilidad y conclusión (incluida ausencia de mejora): __. No fabriques FPS.
 
-## G08 · Documentación, defensa y transferencia
+## G08 · Proceso, reproducción y defensa
 
-Pasos de instalación/arranque/exportación: __. Estructura y decisiones: __. Cambios por fases y cortes: __. Licencias: __. Known issues y QA pendiente: __. Consigna individual nueva: __. Predicción, diff, test y explicación sin ayuda generativa: __. Supervisión docente real o PENDIENTE_SUPERVISION: __. Corte final y handoff: __.
+**Aportación/corte/modo/límite:** __. Fases con archivos/cambios/cortes: __. Pasos de importación, ejecución y exportación: __. Estructura, licencias, límites/known issues y handoff: __. Consigna I3 nueva: __; predicción previa __; diff propio __; comprobación __; explicación observada por docente __ o **PENDIENTE_SUPERVISION**. La cita sustituye minutos de M4, no añade carga ni convierte una captura en observación.
 
-Completa trazabilidad de cada CE con estas evidencias y la rúbrica. Prueba presencial global PMDM separada; tests/builds/commits no generan nota automática ni aceptación PI.
+Antes de entregar, cruza G01–G08 con [RA5.a–j y rúbrica](../Unidad/07_EVALUACION_PM9.md). RA5 pesa 20 % global; todos los RA ≥5 y prueba práctica presencial global ≥5 se mantienen independientes de I3. No hay porcentajes nuevos por artefacto. Si falta hardware/entorno, pide acceso y conserva el pendiente auténtico.

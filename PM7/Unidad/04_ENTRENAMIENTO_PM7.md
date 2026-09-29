@@ -1,6 +1,6 @@
 # Entrenamiento graduado · PM7
 
-Estos ejercicios se distribuyen dentro de A02/A03/T1/A05/A06; no son horas adicionales. Intenta, compara la pista y corrige tu documento. Las respuestas extensas y variantes de evaluación permanecen reservadas.
+Estos ejercicios se distribuyen dentro de A02/A03/T1/A05/A06; no son horas adicionales. Intenta, compara la pista y corrige tu documento. Abre `lib/catalog.dart` y los cuatro datos DEMO para E1–E5; desde E6 contrasta `git diff` y tus pruebas. Registra en D01–D06 la salida que corresponda, no una entrega nueva. Las respuestas extensas y variantes de evaluación permanecen reservadas.
 
 | Nivel | Ejercicio | Salida breve | Pista / criterio de autocontrol |
 |---|---|---|---|
