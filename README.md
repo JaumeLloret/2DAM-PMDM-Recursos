@@ -44,7 +44,7 @@ Consulta las licencias y condiciones de cada herramienta y dependencia en sus fu
 - [PM8](PM8/README.md)
 - [PM9](PM9/README.md)
 
-La actualización completa está disponible en esta rama de revisión. La PR requiere fusión docente; los candidatos Moodle fijan el commit público comprobado y conservan ZIP locales completos.
+Estos materiales forman la biblioteca pública de apoyo. El curso institucional de AULES fija las fechas, tareas y cuestionarios; sus candidatos deben comprobar el commit público utilizado y conservar descargas locales completas.
 
 ## Preparación de la prueba global
 
