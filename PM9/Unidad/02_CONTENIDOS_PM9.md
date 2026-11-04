@@ -42,7 +42,7 @@ No se requieren texturas descargadas ni modelos externos. Si amplías con un ass
 
 ## 6. Movimiento, gravedad y colisión
 
-CharacterBody3D recibe una velocidad calculada por script y move_and_slide aplica el desplazamiento con respuesta a colisiones. No es un RigidBody3D que caiga por gravedad automáticamente. El script resta gravedad a velocity.y mientras no está en suelo; cuando lo está, controla la componente vertical. Horizontalmente convierte input 2D a XZ y limita longitud a uno para que la diagonal no sea más rápida.
+CharacterBody3D recibe una velocidad calculada por script y move_and_slide aplica el desplazamiento con respuesta a colisiones. No es un RigidBody3D que caiga por gravedad automáticamente. El script resta gravedad a velocity.y mientras no está en suelo; cuando lo está, controla la componente vertical. Horizontalmente convierte input 2D a XZ. Input.get_vector ya limita la longitud a uno; limit_length conserva esa cota. Quitar solo esta segunda llamada no acelera la diagonal; el problema aparece al usar un vector manual sin normalizar.
 
 La velocidad se expresa por segundo. move_and_slide utiliza la velocidad del cuerpo y el paso físico; no multipliques de nuevo todas sus componentes por delta al pasarlas como si fueran un desplazamiento. Sí se multiplica la aceleración gravitatoria por delta para actualizar velocidad. Confundir ambas magnitudes hace que el personaje avance demasiado poco o dependa del framerate.
 
@@ -95,3 +95,4 @@ Exportar requiere preset Android, templates exactos 4.7.2, JDK/SDK configurados 
 G06 registra entorno, comando/preset, resultado, hash, instalación y recorrido o estados pendientes. G08 documenta diseño/desarrollo, estructura, cambios, pruebas, licencias, pasos de ejecución y límites. En I3 debes predecir, modificar una condición nueva sin ayuda generativa y ejecutar una comprobación, explicando el diff.
 
 El juego final es completo dentro de su alcance, con QA honesta. Si falta hardware, el docente proporciona oportunidad y conserva el estado pendiente; no se fabrica una observación. El resultado técnico no concede aceptación contractual, AulaTokens o puertas del proyecto PI. PM9 concluye su propia experiencia y deja materiales listos para auditoría docente global.
+

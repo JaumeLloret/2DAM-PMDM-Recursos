@@ -4,7 +4,7 @@ Recibes una lista Flutter con cuatro entradas DEMO. Añadirás búsqueda por tí
 
 **Presupuesto por estudiante:** 6 h = **360 min**: 270 autónomos y dos misiones T1/T2 de 45 min efectivos. T1 **26/01/2027**, T2 **02/02/2027**, martes 19:30–20:25 (10 min de margen operativo). Taller presencial y [misión desde casa](10_TALLERES_Y_EQUIVALENCIAS_PM7.md) son **alternativas**: realiza una sola vía de cada T. I3 puede supervisarse en cita reprogramada dentro de T2, sin añadir otra tarea.
 
-**Calendario de AULES pendiente:** apertura, entrega objetivo y cierre/cutoff aún no confirmados. Las fechas de taller no son fechas de entrega. Antes de abrir PM7, aparecerán en portada, Ruta, sección y tarea.
+**Calendario de esta unidad.** Disponible desde 19/01/2027 00:00. Fecha de entrega final: 07/02/2027 23:59. Cierre de envíos: 10/02/2027 23:59. Hora de Europe/Madrid. El temario permanece disponible para consulta después del cierre de los envíos.
 
 ## Qué abrir y qué conservar
 

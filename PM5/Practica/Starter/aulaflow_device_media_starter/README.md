@@ -1,23 +1,32 @@
-# Device Media · starter DEMO de PM5
+# PM5 · Starter que vas a completar
 
-Este proyecto arranca con puertos y fakes locales. Los botones representan estados de cámara, BLE, sensor y media; todavía no usan esas capacidades físicas. Tu trabajo es desarrollar la integración del laboratorio con evidencia honesta de cada entorno.
-
-## Preparar una copia de trabajo
-
-Utiliza el Flutter/Dart fijado para la unidad. Copia este directorio fuera de la biblioteca y abre una terminal dentro de tu copia:
+Trabaja desde el paquete PM5 completo. En su raíz ejecuta `dart run Alumnado/preparar_pm5.dart starter`. Después abre `Practica/Starter/aulaflow_device_media_starter/`, la carpeta con `pubspec.yaml`, en VS Code o Android Studio.
 
 ```bash
-flutter create . --platforms=android --project-name aulaflow_device_media_starter
-flutter pub get
 flutter analyze
-flutter test test/starter_test.dart
-flutter run
+flutter test
+flutter run -d chrome
 ```
 
-Conserva los archivos [lib/](lib), [test/starter_test.dart](test/starter_test.dart) y [pubspec.yaml](pubspec.yaml) del starter al materializar la plataforma. Si Flutter crea `test/widget_test.dart` de la plantilla contador, elimínalo de tu copia: prueba una aplicación distinta. No cambies el nombre del paquete, porque el test lo importa.
+Android/web ya están preparados. El helper conserva las fuentes y tests del paquete; no borres pruebas para hacer que pase el baseline.
 
-Resultado: título «PM5 · Starter DEMO», estado «Listo en modo DEMO» y botones de acción. El test comprueba el arranque y la presencia del botón de permiso; no acredita permisos o hardware reales.
+Escanear DEMO muestra un periférico, iniciar sensor cambia x y procesar fixture muestra un PNG válido. La conversión todavía devuelve la entrada: ese TODO se trabaja en E11/K10. El modo inicial no usa hardware.
 
-## Qué leer
+`device_ports.dart` define permisos/BLE/sensor/media; `demo_fakes.dart` implementa el arranque; `device_controller.dart` contiene las mejoras previstas; `main.dart` conecta acciones y pantalla. `media_contracts.dart` aporta contratos para extender captura, almacenamiento, borrador y audio. `fixtures.dart` genera imágenes y tono reproducibles.
 
-`main.dart` conecta puertos DEMO con `DeviceController`; `device_ports.dart` define contratos y `demo_fakes.dart` permite observar respuestas locales. Sigue los requisitos del [laboratorio](../../../Unidad/06_LABORATORIO_PM5.md) y la [preparación de plataforma](../../../Unidad/05_PREPARACION_PLATAFORMA_PM5.md).
+Abre `Alumnado/06_RECORRIDOS_GUIADOS_PM5.md` desde la raíz PM5. Los ejemplos que sí puedes ejecutar están en `Practica/Ejemplos/pm5_capacidades_guiadas/`; su README indica qué clase y test corresponde a cada actividad. Completa el laboratorio sobre este starter, conservando tu diff y un único cuaderno.
+
+## Estudia el ejemplo en otra carpeta
+
+Vuelve a la raíz `PM5/` en otra terminal. Prepara el ejemplo y entra en su carpeta:
+
+```bash
+dart run Alumnado/preparar_pm5.dart ejemplo
+cd Practica/Ejemplos/pm5_capacidades_guiadas
+flutter test
+flutter run -d chrome
+```
+
+En esa pantalla puedes provocar denegación, timeout BLE, sensor, conversión y error de imagen, load/play/pause y animación. El README del ejemplo localiza los archivos. Aprende una pieza y aplícala a tu starter; son proyectos distintos y solo el starter se entrega como producto. Las instrucciones detalladas y el punto de entrada Android están en el recorrido guiado del ZIP.
+
+Usa Flutter **3.47.8 / Dart 3.13.7**. Si todavía tienes 3.47.2, sigue la actualización controlada de la página de referencias; no cambies los paquetes de la unidad.

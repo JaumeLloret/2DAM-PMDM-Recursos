@@ -24,7 +24,7 @@ Si la prueba pensada para fallar sale verde: comprueba que trabajas en el **star
 
 ## 3. Infraestructura y destino
 
-- **DevTools no conecta:** inicia primero la app con `flutter run` en un destino compatible; usa el enlace DevTools que imprime Flutter o *Open DevTools* desde tu IDE y confirma que seleccionaste el proceso de esta app. Para Performance, reinicia con `flutter run --profile -d <ID_LOCAL>`; debug sirve para Inspector, no para inferir tiempos de distribución. Si no hay acceso, deja `PENDIENTE_DEVTOOLS` y concierta observación.
+- **DevTools no conecta:** inicia primero la app con `flutter run` en un destino compatible; usa el enlace DevTools que imprime Flutter o *Open DevTools* desde tu IDE y confirma que seleccionaste el proceso de esta app. Para Performance usa móvil físico: profile no está disponible en emuladores. Reinicia con `flutter run --profile -d <ID_LOCAL>`; debug sirve para Inspector, no para inferir tiempos de distribución. Si no hay acceso, deja `PENDIENTE_DEVTOOLS` y concierta observación.
 - **AVD no arranca:** revisa virtualización, RAM/espacio, SDK y el primer error de Device Manager; `flutter devices` debe listar el emulador antes de ejecutar `integration_test`. Sigue con host y marca `PENDIENTE_EMULADOR` si se requiere equipo del centro.
 - **Gradle/build falla:** conserva el primer diagnóstico de `flutter doctor -v` o `flutter build apk --debug`; verifica Java 17, SDK/licencias autorizadas y espacio. No atribuyas a tu código un fallo de descarga.
 - **APK no aparece/instala:** comprueba que el build terminó, ruta `build/app/outputs/flutter-apk/app-debug.apk`, ID de esta app, destino en `flutter devices` y primer error de instalación. Una firma incompatible puede ser de una instalación anterior **de esta app**; acuerda retirada segura. Nunca borres otra app ni datos ajenos.
@@ -32,4 +32,4 @@ Si la prueba pensada para fallar sale verde: comprueba que trabajas en el **star
 
 ## 4. Ticket breve para pedir ayuda
 
-«Estoy en A04/K5, Flutter 3.47.2, Linux + VS Code, host. Ejecuté `flutter test test/retry_test.dart`; esperaba que `loading` fuese false tras error y obtuve true. El test compila, el primer fallo está en la aserción. He descartado import y no he cambiado el timeout. Guardé el comando, diff y salida saneada». Incluye solo lo necesario; nunca tokens, serial, rutas personales ni logs completos de otras apps.
+«Estoy en A04/K5, Flutter 3.47.8, Linux + VS Code, host. Ejecuté `flutter test test/retry_test.dart`; esperaba que `loading` fuese false tras error y obtuve true. El test compila, el primer fallo está en la aserción. He descartado import y no he cambiado el timeout. Guardé el comando, diff y salida saneada». Incluye solo lo necesario; nunca tokens, serial, rutas personales ni logs completos de otras apps.

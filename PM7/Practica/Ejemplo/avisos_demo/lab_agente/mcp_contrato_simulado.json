@@ -1,0 +1,19 @@
+{
+  "purpose": "Documento didáctico; no es configuración ni servidor ejecutable MCP",
+  "tools": [
+    {
+      "name": "catalogo_consultar",
+      "description": "Consultar un registro DEMO por ID",
+      "inputSchema": {"type": "object", "properties": {"id": {"type": "string"}}, "required": ["id"]},
+      "example_arguments": {"id": "DEMO-A"},
+      "example_result": {"titulo": "Revisión de cámara", "done": false},
+      "effect": "read"
+    },
+    {
+      "name": "catalogo_borrar",
+      "description": "Ejemplo de escritura que una tarea de consulta no autoriza",
+      "inputSchema": {"type": "object", "properties": {"id": {"type": "string"}}, "required": ["id"]},
+      "effect": "write"
+    }
+  ]
+}

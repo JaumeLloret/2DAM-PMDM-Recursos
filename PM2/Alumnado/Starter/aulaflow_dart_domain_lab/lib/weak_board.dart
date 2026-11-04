@@ -72,4 +72,3 @@ Future<String> weakSnapshot(String boardId, List<WeakColumn> board) async {
       .join('|');
   return '$boardId|$parts';
 }
-

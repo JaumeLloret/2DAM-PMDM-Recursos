@@ -1,15 +1,40 @@
-# Ampliación opcional · PM4
+# PM4 · Ampliación opcional
 
-Realiza como máximo una ruta después del carril obligatorio. No cuenta como requisito.
+Estas propuestas son visibles, voluntarias y no añaden trabajo obligatorio ni mejoran por sí solas la calificación. Elige como máximo una después de cerrar **¿Estoy listo?**.
 
-1. Cliente envolvente: `BaseClient` para headers/trazas saneadas, sin ocultar contrato.
-2. Serialización generada: comparar mapeo manual con `json_serializable` después de dominar DTO.
-3. Cache con TTL: reloj inyectado, caducidad visible y política justificable.
-4. Refresh token conceptual: diagrama de estados, sin OAuth completo ni secretos reales.
-5. Comparativa `http`/Dio: una tabla de decisiones, no reescritura obligatoria.
-6. Almacén estructurado: prototipo SQLite para muchos registros; sin SQL avanzado.
-7. HTTPS local: CA de pruebas instalada de forma correcta, nunca bypass de certificados.
-8. Offline avanzado: cola/conflictos solo como experimento acotado.
+## A1 · trazas saneadas con `BaseClient`
 
-Cada ruta debe declarar coste, beneficio, nuevo riesgo y prueba. Si introduce permisos/sensores, pipeline profesional o agentes, ya ha cruzado PM5/PM6/PM7 y debe descartarse en PM4.
+Centraliza headers y duración sin ocultar el contrato. Demuestra que password, token y body de login nunca aparecen.
+
+## A2 · serialización generada
+
+Compara mapeo manual con `json_serializable` después de dominar DTO. Registra coste, beneficio y error que evita.
+
+## A3 · cache con TTL
+
+Inyecta un reloj, muestra caducidad y decide cuándo no se permite fallback. No conviertas el tiempo en una constante oculta.
+
+## A4 · refresh token conceptual
+
+Dibuja estados y amenazas sin implementar OAuth completo ni usar secretos reales.
+
+## A5 · `http` frente a Dio
+
+Compara timeout, interceptores, cancelación, errores y testabilidad. No es obligatorio reescribir la app.
+
+## A6 · almacén estructurado
+
+Prototipa SQLite para muchos registros y explica por qué preferences deja de ser adecuada. SQL/ORM profundo pertenece a Acceso a Datos.
+
+## A7 · HTTPS local bien configurado
+
+Utiliza una CA de pruebas instalada correctamente. Nunca ignores certificados.
+
+## A8 · offline avanzado
+
+Explora cola y conflictos en un caso acotado; no la presentes como requisito del laboratorio.
+
+## Contrato de cierre
+
+Conserva: objetivo, decisión, riesgo nuevo y prueba. Descarta cualquier ampliación que adelante sensores/permisos/multimedia de PM5, testing/DevTools/CI curricular de PM6, agentes/SDD de PM7 o arquitectura global de PI II.
 

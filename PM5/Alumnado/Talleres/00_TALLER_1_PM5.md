@@ -1,14 +1,12 @@
-# Taller 1 · 17/11/2026 · permisos y BLE
+# PM5 · Bloque 1 · permisos y BLE
 
-Horario 19:30–20:25. Trae starter y cuaderno. Usa solo el periférico asignado.
+**Fecha del taller opcional:** 24/11/2026 · 19:30–20:25.
 
-1. Predice la transición al denegar Bluetooth.
-2. Ejecuta modo fake y localiza el puerto.
-3. Si hay hardware, reinicia permisos, escanea, conecta e intercambia `DEMO-PING`.
-4. Provoca timeout/desconexión y verifica cleanup.
-5. Redacta ids antes de guardar evidencia.
-6. Registra `OBSERVADA_REAL` solo con confirmación docente; en otro caso usa el estado pendiente/fake correcto.
+**Vía autónoma:** disponible en AULES durante el mismo bloque.
+**Duración/finalidad/evidencia:** 45 min efectivos en cualquiera de las dos vías (franja 55 min nominales + 10 min de margen).
 
-Ticket: ¿qué recurso seguía activo y dónde lo cancelaste?
+Misión: explicar una decisión de permiso, recorrer scan→stop→connect→DEMO-PING y demostrar recuperación/cleanup ante timeout o desconexión.
 
+Entrega: ticket `síntoma → capa → prueba → resultado → estado de evidencia`. Usa solo periférico asignado y redacta ids.
 
+Consulta el reparto minuto a minuto en [Talleres opcionales y misiones autónomas](../../Unidad/11_TALLERES_OPCIONALES_PM5.md).

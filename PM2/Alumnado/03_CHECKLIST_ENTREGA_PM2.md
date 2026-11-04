@@ -1,34 +1,36 @@
-# Checklist de entrega PM2
+# PM2 · Checklist antes de crear el ZIP
 
-## Currículo y diseño
+## Diseño
 
-- [ ] Puedo decir qué clase es necesaria y qué regla protege.
-- [ ] No he creado clases solo para aumentar el número.
-- [ ] Los nombres representan conceptos/responsabilidades.
-- [ ] Las invariantes se protegen también después del constructor.
-- [ ] Justifico composición/herencia.
+- [ ] Puedo decir por qué existe cada clase y qué regla o responsabilidad protege.
+- [ ] He eliminado clases decorativas.
+- [ ] Las invariantes se protegen al construir y al modificar.
+- [ ] Justifico composición o, si existe, una herencia real.
 
 ## Dart
 
-- [ ] Tipos e inferencia son coherentes.
-- [ ] `dynamic` y `!` no aparecen sin una frontera justificada.
+- [ ] Tipos e inferencia expresan el contrato.
+- [ ] `dynamic` y `!` no aparecen sin frontera justificada.
 - [ ] Ausencias legítimas usan tipos anulables.
 - [ ] Colecciones están tipadas y su mutabilidad está controlada.
-- [ ] Records/patterns/switch solo simplifican.
+- [ ] Record/enum/switch simplifican una decisión real.
 - [ ] El `Future` se espera y el error se observa.
 
-## Evidencia
+## Ejecución y evidencia
 
-- [ ] `DECISIONES.md` completo.
+- [ ] `dart format --output=none --set-exit-if-changed .` termina correctamente.
+- [ ] `dart analyze` termina sin errores.
+- [ ] `dart run bin/main.dart` produce una salida reproducible.
+- [ ] `dart test` pasa, o he indicado honestamente `NO APLICA`.
+- [ ] `DECISIONES.md` coincide con el código.
 - [ ] `EVIDENCIA.md` contiene versión, comandos y salidas reales.
-- [ ] El programa produce salida reproducible.
-- [ ] He incorporado y explicado la microvariación.
-- [ ] Puedo localizar el comportamiento sin agente.
+- [ ] He incorporado y explicado la microvariación individual.
 
-## Higiene
+## Higiene del ZIP
 
-- [ ] No incluyo `.dart_tool/`, `build/`, credenciales o datos personales.
-- [ ] No incluyo soluciones docentes.
-- [ ] Mi ZIP se abre y conserva [pubspec.yaml](Starter/aulaflow_dart_domain_lab/pubspec.yaml), [bin/](Starter/aulaflow_dart_domain_lab/bin), [lib/](Starter/aulaflow_dart_domain_lab/lib) y [test/](Starter/aulaflow_dart_domain_lab/test) si existe.
-
+- [ ] Contiene `pubspec.yaml`, `bin/`, `lib/`, `DECISIONES.md` y `EVIDENCIA.md`.
+- [ ] Incluye `test/` si existe.
+- [ ] No incluye `.dart_tool/`, `build/`, credenciales, `.env` o datos personales.
+- [ ] No incluye soluciones docentes.
+- [ ] He descomprimido una copia y comprobado que puede abrirse.
 

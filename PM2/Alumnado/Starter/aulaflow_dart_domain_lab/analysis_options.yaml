@@ -10,4 +10,3 @@ linter:
     - prefer_final_locals
     - unawaited_futures
 
-

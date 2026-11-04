@@ -1,74 +1,91 @@
-# Evaluación, autenticidad y trazabilidad · PM3
+# PM3 · Evaluación y entrega
 
-## Identidad criterial
+## Qué vas a demostrar
 
-RA2.b es el único CE primario:
+PM3 aporta evidencia del CE primario RA2.b:
 
-> Se han analizado y utilizado las clases que modelan ventanas, menús, alertas y
-> controles para el desarrollo de aplicaciones gráficas sencillas.
+> Se han analizado y utilizado las clases que modelan ventanas, menús, alertas y controles para el desarrollo de aplicaciones gráficas sencillas.
 
-RA2 conserva el 35 % del módulo. PM3 no crea pesos internos ni mínimos
-porcentuales. La prueba presencial global de PMDM sigue separada.
+No se crean pesos internos ni mínimos nuevos. RA2 conserva su peso global y la prueba presencial global de PMDM continúa separada.
 
-## Instrumentos
+## Tres instrumentos, una misma historia
 
-- **I1 · entrenamiento:** ejemplos, predicciones y 12 katas; formativo.
-- **I2 · artefacto:** app ejecutable + decisiones + evidencia reproducible.
-- **I3 · autenticidad:** microvariación simultánea sin agente + explicación.
+- **I1 · entrenamiento formativo:** ejemplos, predicciones, 12 katas y debugging. Te prepara; no son doce entregas.
+- **I2 · artefacto:** app ejecutable, decisiones y comprobaciones reproducibles.
+- **I3 · microvariación individual:** cambio pequeño sin agente y explicación propia.
 
-## Trazabilidad
+## Qué debes entregar
 
-| Foco de RA2.b | Evidencia | Instrumento | Autenticidad |
-|---|---|---|---|
-| pantalla/ventana | shell y detalle ejecutables | I2 | recorrer compacto/ancho |
-| menús/navegación | bar, rail, popup y rutas | I1/I2 | variación de destino/ruta |
-| alertas/feedback | diálogo cancelable + SnackBar | I2 | cambiar condición |
-| controles | filtro, orden, switch, botones | I1/I2 | explicar evento→estado |
-| adaptación | decisión basada en constraints | I1/I2 | redimensionar y justificar |
-| estado | local frente a feature | I1/I2 | microcambio en VM |
-| separación | View/ViewModel/repository fake | I2 | sustituir fake/fallo |
-| accesibilidad | texto/teclado/etiquetas | I2 | prueba directa |
+1. La carpeta del proyecto Flutter o un ZIP creado desde ella.
+2. `02_PLANTILLA_DECISIONES_PM3.md` cumplimentada.
+3. `03_CHECKLIST_ENTREGA_PM3.md` con comprobaciones reales.
+4. `04_REGISTRO_ENTREGA_PM3.md` con versiones, comandos y resultados.
+5. Mapa antes/después y dos capturas sin datos personales: vista compacta y ancha.
+6. Evidencia de texto ampliado y teclado/foco con la herramienta realmente usada.
+7. Evidencia breve de I3: predicción, cambio, ejecución y explicación.
 
-## Rúbrica criterial
+Envía en **PM3 · Entrega tu aplicación y sus evidencias**. Apertura: **18/10/2026 00:00**. Entrega recomendada: **01/11/2026 23:59**. Cierre de recepción: **02/11/2026 23:59**, Europe/Madrid. Puedes enviar entre la fecha recomendada y el cierre; el retraso no rebaja automáticamente la competencia. PM4 comienza el **03/11/2026**. Consulta en el formulario el límite técnico de archivo.
 
-| Dimensión | Evidencia sólida | Evidencia parcial | Evidencia insuficiente |
-|---|---|---|---|
-| UI gráfica | usa y explica Scaffold, menú, alerta y controles con propósito | funcionan, pero la explicación o elección es débil | faltan controles esenciales o la app no ejecuta |
-| Adaptación | bar/rail dependen de constraints y no pierden contenido | dos layouts con defectos menores o criterio poco justificado | layout fijo/overflow o clasificación por dispositivo sin medir |
-| Navegación | rutas declarativas, id pequeño, detalle y salida inválida | navegación funciona con acoplamiento evitable | destinos rotos o objeto mutable imprescindible |
-| Estado | una fuente, local/feature distinguidos, UI reacciona | ViewModel existe pero quedan reglas/copias en View | estado disperso/incoherente o no observable |
-| Arquitectura | View→VM→Repository real, DI por constructor, sin ceremonia | separación incompleta pero responsabilidades reconocibles | nombres de capas sin flujo real o fuente creada en ViewModel |
-| Interacción/accesibilidad | confirmación, feedback, teclado, texto grande y etiquetas verificados | funciona con alguna carencia comprobable | acción opaca, solo color o funcionalidad inaccesible |
-| Explicación/autenticidad | predice, modifica, ejecuta y explica causalmente | ejecuta pero explica por receta | no puede producir/explicar variación propia |
+## Estructura y comprobación antes de comprimir
 
-El juicio final es profesional y criterial sobre el conjunto. Una dimensión sin
-evidencia suficiente queda pendiente; no se oculta mediante media aritmética.
+Abre una terminal en la carpeta que contiene `pubspec.yaml`:
 
-## Evidencia mínima válida
+```bash
+flutter pub get
+flutter analyze
+flutter test
+flutter run
+```
 
-La app compila/ejecuta, permite demostrar los cuatro grupos literales del CE y la
-persona explica al menos un flujo completo: control → callback → comando → estado
-→ `notifyListeners` → rebuild. Una maqueta, captura o repositorio no ejecutable no
-basta.
+Después comprueba que la app permite recorrer lista, tablero, ajustes y detalle; que un id inválido no bloquea; que cancelar un diálogo no cambia datos y confirmar sí produce cambio y feedback.
 
-## Autenticidad escalable
+Antes de comprimir, elimina `build/`. No elimines `pubspec.yaml`, `lib/`, `test/`, decisiones, checklist ni registro.
 
-I3 reserva **23 min de microvariación simultánea** dentro del taller 2, coherentes
-con la ruta de trabajo de la unidad. El docente recorre, observa ejecución y selecciona explicaciones breves;
-solo los casos dudosos pasan a T. El registro distingue `OBSERVADA`,
-`PENDIENTE_EVIDENCIA` y `PENDIENTE_ENTORNO`. No se usan detectores de IA, número
-de commits ni estilo como prueba de autoría.
+## Qué no debes incluir
 
-## IA
+- `build/`, `.dart_tool/` si la tarea no la solicita, `.env` o claves;
+- tokens, cuentas, correos, rutas personales completas o datos reales;
+- solución docente, oráculos o materiales de `Docente/`;
+- capturas con información personal;
+- plataformas generadas innecesarias si la tarea no las requiere.
 
-Apoyo opcional, declarado y verificable. El alumno conserva registro de consulta,
-decisión y comprobación. I3 se realiza sin agente. Los prompts no son criterio y
-SDD/agentes siguen reservados a PM7.
+## Criterios visibles
 
-## Entrega tardía o entorno bloqueado
+| Foco | Evidencia sólida |
+|---|---|
+| UI gráfica | pantalla, menú, alerta y controles funcionan y puedes explicar su propósito |
+| Adaptación | bar/rail dependen del espacio y no pierden contenido a 390/900 px |
+| Navegación | rutas declarativas, id estable, detalle y salida para id inválido |
+| Estado | distingues local/feature y mantienes una única fuente observable |
+| Separación | View → ViewModel → Repository responde a responsabilidades reales y usa DI por constructor |
+| Interacción | cancelar/confirmar, feedback, vacío/error/reintento son coherentes |
+| Accesibilidad | texto grande, etiquetas y teclado/foco se comprueban con evidencia real |
+| Autenticidad | puedes modificar y explicar causalmente tu propio artefacto |
 
-Un problema de entorno no se confunde con falta de aprendizaje. Se conserva el
-artefacto y se habilita ejecución equivalente supervisada. La ausencia de
-evidencia auténtica tampoco se convierte automáticamente en cero: se marca y se
-recupera con un caso nuevo.
+El juicio es criterial sobre el conjunto. Una dimensión sin evidencia suficiente queda pendiente; no se oculta mediante una media inventada.
 
+## I3 con o sin taller
+
+La microvariación dura **23 minutos** y se realiza sin agente. Puede observarse en el taller opcional del 27/10 o asignarse por AULES mediante la misión autónoma equivalente.
+
+En ambas vías debes:
+
+1. predecir ficheros y estado afectados;
+2. realizar un cambio pequeño sobre tu copia;
+3. ejecutar y conservar el resultado;
+4. explicar evento → comando → estado → `notifyListeners` → rebuild;
+5. responder una pregunta de límites.
+
+Si la evidencia no permite comprobar comprensión, se hará una comprobación focalizada. No se repite automáticamente toda PM3.
+
+## IA y otras ayudas
+
+La IA es opcional durante el aprendizaje e I2. Declara para qué la utilizaste, qué aceptaste o rechazaste y cómo verificaste el resultado. No se evalúa la forma del prompt. I3 se realiza sin agente.
+
+## Si el entorno está bloqueado
+
+Registra `PENDIENTE_ENTORNO` con sistema, comando y primer error. Puedes avanzar en predicción y diseño, pero una salida ajena no sustituye tu ejecución. Se habilitará una comprobación equivalente supervisada cuando proceda; un bloqueo técnico documentado no se confunde automáticamente con falta de aprendizaje.
+
+## Recuperación
+
+Si queda un foco pendiente, usarás `RepairDesk UI` para producir evidencia nueva únicamente de ese foco. Se aplica el mismo CE y criterio, sin penalización adicional ni repetición automática de toda la unidad.

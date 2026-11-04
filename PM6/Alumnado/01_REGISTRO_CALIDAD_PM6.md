@@ -20,7 +20,7 @@ Explica hipótesis, diff mínimo, prueba previa roja, verde posterior y caso lí
 
 ## 3. Qué observé con DevTools (Q03)
 
-**No inventes una medida.** Declara destino/modo/frecuencia, Flutter, dataset, recorrido y herramienta. Inspector: contador/layout. Performance: profile, misma carga de 1500 DEMO, calentamiento separado y tres repeticiones por variante eager/builder. Memory: corte inicial, 25 cargas, corte final, objetos/referencias e hipótesis. La prueba de `history.length <= 20` es host/retención lógica y se registra por separado. Sigue [protocolo](../Unidad/08_DEVTOOLS_Y_CI_PM6.md).
+**No inventes una medida.** Declara destino/modo/frecuencia, Flutter, dataset, recorrido y herramienta. Inspector: contador/layout. Performance: móvil físico en profile (no emulador), misma carga de 1500 DEMO, calentamiento separado y tres repeticiones por variante eager/builder. Memory: corte inicial, 25 cargas, corte final, objetos/referencias e hipótesis. La prueba de `history.length <= 20` es host/retención lógica y se registra por separado. Sigue [protocolo](../Unidad/08_DEVTOOLS_Y_CI_PM6.md).
 
 | Herramienta/corte | Entorno y recorrido | Observación real/traza saneada | Inferencia y límite | Próxima prueba o pendiente |
 |---|---|---|---|---|

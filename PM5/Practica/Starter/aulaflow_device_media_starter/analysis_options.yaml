@@ -7,4 +7,3 @@ analyzer:
     dead_code: error
     unused_import: error
 
-

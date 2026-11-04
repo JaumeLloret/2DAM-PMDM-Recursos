@@ -1,67 +1,122 @@
-# Gimnasio graduado · PM4
+# PM4 · Gimnasio de 14 katas
 
-Las 14 katas están embebidas en las fases 2, 3, 5 y 7; no son 14 entregas. Registra hipótesis, cambio y evidencia breve en el cuaderno.
+Las katas están incluidas en las fases 2, 3, 5, 6 y 7. **No son catorce entregas.** Trabaja sobre fragmentos preparados o una copia del starter.
 
-## K1 · anatomía
+En todas usa **LEE → PREDICE → MODIFICA → VERIFICA → EXPLICA**.
 
-Dada `GET https://demo.invalid/tasks/DEMO-2?compact=true`, identifica esquema, host, ruta, query, método y si esperas body de request. Criterio: seis piezas correctas y no confundir URL con endpoint.
+## K1 · anatomía de una URI
 
-## K2 · código → estado
+- **Lee:** `GET https://demo.invalid/tasks/DEMO-2?compact=true`.
+- **Predice:** esquema, host, ruta, query, método y body de request.
+- **Modifica:** cambia solo la query.
+- **Verifica:** sigues identificando seis piezas sin llamar «endpoint» a toda la URL.
+- **Explica:** qué parte cambia por entorno.
 
-Asocia 200, 401, 404 y 500 a `data`, `sessionExpired`, `notFound` y `error/retry`. Justifica por qué 401 no es 403.
+## K2 · código a estado
 
-## K3 · 204
+- **Lee:** respuestas 200, 401, 404 y 500.
+- **Predice:** `data`, `sessionExpired`, `notFound` o `error/retry`.
+- **Modifica:** añade 403.
+- **Verifica:** no lo conviertes automáticamente en «inicia sesión».
+- **Explica:** diferencia 401/403.
 
-Corrige un cliente que ejecuta siempre `jsonDecode(response.body)`. Criterio: 204 se trata como éxito sin body y el siguiente paso respeta el contrato.
+## K3 · 204 sin JSON
 
-## K4 · JSON frágil
+- **Lee:** un cliente que siempre ejecuta `jsonDecode(response.body)`.
+- **Predice:** fallo con body vacío.
+- **Modifica:** acepta 204 como éxito sin decodificar.
+- **Verifica:** 200 con JSON continúa funcionando.
+- **Explica:** de dónde saldrá el estado siguiente.
 
-Un cast `json['done'] as bool` recibe `"false"`. Localiza la capa y genera `FormatFailure`; no conviertas cualquier texto silenciosamente.
+## K4 · contrato JSON frágil
 
-## K5 · opcionalidad
+- **Lee:** `json['done'] as bool` recibe `"false"`.
+- **Predice:** capa y excepción.
+- **Modifica:** valida tipo y genera `FormatFailure`.
+- **Verifica:** no conviertes texto arbitrario a booleano.
+- **Explica:** por qué el servidor no se «corrige» en UI.
 
-Añade `note: String?` sin hacer opcional `id`. Prueba ausencia, null y tipo incorrecto.
+## K5 · opcionalidad honesta
 
-## K6 · timeout
+- **Lee:** `id` obligatorio y `note` opcional.
+- **Predice:** ausencia, null y tipo incorrecto.
+- **Modifica:** añade `note: String?` sin debilitar `id`.
+- **Verifica:** tres casos con prueba pequeña.
+- **Explica:** opcional no significa `dynamic`.
 
-Aplica 400 ms y activa `scenario=slow`. Criterio: estado específico, retry y ningún spinner infinito.
+## K6 · timeout observable
 
-## K7 · saca HTTP del widget
+- **Lee:** `scenario=slow` y límite 400 ms.
+- **Predice:** estado y acción disponible.
+- **Modifica:** tipa timeout y añade retry.
+- **Verifica:** no hay spinner infinito; normal sigue funcionando.
+- **Explica:** límite del timeout respecto a cancelación real.
 
-Recibe un `onPressed` con `http.get`, JSON y `setState`. Extrae RemoteService y haz que la View reciba un evento del ViewModel.
+## K7 · HTTP fuera del widget
 
-## K8 · DTO=dominio o no
+- **Lee:** `onPressed` con `http.get`, JSON y `setState`.
+- **Predice:** qué rompe testabilidad y separación.
+- **Modifica:** mueve HTTP/JSON a RemoteService y coordinación a ViewModel.
+- **Verifica:** la View solo envía evento y observa estado.
+- **Explica:** responsabilidad de cada capa.
 
-Decide para dos casos: `{id,title}` idéntico y `{id,status:"doing"}` con enum interno. Una respuesta válida puede elegir una clase en el primer caso y dos en el segundo; lo importante es la razón.
+## K8 · DTO y dominio con motivo
 
-## K9 · login ficticio
+- **Lee:** caso idéntico `{id,title}` y caso externo `status:"doing"` con enum interno.
+- **Predice:** uno o dos tipos para cada caso.
+- **Modifica:** separa solo el segundo.
+- **Verifica:** un estado futuro queda `unknown`.
+- **Explica:** qué variación justifica el mapeo.
 
-Implementa POST, `Content-Type`, body JSON y lectura de token. Rechaza 401 sin guardar contraseña. Sanea el log.
+## K9 · login ficticio seguro
 
-## K10 · almacenamiento inseguro
+- **Lee:** POST, content type, JSON y token.
+- **Predice:** 200 y 401.
+- **Modifica:** implementa login sin persistir contraseña.
+- **Verifica:** log con método/ruta/código, nunca body ni token.
+- **Explica:** diferencia credencial y sesión.
 
-Encuentra dos defectos: token en constante y token en preferencias. Mueve la sesión a `SessionStore` seguro; logout elimina clave y memoria.
+## K10 · almacenamiento del token
 
-## K11 · preferencia persistente
+- **Lee:** token en constante y token en preferences.
+- **Predice:** riesgos.
+- **Modifica:** introduce `SessionStore` seguro; logout borra clave y memoria.
+- **Verifica:** re-instanciación restaura token; contraseña no existe.
+- **Explica:** por qué secure storage es el mecanismo proporcionado.
 
-Guarda/restaura `showCompleted`. Demuestra lectura con una nueva instancia de LocalStore. Explica por qué no es dato crítico.
+## K11 · preferencia y cache
 
-## K12 · remote-first/cache-first
+- **Lee:** `showCompleted` y cache JSON pequeña.
+- **Predice:** sensibilidad y vida.
+- **Modifica:** guarda/restaura con LocalStore no sensible.
+- **Verifica:** nueva instancia recupera datos y delete los elimina.
+- **Explica:** por qué no es una base de datos crítica.
 
-Para un horario casi estático y para tareas colaborativas activas, elige política. Indica cuándo mostrar `stale` y cuándo no usar cache.
+## K12 · política de fuente
+
+- **Lee:** horario casi estático y tareas activas.
+- **Predice:** remote-first o cache-first.
+- **Modifica:** aplica remote-first a las tareas demo.
+- **Verifica:** éxito actualiza cache; fallo recuperable muestra `stale`.
+- **Explica:** coste de enseñar datos antiguos.
 
 ## K13 · 401 coherente
 
-Simula 401 al refrescar: Repository borra sesión, ViewModel elimina datos protegidos y View vuelve a login. Criterio: no hay bucle de retry con el mismo token.
+- **Lee:** 401 durante refresh con cache disponible.
+- **Predice:** qué debe ocurrir con sesión y datos.
+- **Modifica:** Repository borra sesión y ViewModel pasa a `sessionExpired`.
+- **Verifica:** no hay retry infinito ni cache protegida como éxito.
+- **Explica:** por qué 401 no es offline.
 
-## K14 · localhost
+## K14 · árbol de `localhost`
 
-La API responde en host pero no en AVD. Escribe un árbol de diagnóstico con URL efectiva, `10.0.2.2`, escucha/puerto, permiso INTERNET y firewall/red. No cambies cinco cosas a la vez.
+- **Lee:** host responde, Android Emulator no.
+- **Predice:** URL efectiva, escucha/puerto, permiso y red.
+- **Modifica:** cambia únicamente `API_BASE_URL` a `10.0.2.2`.
+- **Verifica:** health host y carga app; después prueba una regresión normal.
+- **Explica:** por qué `127.0.0.1` apunta a dos sistemas diferentes.
 
-## Escala de ayuda
+## Autocorrección
 
-- Pista 1: nombra la capa responsable.
-- Pista 2: reproduce con curl/fixture.
-- Pista 3: compara con E1–E12.
-- Solución completa: reservada por el docente y no publicada.
+Una kata se cierra con predicción, cambio pequeño, salida observable y explicación causal. Si solo existe código o captura, falta aprendizaje. Usa las pistas en este orden: capa → escenario reproducible → ejemplo relacionado → ayuda docente.
 

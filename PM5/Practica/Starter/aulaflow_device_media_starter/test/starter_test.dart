@@ -10,4 +10,3 @@ void main() {
     expect(find.text('Pedir cámara en contexto'), findsOneWidget);
   });
 }
-

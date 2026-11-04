@@ -63,4 +63,3 @@ Future<String> createLocalSnapshot({
   }
   return 'snapshot:$boardId:$cardCount';
 }
-

@@ -1,12 +1,13 @@
-# Referencias y actualización PM2
+# PM2 · Referencias técnicas
+
+Usa esta página cuando quieras ampliar una explicación o comprobar la fuente oficial de una regla. Para completar la Ruta no necesitas leer todos los enlaces.
 
 ## Baseline utilizado
 
 - Fecha de consulta técnica: **2026-09-05**.
 - PM1 validó en CI **Flutter 3.47.2 / Dart 3.13.2**.
-- Este entorno de Work no dispone de ejecutables `dart` ni `flutter`.
 - La documentación oficial consultada declara que refleja **Dart 3.13.0**.
-- Los paquetes fijan `sdk: ">=3.13.0 <4.0.0"` para hacer explícito el baseline; antes de publicar debe revalidarse con la stable instalada.
+- Los proyectos de PM2 fijan `sdk: ">=3.13.0 <4.0.0"`.
 - No se usan features experimentales. Records y patterns requieren Dart 3.0 o posterior.
 
 ## Fuentes oficiales
@@ -30,15 +31,17 @@
 | Formatter | https://dart.dev/tools/dart-format | procedimiento de formato |
 | Tests | https://dart.dev/tools/dart-test | ejecución de tests de materiales |
 
-## Criterio de actualización antes de impartir
+## Comprobación rápida de tu entorno
 
-1. ejecutar el procedimiento técnico;
-2. registrar versión y sistema operativo;
-3. comprobar que el SDK satisface el rango;
-4. revisar cambios de lenguaje/lints que afecten a ejemplos;
-5. no introducir nueva sintaxis solo por estar disponible;
-6. actualizar comandos/salidas únicamente después de ejecutarlos;
-7. si se cambia código, repetir formato, analyzer, run y tests sobre el nuevo HEAD.
+Desde la terminal integrada de tu IDE, ejecuta:
+
+```bash
+dart --version
+dart format .
+dart analyze
+```
+
+La versión debe satisfacer el rango del `pubspec.yaml`. Si `dart` no se reconoce, no cambies el proyecto: revisa la instalación o el PATH con la ayuda de tu entorno y vuelve a ejecutar `dart --version`.
 
 ## Alternativas sencillas a sintaxis moderna
 
@@ -50,5 +53,4 @@
 | collection-if/spread | construir lista declarativa | `List.of` + `add`/`addAll` |
 
 No se usan class modifiers como requisito, ni sealed classes, mixins, extensions o generics avanzados en la ruta base.
-
 

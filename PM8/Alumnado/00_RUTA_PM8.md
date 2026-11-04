@@ -2,7 +2,7 @@
 
 Vas a estudiar un juego y dos laboratorios que ya funcionan. Aprenderás a explicar sus escenas, sus servicios del motor y sus reglas; al final justificarás el uso de Godot para preparar PM9. **Aquí no construyes un juego nuevo ni exportas una APK.** Guarda un único dossier [Motor Lab L01–L06](01_DOSSIER_MOTOR_LAB_PM8.md).
 
-**Calendario de publicación:** apertura `PENDIENTE_CONFIRMACION_DOCENTE` · entrega objetivo `PENDIENTE_CONFIRMACION_DOCENTE` · cierre/cutoff `PENDIENTE_CONFIRMACION_DOCENTE`. Tu profesor escribirá las tres fechas aquí, en la portada y en la sección/tarea de AULES antes de abrir la unidad. **09/02/2027 es el taller, no la fecha de entrega.**
+**Calendario de publicación:** apertura `Consulta la fecha vigente en AULES` · entrega objetivo `Consulta la fecha vigente en AULES` · cierre/cutoff `Consulta la fecha vigente en AULES`. Tu profesor escribirá las tres fechas aquí, en la portada y en la sección/tarea de AULES antes de abrir la unidad. **09/02/2027 es el taller, no la fecha de entrega.**
 
 ## Los primeros 20 minutos
 

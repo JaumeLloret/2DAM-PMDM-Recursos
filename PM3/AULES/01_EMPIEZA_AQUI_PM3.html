@@ -7,39 +7,73 @@
 </head>
 <body>
   <main>
-    <h1>PM3 · UI adaptable, navegación, estado y arquitectura</h1>
-    <p><strong>12 horas, 720 minutos.</strong> Construirás una app Flutter local
-      y ejecutable que usa pantalla, menú, alerta y controles, se adapta al
-      espacio y separa la vista del estado de feature.</p>
-    <h2>Ruta</h2>
+    <h1>PM3 · Empieza aquí</h1>
+    <p>Vas a construir una interfaz Flutter local que se adapta al espacio,
+      navega por destinos y detalle, y mantiene el estado fuera de los widgets
+      cuando pertenece a toda la feature. Dispones de <strong>720 minutos</strong>;
+      todo el trabajo obligatorio está incluido.</p>
+
+    <h2>Tu primer resultado</h2>
     <ol>
-      <li>Completa el diagnóstico Q01–Q04.</li>
-      <li>Lee widgets/layout/Material 3 y resuelve K1–K5.</li>
-      <li>Participa en el taller del 13/10.</li>
-      <li>Estudia rutas/estado/arquitectura y resuelve K6–K12.</li>
-      <li>Trabaja sobre el starter, no sobre la solución.</li>
-      <li>Participa en el taller del 20/10 y realiza la microvariación.</li>
-      <li>Entrega proyecto, decisiones, checklist y registro.</li>
-      <li>Completa la autoevaluación Q05–Q12.</li>
+      <li>Abre la carpeta del starter que contiene <code>pubspec.yaml</code>.</li>
+      <li>Ejecuta <code>flutter pub get</code>, <code>flutter analyze</code>,
+        <code>flutter test</code> y <code>flutter run</code>.</li>
+      <li>Comprueba que ves tres destinos y tareas <code>DEMO-*</code>.</li>
     </ol>
-    <h2>Antes de empezar</h2>
+    <p>Si no ocurre, no reinstales todo: abre <strong>Ayuda PM3</strong> y conserva
+      el comando y el primer mensaje de error.</p>
+
+    <h2>Ruta en diez pasos</h2>
+    <table>
+      <thead><tr><th>Paso</th><th>Tiempo</th><th>Haz</th><th>Comprueba y conserva</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>30 min</td><td>Entorno, starter y diagnóstico</td><td>App abierta o bloqueo exacto</td></tr>
+        <tr><td>2</td><td>80 min</td><td>Widgets, constraints, controles y K1–K2/K4–K5</td><td>Overflow reparado y feedback explicable</td></tr>
+        <tr><td>3</td><td>75 min</td><td>Responsive/adaptive, accesibilidad y K3</td><td>Resultado a 390/900 px y texto grande</td></tr>
+        <tr><td>4</td><td>45 min</td><td>Taller opcional 1 o misión autónoma equivalente</td><td>Predicción, cambio y comprobación</td></tr>
+        <tr><td>5</td><td>90 min</td><td>Navegación y K6–K7</td><td>Mapa de rutas e id inválido controlado</td></tr>
+        <tr><td>6</td><td>100 min</td><td>Estado/ViewModel y K8–K10</td><td>Una fuente de verdad</td></tr>
+        <tr><td>7</td><td>75 min</td><td>Repositorio/DI y K11–K12</td><td>Mapa sin capas vacías</td></tr>
+        <tr><td>8</td><td>110 min</td><td>Debugging y laboratorio por hitos</td><td>Producto mínimo ejecutable</td></tr>
+        <tr><td>9</td><td>70 min</td><td>Entrega y autoevaluación</td><td>Proyecto, decisiones, checklist y registro</td></tr>
+        <tr><td>10</td><td>45 min</td><td>Taller opcional 2 o misión autónoma I3</td><td>Microvariación propia sin agente</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Herramientas</h2>
+    <p>VS Code con Flutter/Dart es el editor recomendado; Android Studio también
+      es válido y proporciona SDK Manager y Device Manager. Android Studio puede
+      gestionar el SDK/AVD aunque edites con VS Code.</p>
     <pre><code>flutter --version
+dart --version
 flutter doctor -v
-flutter pub get
-flutter analyze
-flutter test
-flutter run</code></pre>
-    <p>Prueba a 390 y 900 píxeles lógicos. Si el entorno falla, registra el
-      comando y el mensaje exacto: un bloqueo técnico no se oculta.</p>
+flutter devices</code></pre>
+
+    <h2>Cómo comprobar el layout</h2>
+    <p>Con Chrome puedes usar la barra de dispositivos de las herramientas de
+      desarrollo y escribir 390 × 800 y 900 × 700. En Android aumenta la fuente
+      desde Ajustes → Accesibilidad → Tamaño de visualización y texto. Los anchos
+      son píxeles lógicos.</p>
+
+    <h2>Talleres opcionales</h2>
+    <p>20/10 y 27/10/2026 · 19:30–20:25. Aportan práctica y feedback, pero no
+      contenido exclusivo. Si no asistes, realiza la misión autónoma equivalente
+      del recurso <strong>Talleres opcionales PM3</strong>. I3 está disponible por
+      ambas vías.</p>
+
+    <p>Los talleres opcionales y las misiones desde casa son alternativas de 45 min efectivos. La franja de 55 min nominales incluye 10 min de margen. Los 20 min se distribuyen en los pasos 5 y 9; la ruta sigue sumando 720 min.</p>
+    <h2>Fechas de PM3</h2><p>Apertura: <strong>18/10/2026 00:00</strong>. Entrega recomendada: <strong>01/11/2026 23:59</strong>. Cierre de recepción: <strong>02/11/2026 23:59</strong>. Puedes enviar hasta el cierre del 02/11/2026 a las 23:59. PM4 comienza el 03/11/2026. La tarea repite estas fechas.</p>
+
+    <h2>Qué entregarás</h2>
+    <p>Proyecto ejecutable, decisiones, checklist, registro de comprobaciones y
+      microvariación I3. No incluyas <code>build/</code>, secretos, datos reales,
+      <code>.env</code> ni solución docente. Consulta Evaluación y Autoevaluación
+      antes de enviar.</p>
+
     <h2>Límites y ayuda</h2>
-    <p>No necesitas REST, login, almacenamiento, sensores, multimedia, CI como
-      contenido ni agentes. Todos los datos deben ser ficticios <code>DEMO-*</code>.
-      La IA es opcional y declarada; la microvariación se realiza sin agente.</p>
-    <h2>Qué se evalúa</h2>
-    <p>Artefacto ejecutable, decisiones y explicación propia. Una captura no
-      basta. No hay porcentajes internos nuevos: se aplica RA2.b de forma
-      criterial.</p>
+    <p>No necesitas REST, login, persistencia, sensores, multimedia, CI como
+      contenido ni agentes. Si te bloqueas, consulta Ayuda PM3 y aporta sistema,
+      paso, comando, mensaje exacto y acciones probadas, nunca credenciales.</p>
   </main>
 </body>
 </html>
-

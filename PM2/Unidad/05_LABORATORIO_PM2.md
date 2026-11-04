@@ -1,76 +1,172 @@
-# Laboratorio principal · AulaFlow Dart Domain Lab
+# PM2 · Laboratorio AulaFlow Dart Domain Lab
 
-## Naturaleza
+## Qué vas a demostrar
 
-Caso **didáctico y pure Dart**. Se inspira en un tablero de tareas, pero no define contrato, AulaTokens, modelo final, API ni arquitectura de AulaFlow 2.0.
+Vas a transformar un programa que funciona con maps y strings en un modelo de clases pequeño y defendible. El objetivo no es reproducir una solución concreta: cada clase debe existir por una responsabilidad o una regla observable.
+
+El caso es **pure Dart** y didáctico. No define el modelo final, la API ni la arquitectura de AulaFlow 2.0.
 
 ## Punto de partida
 
-El starter funciona por consola, pero usa `Map<String, dynamic>`, strings libres, nulos ambiguos, reglas duplicadas y una lista expuesta. Su debilidad es plausible: no está construido para ser ridículo ni fallar a propósito.
+Duplica `Alumnado/Starter/aulaflow_dart_domain_lab/` y trabaja en la copia. Abre la carpeta que contiene `pubspec.yaml`.
 
-Ruta pública: [Alumnado/Starter/aulaflow_dart_domain_lab/](../Alumnado/Starter/aulaflow_dart_domain_lab).
+Ejecuta:
 
-## Encargo incluido en 70 min
+```bash
+dart pub get
+dart analyze
+dart run bin/main.dart
+dart test
+```
 
-| Tramo | Min | Acción |
-|---|---:|---|
-| Comprender | 10 | ejecutar, predecir salida y señalar tres riesgos |
-| Diseñar | 15 | responsabilidades, reglas y clase que no crearás |
-| Implementar | 30 | tipos, clases, enum, colecciones e invariantes |
-| Asincronía | 5 | conservar/reescribir snapshot local con error observable |
-| Evidenciar | 10 | ejecutar, completar decisiones y checklist |
-| **Total** | **70** | |
+Salida inicial:
 
-La microvariación I3 está dentro del taller 2, no en estos 70 minutos.
+```text
+ANTES · todo=2 · doing=0
+MOVE · C-1 movida
+DESPUÉS · todo=1 · doing=1
+SNAPSHOT · board-demo|todo:1|doing:1
+```
 
-## Requisitos funcionales
+El programa inicial es ejecutable, pero admite estados débiles: `Map<String, dynamic>`, prioridad como string, nulos ambiguos, reglas repartidas y colecciones expuestas.
 
-1. Una tarjeta tiene id y título no vacío de al menos 3 caracteres.
-2. La prioridad pertenece a un conjunto cerrado.
-3. El responsable puede estar ausente de forma explícita.
-4. Un id de tarjeta no aparece dos veces en el tablero.
-5. Una columna tiene capacidad positiva y no puede superarla.
-6. Mover una tarjeta conserva la tarjeta si el destino está lleno o no existe.
-7. La operación informa éxito + mensaje; un record es válido si no necesita vida propia.
-8. Existe una operación `Future` local que genera una descripción reproducible del tablero y dispone de una **ruta de fallo asíncrono controlada y realmente alcanzable**. El fallo debe simularse localmente, sin introducir red ni persistencia.
+## Ruta de 70 minutos
 
-## Requisitos de diseño
+| Hito | Min | Acción | Checkpoint |
+|---|---:|---|---|
+| 1. Comprender | 10 | Ejecuta, predice la salida y localiza tres riesgos. | Tienes tres pares `riesgo → estado inválido posible`. |
+| 2. Diseñar | 15 | Decide datos, reglas, responsabilidades y una clase que no crearás. | Boceto de clases/enum y primera versión de `DECISIONES.md`. |
+| 3. Implementar | 30 | Refactoriza por capas pequeñas: tarjeta → columna → tablero. | Tras cada capa, `dart analyze` y el recorrido principal siguen funcionando. |
+| 4. Asincronía | 5 | Conserva o reescribe el snapshot local y su fallo controlado. | Obtienes una salida válida y otra de error observable. |
+| 5. Evidenciar | 10 | Formatea, ejecuta, revisa decisiones y completa evidencia. | Paquete limpio + `DECISIONES.md` + `EVIDENCIA.md`. |
+| **Total** | **70** |  |  |
 
-- tipos estáticos; `dynamic` solo podría sobrevivir en una frontera documentada;
+## Hito 1 · comprender antes de refactorizar
+
+Lee `lib/weak_board.dart` sin editar y responde:
+
+1. ¿qué claves son obligatorias?;
+2. ¿qué strings representan vocabularios cerrados?;
+3. ¿qué valor puede faltar legítimamente?;
+4. ¿qué reglas solo existen dentro de una función?;
+5. ¿qué colección puede modificar cualquier llamador?
+
+Conserva la salida inicial en `EVIDENCIA.md`. Será tu baseline para comprobar que el refactor mantiene el comportamiento.
+
+### Si te bloqueas
+
+Empieza por `seedWeakBoard` y sigue una sola tarjeta hasta `moveWeakCard`. No intentes entender todo el fichero a la vez.
+
+## Hito 2 · diseñar lo mínimo
+
+Tu diseño debe poder representar:
+
+- tarjeta con id y título válido;
+- prioridad perteneciente a un conjunto cerrado;
+- responsable legítimamente ausente;
+- columna con capacidad positiva;
+- tablero que impide ids duplicados y coordina movimientos.
+
+Antes de programar, completa una tabla:
+
+| Elemento propuesto | Responsabilidad o regla | ¿Por qué no basta un map/función? |
+|---|---|---|
+|  |  |  |
+
+Añade también una propuesta descartada: una clase que no crearás porque no protege reglas ni tiene responsabilidad propia.
+
+### Checkpoint
+
+No existe un número mínimo de clases. Puedes explicar cada elemento en una frase y ninguna se llama `Manager`, `Utils` o `Helper` sin una responsabilidad concreta.
+
+## Hito 3 · implementar por capas pequeñas
+
+### 3.1 Tarjeta y prioridad
+
+Protege:
+
+1. id no vacío;
+2. título de al menos 3 caracteres tras `trim`;
+3. prioridad cerrada;
+4. responsable opcional explícito.
+
+Ejecuta `dart analyze` antes de continuar.
+
+### 3.2 Columna
+
+Protege:
+
+1. capacidad positiva;
+2. número de tarjetas no superior a capacidad;
+3. colección interna no modificable desde fuera.
+
+Comprueba un caso válido y un intento de superar capacidad.
+
+### 3.3 Tablero y movimiento
+
+El tablero debe:
+
+- rechazar ids de tarjeta duplicados;
+- localizar origen y destino;
+- no perder la tarjeta si el destino está lleno o no existe;
+- informar éxito y mensaje; un record es válido si ese resultado no necesita vida propia.
+
+No cambies toda la estructura de una vez. Después de cada paso ejecuta:
+
+```bash
+dart analyze
+dart run bin/main.dart
+```
+
+### Checkpoint
+
+El recorrido muestra dos tarjetas antes, una en cada columna después y conserva la tarjeta si un movimiento falla.
+
+## Hito 4 · asincronía local
+
+Incluye una operación `Future` que genere una descripción reproducible del tablero. Debe existir:
+
+- ruta normal;
+- ruta de fallo local, controlada y realmente alcanzable;
+- manejo del error sin `catch` vacío.
+
+No introduzcas HTTP, archivos, base de datos ni persistencia.
+
+### Checkpoint
+
+Puedes ejecutar una llamada válida y otra inválida y explicar dónde se lanza y dónde se añade contexto.
+
+## Hito 5 · comprobar y evidenciar
+
+Ejecuta:
+
+```bash
+dart format --output=none --set-exit-if-changed .
+dart analyze
+dart run bin/main.dart
+dart test
+```
+
+Si no has añadido tests, conserva el resultado del test del starter y explica qué comportamiento cubre; no afirmes que valida todo tu modelo.
+
+Completa:
+
+- `DECISIONES.md`: responsabilidad, regla, alternativa descartada y motivo;
+- `EVIDENCIA.md`: versión, comandos, salidas y cualquier bloqueo real.
+
+## Requisitos de aceptación
+
+- tipos estáticos; `dynamic` solo en una frontera documentada;
 - null safety sin `!` rutinario;
-- al menos un enum si el vocabulario es cerrado;
-- colecciones tipadas;
-- constructores que protejan invariantes;
-- getter calculado cuando evite estado duplicado;
+- enum para vocabulario cerrado;
+- colecciones tipadas y mutabilidad controlada;
+- constructores y operaciones que protegen invariantes;
 - composición razonada;
-- decisión explícita sobre mutabilidad;
 - ninguna clase decorativa;
-- nombres de dominio, no `Manager/Utils/Helper` genéricos.
+- operación `Future` local con fallo observable;
+- salida reproducible y decisiones coherentes con el código.
 
-No hay un número mínimo de clases.
-
-## Evidencia
-
-`DECISIONES.md`:
-
-| Elemento | Responsabilidad/regla | Alternativa descartada | Motivo |
-|---|---|---|---|
-
-Incluye además «clase que no creé» y decisión de mutabilidad.
-
-`EVIDENCIA.md`:
-
-- `dart --version`;
-- `dart format --output=none --set-exit-if-changed .`;
-- `dart analyze`;
-- `dart run bin/main.dart`;
-- `dart test` si hay tests;
-- salida real o bloqueo exacto;
-- cambio individual recibido, impacto y resultado.
-
-## Resultado de referencia
-
-Ejemplo de salida válida:
+## Salida orientativa, no plantilla obligatoria
 
 ```text
 ANTES · todo=2 · doing=0
@@ -79,13 +175,8 @@ DESPUÉS · todo=1 · doing=1
 SNAPSHOT · board-demo|doing:C-1|todo:C-2
 ```
 
-La operación asíncrona debe disponer de un caso de fallo que puedas ejecutar y explicar.
-
-## Cambio individual
-
-En taller se asigna una variación breve: responsable opcional, prioridad urgente, capacidad, retorno doble, fallo asíncrono, clase redundante o nueva regla de validez. Cada persona la resuelve simultáneamente durante el bloque I3, deja predicción/cambio/comando/salida y explica el impacto. No se publica de antemano la microvariación exacta.
+Tu salida puede variar si conserva el comportamiento y es verificable.
 
 ## Límites
 
-Sin widgets, navegación, estado de interfaz, arquitectura Flutter, HTTP, JSON de API, autenticación, persistencia, sensores, permisos, multimedia, DevTools/CI como contenido, SDD/agentes o contrato/AulaTokens.
-
+No añadas widgets, navegación, estado de interfaz, arquitectura Flutter, HTTP, JSON de API, autenticación, persistencia, sensores, permisos, multimedia, CI como contenido, SDD/agentes ni contrato/AulaTokens.

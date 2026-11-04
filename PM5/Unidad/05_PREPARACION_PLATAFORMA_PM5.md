@@ -1,78 +1,247 @@
-# Preparación de plataforma · PM5
+# PM5 · Preparación de plataforma sin perderse
 
-## Baseline reproducible
+## Objetivo
 
-- Flutter **3.47.2 stable** / Dart **3.13.2**.
-- Android como carril físico obligatorio; API mínima efectiva de la app 24.
-- **BLE físico obligatorio: Android 12+ / API 31+**. En API 24–30 no se promete el scan real de esta unidad porque la política legacy exige además ubicación runtime; se usa DEMO para BLE salvo extensión revalidada.
-- JDK y Gradle se materializan desde la plantilla del Flutter fijado.
-- Dependencias exactas documentadas en [10_REFERENCIAS_Y_ACTUALIZACION_PM5.md](10_REFERENCIAS_Y_ACTUALIZACION_PM5.md).
+Al terminar esta preparación tendrás una copia del starter ejecutándose en **modo DEMO**. Después decidirás si tu equipo permite añadir el carril Android real.
 
-## Arranque del starter público
+No intentes resolver todo el hardware antes de ver la app. Primero logra una microvictoria reproducible; luego prepara AVD o móvil cuando la Ruta lo pida.
 
-El starter solo incluye Flutter y fakes DEMO. Sigue su [README de arranque](../Practica/Starter/aulaflow_device_media_starter/README.md). Sus tests comprueban la lógica de entrada; no solicitan permisos ni acreditan cámara, sensores o BLE reales.
+## 1. Elige editor e identifica para qué sirve cada herramienta
 
-## Preparación de tu integración Android
+| Herramienta | Uso en PM5 | Opción recomendada |
+|---|---|---|
+| VS Code | editar Dart, terminal, análisis y tests | recomendado si ya lo usas en PM1–PM4 |
+| Android Studio | editar si lo prefieres; gestionar Android SDK y AVD | necesario para SDK Manager/Device Manager |
+| Flutter SDK | compilar y ejecutar la app | versión del curso, 3.47.8 stable |
+| Dart SDK | lenguaje y formateo | incluido con Flutter, 3.13.7 |
+| AVD | Android virtual dentro del ordenador | útil para app/permisos/lifecycle parciales |
+| dispositivo físico | Android real por USB | necesario para evidencia física que el AVD no pueda demostrar |
+| periférico BLE de aula | anuncia servicio y característica GATT | necesario solo para BLE físico |
 
-La tabla de dependencias de las referencias describe la integración que desarrollarás. No todas están añadidas al starter. Materializa Android en una copia de trabajo, conserva tus archivos [lib/](../Practica/Starter/aulaflow_device_media_starter/lib), [test/](../Practica/Starter/aulaflow_device_media_starter/test) y [pubspec.yaml](../Practica/Starter/aulaflow_device_media_starter/pubspec.yaml), declara los permisos necesarios y verifica cada capacidad por separado.
+No instales otra versión de Flutter para «probar si funciona». Si tu versión no coincide, conserva la salida y usa el mecanismo de versión indicado por el curso.
 
-Para la combinación fijada de `reactive_ble_mobile 5.5.0` y compileSdk 36 existe un [puente de compatibilidad](../Recursos/Android/README.md). Se aplica después de resolver esa dependencia; no es necesario para ejecutar el starter DEMO. La imagen de referencia de Android y el periférico se confirman con el docente antes de la prueba física.
+## 2. Comprueba el entorno antes de abrir el proyecto
 
-## Matriz de capacidades
+Abre una terminal normal. No necesita estar todavía dentro del starter.
 
-| Feature | Android real | AVD | CI Linux | Fake |
-|---|---:|---:|---:|---:|
-| permisos runtime | sí | parcial | no | transición |
-| BLE scan/GATT | **sí en API 31+ + periférico** | no fiable | no | determinista |
-| acelerómetro | sí | controles AVD variables | no | traza |
-| selector/cámara | sí | parcial | no | fixture |
-| conversión imagen | sí | sí | sí | fixture real |
-| audio WAV | sí | parcial | build/tests | estado |
-
-La integración real debe comprobar que el stack BLE alcance `BleStatus.ready`, limita el scan a 8 s, permite cancelarlo, detiene el scan antes de conectar y propaga una desconexión posterior a la UI. Al pausar/inactivar la app libera scan, sensor y conexión BLE.
-
-## Manifiesto Android
-
-La lista deliberada es:
-
-```xml
-<uses-feature android:name="android.hardware.bluetooth_le" android:required="false" />
-<uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false" />
-<uses-feature android:name="android.hardware.camera.any" android:required="false" />
-<uses-permission android:name="android.permission.BLUETOOTH_SCAN"
-    android:usesPermissionFlags="neverForLocation" />
-<uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
-    android:maxSdkVersion="30" />
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"
-    android:maxSdkVersion="30" />
-<uses-permission android:name="android.permission.CAMERA" />
+```bash
+flutter --version
+dart --version
+flutter doctor -v
+flutter devices
 ```
 
-No se declara `MANAGE_EXTERNAL_STORAGE`, acceso a ubicación en segundo plano, micrófono ni Internet. Las features son `required=false` para que la instalación no simule disponibilidad; la app representa el estado ausente. Los permisos de ubicación limitados a API 30 son compatibilidad declarativa legacy: **PM5 no presenta el BLE físico API 24–30 como carril soportado sin una ampliación específica que implemente y revalide ese permiso runtime.**
+Debes comprobar:
 
-## Periférico BLE de aula
+- `flutter --version` muestra Flutter 3.47.8 y Dart 3.13.7;
+- `flutter doctor -v` identifica cada problema por bloque;
+- `flutter devices` muestra al menos un destino cuando vayas a ejecutar.
 
-El adaptador recibe `serviceUuid` y `characteristicUuid`. Los valores `DEMO` incluidos son un contrato didáctico y deben sustituirse por el periférico de prepublicación. No guardes MAC/UUID de instancia en Git, AULES o capturas. El protocolo mínimo acepta `DEMO-PING` y ofrece lectura/confirmación observable. Si el periférico no soporta ese intercambio, documenta el protocolo equivalente sin inventar respuesta.
+Si `flutter` no se reconoce, el SDK no está en `PATH`. Usa la instalación oficial del sistema operativo y añade la carpeta `flutter/bin` al PATH siguiendo la guía del curso. Cierra y vuelve a abrir terminal/editor antes de repetir. No envíes capturas que muestren tu nombre de usuario o rutas personales completas.
 
-## Fixtures y recuperación Android
+### Instalación mínima si todavía falta algo
 
-- `DEMO-PNG-01`: imagen sintética generada por test.
-- `DEMO-CORRUPT-01`: bytes que no decodifican.
-- `DEMO-TOO-LARGE-01`: tamaño lógico >5 MiB.
-- `DEMO-TONE.wav`: WAV PCM sintético generado localmente.
-- traza sensor: tres muestras predecibles y un error opcional.
+1. Descarga el Flutter SDK desde la fuente oficial enlazada por el curso.
+2. Descomprime en una ruta estable y con permisos de escritura; evita carpetas temporales.
+3. Añade `flutter/bin` al PATH de tu usuario.
+4. Instala VS Code y las extensiones oficiales **Flutter** y **Dart**, o Android Studio con esos plugins.
+5. Instala Android Studio desde su fuente oficial.
+6. En **SDK Manager**, instala el Android SDK y Platform-Tools del curso; para el carril BLE prepara una imagen/plataforma API 31 o superior.
+7. Ejecuta de nuevo `flutter doctor -v` y resuelve el **primer** bloque rojo, no todos a la vez.
 
-`image_picker` puede perder la respuesta si Android destruye la Activity mientras el selector/cámara está abierto. La integración real debe llamar `retrieveLostData()` al iniciar/reanudar y, si recupera un fichero, lo procesa y guarda por el mismo pipeline que una selección ordinaria. La verificación con el docente debe observar este caso cuando sea reproducible; un test fake solo certifica la lógica de recuperación.
+Los enlaces externos complementan esta guía; los pasos y checkpoints que debes seguir están aquí.
 
-No uses fotos personales. Para cámara real, enfoca una tarjeta con el texto `DEMO-OBJECT` y elimina el archivo tras la verificación si la política de aula lo exige.
+## 3. Haz una copia de trabajo del starter
 
-## Diagnóstico de entrada
+En el material PM5 localiza:
 
-1. ¿Qué puede demostrar hoy tu entorno?
-2. ¿Qué permiso pide cada acción?
-3. ¿Quién cancelará cada stream/scan/conexión?
-4. ¿Cómo probarás conversión sin mirar la extensión?
-5. ¿Qué evidencia quedará pendiente de hardware?
-6. ¿Tu dispositivo BLE físico es API 31+ y el stack llega a `ready`?
+```text
+30 - PMDM/Unidades/PM5/
+└── Practica/
+    └── Starter/
+        └── aulaflow_device_media_starter/
+            ├── pubspec.yaml
+            ├── lib/
+            └── test/
+```
+
+Descarga el paquete de materiales y conserva la raíz **PM5/**. Desde ella ejecuta:
+
+```bash
+dart run Alumnado/preparar_pm5.dart starter
+cd Practica/Starter/aulaflow_device_media_starter
+```
+
+El preparador materializa Android/web sin sustituir fuentes o pruebas, conserva las reglas de análisis y retira solo el test ajeno que Flutter genera. Abre esta carpeta con `pubspec.yaml` en el editor. Para el ejemplo guiado, vuelve a PM5/ y elige `ejemplo`; consulta su README. El helper del ejemplo aplica también las capacidades del manifiesto y el puente BLE fijado en el curso: no necesitas copiar archivos docentes ni editar caches a mano.
+
+## 4. Microvictoria en carril A · DEMO / FAKE
+
+Desde la carpeta con `pubspec.yaml`:
+
+```bash
+flutter pub get
+flutter analyze
+flutter test
+flutter devices
+flutter run -d chrome
+```
+
+Si aparecen varios destinos, Flutter te permite elegir. Chrome es suficiente para esta primera victoria porque los puertos usados son fakes.
+
+En la app:
+
+1. comprueba el título **PM5 · Starter DEMO**;
+2. pulsa **Escanear DEMO** y espera `Periférico DEMO`;
+3. pulsa **Iniciar sensor DEMO** y observa que cambia `x=`;
+4. pulsa **Procesar fixture DEMO** y observa tipo/tamaño.
+
+Guarda:
+
+- versiones, sin rutas personales;
+- destino usado;
+- resultado de analyze/test;
+- cuatro resultados visibles;
+- estado `OBSERVADA_FAKE_TEST`.
+
+Si esto funciona, el proyecto base está vivo. Todavía no has pedido permisos ni demostrado hardware.
+
+## 5. Añade dependencias cuando llegue su hito
+
+El starter inicial incluye Flutter e `image` para generar un PNG válido. No añadas siete plugins antes de la microvictoria.
+
+### Carril DEMO con conversión real
+
+El procesador `image` ya figura en el starter. Comprueba la dependencia antes de modificarlo:
+
+```bash
+flutter pub add image:4.9.2
+flutter pub get
+```
+
+Los puertos/fakes de permiso, BLE, sensor, almacenamiento y player pueden practicarse sin plugin físico.
+
+### Carril Android real
+
+El ejemplo Android ya declara estas dependencias fijadas. Si las llevas al producto del starter, añade únicamente las de las features que vas a observar:
+
+```bash
+flutter pub add permission_handler:12.0.3
+flutter pub add flutter_reactive_ble:5.5.0
+flutter pub add sensors_plus:7.1.0
+flutter pub add image_picker:1.2.3
+flutter pub add path_provider:2.1.6
+flutter pub add just_audio:0.10.6
+flutter pub get
+```
+
+Después de cada grupo ejecuta `flutter analyze` y `flutter test`. Las versiones y el motivo de cada paquete están en Referencias. No uses `flutter pub upgrade` para sustituir el baseline durante la unidad.
+
+## 6. Prepara un AVD cuando lo necesites
+
+Un AVD es un dispositivo Android virtual. Se ejecuta en tu ordenador y consume memoria, CPU y espacio.
+
+1. Abre Android Studio.
+2. Ve a **Tools → Device Manager**.
+3. Selecciona **Create device**.
+4. Elige un perfil de teléfono del curso.
+5. Descarga/selecciona una imagen Android API 31 o superior.
+6. Termina el asistente e inicia el AVD.
+7. Espera a que aparezca la pantalla de inicio.
+8. Comprueba:
+
+```bash
+flutter devices
+adb shell getprop ro.build.version.release
+adb shell getprop ro.build.version.sdk
+```
+
+El último comando debe devolver `31` o superior si quieres ensayar la frontera Android 12+.
+
+### Qué puede y qué no puede acreditar el AVD
+
+| AVD puede ayudar a | AVD no certifica por sí solo |
+|---|---|
+| instalar/arrancar la app | radio BLE y conexión con un periférico físico |
+| observar parte de permisos y lifecycle | sensor físico real |
+| ensayar selección de archivos/cámara virtual según configuración | cámara/lost-data físicos de tu dispositivo |
+| ejecutar conversión, almacenamiento y player | comportamiento de todo el hardware real |
+
+Los controles de sensores/cámara del emulador varían según imagen y equipo. Si no están disponibles, no es un fracaso de aprendizaje: usa DEMO y registra `PENDIENTE_HARDWARE`.
+
+## 7. Prepara un dispositivo físico sin exponer datos
+
+1. Comprueba en **Ajustes → Información del teléfono → Versión de Android** que utiliza Android 12 o superior para BLE PM5.
+2. Activa las opciones de desarrollador y **Depuración USB** siguiendo el procedimiento del fabricante/centro.
+3. Conecta por USB y acepta la huella del ordenador solo si es un equipo autorizado.
+4. Ejecuta:
+
+```bash
+adb devices
+adb shell getprop ro.build.version.release
+adb shell getprop ro.build.version.sdk
+flutter devices
+```
+
+Para BLE físico, el SDK debe indicar `31` o superior. La app puede instalarse desde API 24, pero PM5 no promete BLE físico en API 24–30 porque requeriría un carril legacy con ubicación runtime que no forma parte de la unidad.
+
+No entregues número de serie de `adb devices`, nombre del teléfono, cuenta, capturas de Ajustes ni rutas personales. Registra solo «Android API 31+ detectado» o el valor de API sin identificadores.
+
+## 8. Comprueba el periférico BLE de aula
+
+Antes del carril real confirma con el docente:
+
+- periférico disponible;
+- servicio/característica del protocolo de aula;
+- comando mínimo `DEMO-PING` o equivalente;
+- política de préstamo/turno.
+
+No guardes MAC ni UUID de instancia en Git, AULES, logs o capturas. La solución usa configuración didáctica y redacta el id.
+
+Si no hay periférico:
+
+1. realiza scan/conexión/intercambio con `FakeBlePort`;
+2. conserva el comportamiento y los errores;
+3. marca `PENDIENTE_HARDWARE` solo en BLE físico;
+4. agenda la observación posterior. No bloquees sensor, media o audio.
+
+## 9. Permisos que PM5 sí y no necesita
+
+| Feature | Permiso/capacidad | Momento |
+|---|---|---|
+| scan BLE | `BLUETOOTH_SCAN` | al pulsar buscar |
+| conexión BLE | `BLUETOOTH_CONNECT` | al conectar |
+| cámara | `CAMERA` | al pulsar capturar |
+| selector de imagen | selector del sistema según plataforma | al elegir imagen |
+| sensor | disponibilidad del hardware | al iniciar stream |
+| audio DEMO | reproducción de WAV local | no necesita micrófono |
+
+PM5 no pide `MANAGE_EXTERNAL_STORAGE`, ubicación en background ni micrófono. Una denegación afecta a su feature: denegar cámara no apaga BLE o sensor.
+
+## 10. Fixtures y privacidad
+
+Usa:
+
+- `DEMO-PNG-01`;
+- `DEMO-CORRUPT-01`;
+- `DEMO-TOO-LARGE-01`;
+- `DEMO-TONE.wav`;
+- trazas de sensor preparadas;
+- para cámara real, una tarjeta/escena neutra `DEMO-OBJECT`.
+
+No uses fotos, audio, ubicación, nombres o cuentas personales. Elimina el archivo físico de prueba cuando termine la verificación si así lo indica la política del centro.
+
+## 11. Diagnóstico rápido de entrada
+
+| Síntoma | Comprueba primero | Rescate |
+|---|---|---|
+| `flutter` no existe | PATH y nueva terminal | corrige PATH; no reinstales todo |
+| no hay dispositivos | `flutter devices` y AVD iniciado/USB autorizado | usa Chrome/escritorio para DEMO |
+| AVD no inicia | virtualización, espacio y primer error | dispositivo físico o DEMO temporal |
+| API menor de 31 | `getprop ro.build.version.sdk` | DEMO para BLE; otras features pueden seguir |
+| BLE no ready | radio, permisos y API | no repitas scan; registra y usa fake |
+| no hay periférico | disponibilidad de aula | fake + `PENDIENTE_HARDWARE` |
+| Gradle falla | primer error, red/espacio/JDK de Flutter | corrige una causa y repite |
+| test/analyze falla | primer diagnóstico y fichero/línea | vuelve al baseline antes de hardware |
+
+Cuando el starter DEMO arranca y sabes qué carril utilizarás, continúa con permisos y lifecycle.
 

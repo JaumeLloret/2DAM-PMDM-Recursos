@@ -2,6 +2,8 @@
 
 ## 1. Qué significa SDD en esta unidad
 
+SDD significa *Spec-Driven Development*, desarrollo guiado por especificaciones. Una **spec** es la especificación escrita de lo que debe hacer una funcionalidad (*feature*). Un **baseline** es el punto de partida guardado; un **stub** es una implementación provisional que permite montar una prueba; un **diff** compara cambios; una **PR** (*pull request*) solicita revisar esos cambios; un **handoff** es el traspaso de instrucciones a quien continuará el trabajo.
+
 SDD es organizar el desarrollo alrededor de una especificación comprobable. Aquí el flujo obligatorio es Spec → Clarificación → Plan → Tasks → Implementación incremental → Tests/análisis → Revisión de diff → PR → Defensa. Una especificación convierte una necesidad en límites y ejemplos; no garantiza por sí sola que el software sea correcto. Un agente puede producir código, tests o propuestas, pero no conoce automáticamente las decisiones del usuario ni sustituye el juicio de quien entrega.
 
 La unidad evalúa documentación del proceso técnico. Un registro útil permite a otra persona reproducir el punto de partida, entender una decisión y localizar el cambio que la realiza. No pretende archivar todo lo que se teclea. Si el registro dice “se comprobó el filtro” pero no identifica entrada, resultado, comando y corte, no ayuda a revisar. Si contiene cientos de mensajes y no distingue decisiones vigentes, tampoco.
@@ -44,6 +46,8 @@ Los archivos y salidas que consulta un agente pueden contener instrucciones ajen
 
 ## 6. Implementación incremental y evidencia de ejecución
 
+En Consulta DEMO basta separar la política en `catalog.dart` y el estado de presentación en `main.dart`. El filtrado de cuatro datos es síncrono: no necesita `Future`, servidor, repositorio remoto ni nueva librería de estado. Si añades después una consulta remota, tendrás que justificar asincronía, errores y respuestas antiguas con lo aprendido en PM4/PM6. Aquí se evita esa ampliación para dedicar tiempo a documentar el proceso.
+
 Un incremento cambia una parte comprensible y conserva el resto verificable. Antes de empezar, registra baseline y estado del árbol; después anota archivos afectados, comandos, códigos de salida y observaciones. Un test que falla es información útil si se conserva su causa y reparación. No borres el fallo del registro para presentar un proceso perfecto.
 
 En D05 separa EJECUTADO, PROPUESTO y PENDIENTE. El agente puede afirmar “tests correctos” sin acceso a terminal: esa frase es una propuesta o una afirmación no contrastada, no tu resultado. Ejecuta tú o consulta el log real del entorno autorizado. Vincula la prueba al SHA o, mientras no exista commit, a un corte local identificado expresamente. Después del commit vuelve a comprobar el corte que entregarás.
@@ -72,7 +76,9 @@ La PR presenta problema, alcance, decisiones, cambios, verificación y límites.
 
 Una PR es una solicitud de revisión, no una aprobación automática. Durante el ejercicio usa el repositorio autorizado; prepara el borrador completo si aún falta acceso. No fusiones por el hecho de haber terminado el código cuando el proceso docente exige revisión. Los commits ayudan a identificar incrementos, pero no prueban autoría o competencia individual por recuento.
 
-La cadena mínima es criterio Sx → decisión D02 → tarea → archivo/diff → prueba → resultado → revisión. No hace falta duplicar cada dato en ocho sitios: utiliza referencias consistentes y una tabla breve. Si cambias un criterio, actualiza sus enlaces y explica qué evidencia queda histórica.
+La cadena mínima es criterio Sx → decisión D02 → tarea → archivo/diff → prueba → resultado → revisión. Una cadena compacta puede ser `S3 → C3 (AND) → tarea política → catalog.dart:selectEntries → search_test.dart/S3 → D05 fila 2, corte local → D06 párrafo 1`. D01–D08 son apartados, no ocho memorias.
+
+No hace falta duplicar cada dato en ocho sitios: utiliza referencias consistentes y una tabla breve. Si cambias un criterio, actualiza sus enlaces y explica qué evidencia queda histórica.
 
 ## 10. Defensa, mantenimiento y límites
 

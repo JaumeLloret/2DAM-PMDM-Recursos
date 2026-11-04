@@ -33,4 +33,3 @@ Anota para login, cargar, toggle, fallback, 401 y logout.
 - T1: fallo observado, capa, prueba, siguiente acción.
 - T2: política remoto/local y evidencia de re-instanciación.
 - T3: variante, diff, ejecución y explicación.
-

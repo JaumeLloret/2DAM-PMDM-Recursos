@@ -1,0 +1,8 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:avisos_demo/notices.dart';
+
+void main() {
+  test('contrato: prioridad 3 y ocultar leídos deja solo AV-A', () {
+    expect(selectNotices(notices, 3, true).map((n) => n.id), ['AV-A']);
+  });
+}

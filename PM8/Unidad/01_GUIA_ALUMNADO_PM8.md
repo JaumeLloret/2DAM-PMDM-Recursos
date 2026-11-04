@@ -1,6 +1,6 @@
 # PM8 · Guía de trabajo autónomo
 
-Lee primero [la Ruta](../Alumnado/00_RUTA_PM8.md): allí están el arranque de 20 minutos, presupuesto 315 + 45 y calendario. Apertura, entrega objetivo y cierre/cutoff: `PENDIENTE_CONFIRMACION_DOCENTE` cada una. La sesión T1 es el 09/02/2027; esa fecha **no** es un plazo. Todo el material de estudio está disponible desde casa. Conserva un único [dossier L01–L06](../Alumnado/01_DOSSIER_MOTOR_LAB_PM8.md); los checkpoints intermedios solo sirven para recibir feedback.
+Lee primero [la Ruta](../Alumnado/00_RUTA_PM8.md): allí están el arranque de 20 minutos, presupuesto 315 + 45 y calendario. Apertura, entrega objetivo y cierre/cutoff: `Consulta la fecha vigente en AULES` cada una. La sesión T1 es el 09/02/2027; esa fecha **no** es un plazo. Todo el material de estudio está disponible desde casa. Conserva un único [dossier L01–L06](../Alumnado/01_DOSSIER_MOTOR_LAB_PM8.md); los checkpoints intermedios solo sirven para recibir feedback.
 
 El motor ya está elegido para este curso: Godot 4.7.2 Standard con GDScript y Compatibility. Tú explicarás por qué sirve para este alcance y qué límites quedan. En PM8 analizas Motor Lab; PM9 desarrolla el juego. Antes de tocar un valor, predice, cambia una variable en una copia, comprueba y restaura. Marca cada afirmación como documentada, calculada, observada en editor o pendiente según corresponda.
 

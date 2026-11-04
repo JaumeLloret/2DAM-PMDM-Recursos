@@ -1,14 +1,12 @@
-# Taller 2 · 24/11/2026 · sensor, media y debugging
+# PM5 · Bloque 2 · sensor, media y debugging
 
-Horario 19:30–20:25.
+**Fecha del taller opcional:** 01/12/2026 · 19:30–20:25.
 
-1. Observa aceleración con fake/real y compara entornos.
-2. Reduce repintados sin detener el stream.
-3. Selecciona fixture o captura `DEMO-OBJECT`.
-4. Verifica MIME/tamaño, decodifica, redimensiona y codifica JPEG.
-5. Introduce `DEMO-CORRUPT-01` y documenta error/recuperación.
-6. Pausa/reanuda la app y comprueba suscripciones/player.
+**Vía autónoma:** disponible en AULES.
+**Duración/finalidad/evidencia:** 45 min efectivos en cualquiera de las dos vías (franja 55 min nominales + 10 min de margen).
 
-Salida: diff + registro saneado + estado de evidencia.
+Misión: controlar/cancelar una traza, convertir `DEMO-PNG-01` a JPEG real, depurar `DEMO-CORRUPT-01` y comprobar lifecycle.
 
+Entrega: diff, MIME/dimensiones/firma, incidencia con regresión y estado de evidencia.
 
+Consulta el reparto minuto a minuto en [Talleres opcionales y misiones autónomas](../../Unidad/11_TALLERES_OPCIONALES_PM5.md).

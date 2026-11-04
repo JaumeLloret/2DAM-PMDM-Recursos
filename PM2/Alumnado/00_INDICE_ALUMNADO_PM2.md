@@ -1,32 +1,36 @@
-# PM2 · paquete del alumnado
+# PM2 · Cómo utilizar el paquete del alumnado
 
-## Orden de trabajo
+Empieza por `Unidad/01_GUIA_ALUMNADO_PM2.md`. Esa Ruta indica qué leer, hacer, comprobar y conservar en las 8 horas de PM2.
 
-1. [Unidad/01_GUIA_ALUMNADO_PM2.md](../Unidad/01_GUIA_ALUMNADO_PM2.md).
-2. [Unidad/02_CONTENIDOS_PM2.md](../Unidad/02_CONTENIDOS_PM2.md).
-3. [Unidad/03_EJEMPLOS_GUIADOS_PM2.md](../Unidad/03_EJEMPLOS_GUIADOS_PM2.md) + [Ejemplos/dart_moderno_examples/](Ejemplos/dart_moderno_examples).
-4. [Unidad/04_GIMNASIO_PM2.md](../Unidad/04_GIMNASIO_PM2.md) + [01_CUADERNO_KATAS_PM2.md](01_CUADERNO_KATAS_PM2.md).
-5. [Starter/aulaflow_dart_domain_lab/](Starter/aulaflow_dart_domain_lab) + [Unidad/05_LABORATORIO_PM2.md](../Unidad/05_LABORATORIO_PM2.md).
-6. [02_PLANTILLA_DECISIONES_PM2.md](02_PLANTILLA_DECISIONES_PM2.md).
-7. [03_CHECKLIST_ENTREGA_PM2.md](03_CHECKLIST_ENTREGA_PM2.md) y [04_REGISTRO_ENTREGA_PM2.md](04_REGISTRO_ENTREGA_PM2.md).
+## Orden recomendado
 
-Recuperación: el docente asignará el material correspondiente en AULES.
+1. **Ruta y diagnóstico** · `Unidad/01` + Q01–Q05.
+2. **Teoría con propósito** · `Unidad/02`.
+3. **Ejemplos reproducibles** · `Unidad/03` + `Ejemplos/dart_moderno_examples/`.
+4. **Entrenamiento** · `Unidad/04` + `01_CUADERNO_KATAS_PM2.md`.
+5. **Debugging** · `Unidad/04A_DEBUGGING_PM2.md`.
+6. **Laboratorio** · `Starter/aulaflow_dart_domain_lab/` + `Unidad/05`.
+7. **Entrega** · `Unidad/06` + plantillas/checklist.
+8. **Autoevaluación** · `Unidad/12` + Q06–Q12.
 
-## No incluido
-
-No contiene soluciones, oráculos, microvariaciones ni rúbricas cumplimentadas. PM2 no requiere widgets Flutter, red, autenticación, persistencia o sensores.
+Los talleres de `Unidad/10` son opcionales y contienen una ruta autónoma equivalente.
 
 ## Comandos base
 
-```bash
-dart --version
+Ejecuta desde la carpeta que contiene `pubspec.yaml`:
+
+<pre style="white-space: pre-wrap; overflow-wrap: anywhere;"><code>dart --version
 dart pub get
 dart format --output=none --set-exit-if-changed .
 dart analyze
-dart run
-dart test
-```
+dart run bin/main.dart
+dart test</code></pre>
 
-Registra la salida real. Si un comando no existe o falla, conserva el mensaje exacto y solicita apoyo.
+Registra salidas reales. Si un comando falla, conserva el primer error y consulta `Unidad/11_AYUDA_PM2.md`.
 
+## Qué no contiene este paquete
+
+No incluye soluciones, oráculos ni variantes individuales. Tampoco necesitas widgets Flutter, red, autenticación, persistencia, sensores o multimedia.
+
+La recuperación `Recuperacion/loan_queue_recovery/` solo se utiliza cuando se asigne expresamente. La ampliación es opcional.
 

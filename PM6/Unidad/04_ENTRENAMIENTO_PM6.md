@@ -11,7 +11,7 @@ Dentro de A03/A04/A05/A07. No son horas añadidas ni diez entregas. Trabaja en *
 | K5 | Aplicar: error→retry→lista vacía en widget | No spinner eterno; salida visible y acción usable |
 | K6 | Transferir: desmonta pantalla con solicitud pendiente | No notificación tardía/estado publicado en controlador desechado |
 | K7 | Inspeccionar: provoca texto ampliado y revisa lista/contador | Registra overflow observado o ausencia observada con entorno, no supuesta |
-| K8 | Medir: compara eager/builder con1500elementos en profile | Mismo recorrido/objetivo; conserva traza y límite de inferencia |
+| K8 | Medir: compara eager/builder con 1500 elementos en profile | Mismo recorrido/objetivo; conserva traza y límite de inferencia |
 | K9 | Medir: repite cargas y examina history/Memory | Separa retención lógica, heap y memoria del proceso |
 | K10 | Integrar: una modificación invalida run anterior | Vincula SHA, tests ejecutados, APK y destino realmente observado |
 

@@ -24,4 +24,3 @@ void main() {
     expect(find.byType(NavigationBar), findsNothing);
   });
 }
-

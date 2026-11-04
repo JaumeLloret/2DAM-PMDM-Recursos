@@ -11,4 +11,3 @@ void main() {
     expect(await weakSnapshot('board-demo', board), contains('board-demo'));
   });
 }
-

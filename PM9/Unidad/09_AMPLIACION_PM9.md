@@ -6,4 +6,5 @@ Después de completar el juego y su evidencia ordinaria, elige una opción con l
 2. **Accesibilidad de interacción.** Propón un esquema alternativo de control o señal visual adicional. Contrasta con una necesidad concreta y pruebas autorizadas, sin atribuir experiencia de usuarios que no participaron.
 3. **Optimización acotada.** Compara dos políticas de objetos/recursos con mismo recorrido y entorno; conserva regresión y explica la diferencia observada o su ausencia.
 
-Assets nuevos solo con procedencia/licencia compatible comprobada. No publicar tienda, crear compras, introducir datos personales ni ampliar a una nueva fase de campaña.
+Assets nuevos solo con procedencia/licencia compatible comprobada. Mantén la ampliación acotada a tu copia del juego y documenta el resultado.
+

@@ -193,4 +193,3 @@ class _DetailState extends State<Detail> {
     );
   }
 }
-

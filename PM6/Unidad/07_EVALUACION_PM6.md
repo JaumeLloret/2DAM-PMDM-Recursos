@@ -19,4 +19,17 @@ I1: entrenamiento/cuestionario formativos. I2: desempeño del producto y dossier
 | g | Diseña casos discriminantes, explica límites y mejora interacción con evidencia comparada reproducible en emulador | Reproduce, corrige y verifica interacción en emulador, con resultados y límites claros | Hay tests en host pero falta emulador o no explica la mejora/defecto | No reproduce el fallo, adapta expectativas al bug o afirma evidencia inexistente |
 | h | Reconstruye artefacto/corte, resuelve instalación y demuestra recorrido real con trazabilidad y límites | Empaqueta e instala/ejecuta la app en dispositivo real identificado de forma saneada | Hay APK o emulador, pero falta instalación real observada | No hay artefacto reproducible ni evidencia real suficiente |
 
-Un build es evidencia parcial deh, no adquisición completa. Los controles automáticos no transforman un PENDIENTE_DISPOSITIVO en observado. Ante limitación de entorno, ofrecer acceso y fecha real; no imponer una penalización numérica automática. La autenticidad se triangula, no se deduce de un detector de IA. Registra por persona/CE evidencia, versión, descriptor, límite, feedback y recuperación.
+Un build es evidencia parcial de h, no adquisición completa. Los controles automáticos no transforman un PENDIENTE_DISPOSITIVO en observado. Ante limitación de entorno, ofrecer acceso y fecha real; no imponer una penalización numérica automática. La autenticidad se triangula, no se deduce de un detector de IA. Registra por persona/CE evidencia, versión, descriptor, límite, feedback y recuperación.
+
+
+## Qué adjuntar en la entrega ordinaria
+
+Abre **Entrega tu producto y el dossier único** antes del **24/01/2027, 23:59** (Europe/Madrid). Puedes enviar hasta el **27/01/2027, 23:59** con la condición de tardía aprobada. El feedback está previsto para el 28/01.
+
+1. Una copia del proyecto o enlace al repositorio accesible al docente, con commit identificado, `lib`, `test`, `integration_test`, `pubspec.yaml`, `pubspec.lock`, preparador y plataformas generadas. Excluye `.dart_tool`, `build`, cachés del IDE y datos privados.
+2. El **único dossier Q01–Q05**, como `dossier_PM6.md` o PDF, que enlace el diff y las pruebas/observaciones ya obtenidas. No repitas las mismas capturas en otra memoria.
+3. El workflow y enlace al run del corte, si existe. La APK identificada por su huella puede adjuntarse o enlazarse por el canal institucional; adjunta solo el archivo de práctica solicitado, nunca claves de firma.
+
+El mini ejemplo no se entrega. Las katas y el cuestionario son entrenamiento formativo sin una entrega adicional. Si falta un destino, conserva el apartado pendiente y solicita acceso; una casilla no sustituye la observación requerida.
+
+**Uso de IA:** puedes pedir explicaciones y ayuda durante la práctica, contrastar cada cambio y declarar brevemente qué asistencia incorporaste en Q05. Debes entender y poder modificar el resultado. I3 y la prueba práctica global se realizan sin agente. No envíes a un servicio externo tokens, datos del alumnado o código privado sin autorización.

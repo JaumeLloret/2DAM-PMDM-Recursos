@@ -1,6 +1,6 @@
 # PM7 · T1/T2: taller opcional o misión desde casa
 
-**Fechas vigentes:** T1 **26/01/2027**, T2 **02/02/2027**, martes **19:30–20:25** (Europe/Madrid). La franja nominal dura 55 min, pero cada misión tiene **45 min efectivos** y 10 min de margen operativo presencial. Dentro de las 6 h de PM7: **270 min autónomos + 45 + 45 = 360 min**. Para cada T eliges taller **o** misión desde casa, nunca ambas. Las fechas de taller no son plazos de entrega; apertura, entrega objetivo y cierre/cutoff están pendientes de confirmación docente.
+**Calendario de esta unidad.** Disponible desde 19/01/2027 00:00. Fecha de entrega final: 07/02/2027 23:59. Cierre de envíos: 10/02/2027 23:59. Hora de Europe/Madrid. El temario permanece disponible para consulta después del cierre de los envíos.
 
 Todo el conocimiento y la consigna ordinaria aparecen en la [Ruta](../Alumnado/00_RUTA_PM7.md), [Teoría](02_CONTENIDOS_PM7.md), [ejemplos](03_EJEMPLOS_GUIADOS_PM7.md), [tarjeta](05_SPEC_Y_DECISIONES_PM7.md) y [laboratorio](06_LABORATORIO_PM7.md). El taller aporta acompañamiento, no una regla secreta. Trabajar MANUAL o con herramienta autorizada conduce a la misma salida.
 
@@ -10,11 +10,12 @@ Todo el conocimiento y la consigna ordinaria aparecen en la [Ruta](../Alumnado/0
 
 | Min | Taller presencial opcional | Misión autónoma desde casa | Comprueba y conserva |
 |---:|---|---|---|
-| 0–8 | Comparas preguntas con otra persona. | Lee tu D02 y predice cámara + pendientes. | Anota expectativa DEMO-A antes de cambiar código. |
-| 8–18 | Contrastáis C1–C6. | Consulta la tarjeta y marca fuente/motivo de cada decisión. | D01/D02 sin ambigüedad oculta. |
-| 18–25 | Acordáis tareas pequeñas. | Escribe tarea de política S1–S5 y archivo/test permitido. | D03/D04 con alcance y condición de parada. |
-| 25–40 | Implementas con apoyo. | Sigue el ejemplo rojo/verde de S3 en tu copia; corrige AND. | Test rojo esperado, diff mínimo y verde real o primer fallo documentado. |
-| 40–45 | Recibes feedback. | Revisa diff y escribe duda/próximo incremento. | D05 y límite de la comprobación. |
+| 0–5 | Preparas el ensayo y predices AV-A. | Sigue el libro Trabajo con agente, pasos 1–2. | Regla e IDs esperados antes de ejecutar. |
+| 5–12 | Ejecutas test débil y añades el independiente. | Reproduce verde débil, rojo de contrato y corrección en Avisos DEMO. | Explicas por qué cambió la confianza, sin fingir sesión real. |
+| 12–15 | Contrastáis el resultado y el contexto. | Registra una fila de ensayo simulado o la observación real autorizada. | D03/D05; sin nueva memoria. |
+| 15–22 | Compruebas decisiones de Consulta DEMO y tarea pequeña. | Verifica C1–C6 y predice cámara + pendientes. | D01–D04; regla esperada solo A. |
+| 22–40 | Implementas tu primer incremento con apoyo. | Sigue el ejemplo de prueba de S3 e inicia tu política/pantalla. | Rojo/verde real y diff pequeño; no es necesario acabar la UI. |
+| 40–45 | Recibes feedback y decides el siguiente cambio. | Revisa el diff y señala tu siguiente incremento. | D05 y límite de la comprobación. |
 
 Si no hay Flutter, registra `PENDIENTE_ENTORNO`, formula spec/tareas y solicita acceso para ejecutar la prueba. No marques verde sin log. Si la prueba no compila, usa [Ayuda](11_AYUDA_PM7.md) antes de diagnosticar S3.
 
