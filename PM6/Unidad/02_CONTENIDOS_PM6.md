@@ -14,9 +14,26 @@ El rojo **esperado** es una diferencia de comportamiento que tu caso predijo: «
 
 Cuando la parte conceptual quede clara, abre el [protocolo operativo de DevTools y CI](08_DEVTOOLS_Y_CI_PM6.md). Sus pasos indican cómo iniciar la herramienta, repetir un recorrido y registrar los límites de cada observación. Lee cada sección de esta teoría al llegar a su fase, no como una lista para memorizar de golpe.
 
+## 0. Un mapa del programa y seis palabras para empezar
+
+`lib/quality.dart` contiene los datos (`TaskItem`), el contrato del origen de datos (`TaskStore`), un origen ficticio (`DemoStore`) y el controlador que mantiene lista/carga/error. `lib/main.dart` crea la pantalla, escucha el controlador y muestra esos estados. Una prueba no necesita abrir Android para comprobar una regla del controlador.
+
+| Palabra | Qué significa aquí | Ejemplo |
+|---|---|---|
+| Aserción | Comparación que decide si se cumple una expectativa | `expect(controller.pendingCount, 2)` |
+| Smoke o prueba de humo | Comprobación pequeña de arranque | El proyecto carga; todavía puede contar mal |
+| Future | Resultado que estará disponible más adelante | `store.fetch()` inicia una carga |
+| Completer | Mando del test para completar un Future con datos o error | Entregar NEW antes que OLD sin usar red |
+| Regresión | Reaparición de un comportamiento que ya corregiste | Volver a contar los terminados como pendientes |
+| SHA | Identificador del commit cuyo código estás comprobando | Vincular el run de CI con la versión entregada |
+
+Un `await` no bloquea toda la app: suspende esa función hasta recibir el resultado. Si esperas un Future antes de que tu test ejecute su `complete`, el test no llega a producir el resultado. Primero inicia la operación, después entrega datos y finalmente espera su procesamiento. E2 te hará seguir ese orden.
+
+No todo el starter está roto. Ya usa identidad por ID y evita notificar después de `dispose`. Escribe pruebas para conservar esas garantías; solo cambia el código si tu caso demuestra un incumplimiento. Los defectos intencionales se concentran en contador, respuesta obsoleta, fin de carga tras error y retención sin límite.
+
 ## 1. Fallo, defecto y prueba
 
-Un fallo es un comportamiento observado que no coincide con el esperado; un defecto es la causa en el código o diseño. Una prueba crea condiciones y compara resultados. No empieces cambiando código al azar: fija versión, entrada, acción y salida esperada/obtenida. «No funciona» no permite reproducir. «Con dos trabajos abiertos y uno terminado, el contador muestra1 en lugar de 2» ya distingue un comportamiento concreto.
+Un fallo es un comportamiento observado que no coincide con el esperado; un defecto es la causa en el código o diseño. Una prueba crea condiciones y compara resultados. No empieces cambiando código al azar: fija versión, entrada, acción y salida esperada/obtenida. «No funciona» no permite reproducir. «Con dos trabajos abiertos y uno terminado, el contador muestra 1 en lugar de 2» ya distingue un comportamiento concreto.
 
 Una prueba de regresión conserva esa distinción para detectar si el defecto vuelve. Primero debe fallar por el motivo previsto. Si falla porque el paquete no se encuentra, todavía no has probado el contador. Cuando la corrección la pone verde, revisa un caso límite que evite una solución demasiado específica: todos terminados, ninguno o lista vacía. El objetivo es confianza proporcional, no acumular tests.
 
@@ -64,15 +81,15 @@ Para depurar, crea un caso mínimo, pon un breakpoint antes de actualizar estado
 
 El inspector ayuda a relacionar árbol de widgets con UI. Selecciona el contador, identifica su origen y comprueba restricciones de la lista. Si hay overflow, revisa el layout y el tamaño de texto antes de cambiar todo a tamaños fijos. Conserva una descripción textual junto a una captura saneada.
 
-Para rendimiento, usa modo profile en un objetivo compatible; los tiempos debug no representan el rendimiento de release. Mantén dispositivo/modo/carga y recorrido iguales entre variantes, deja una fase de calentamiento y repite. Un primer frame puede incluir compilación/preparación; no extraigas una conclusión universal de una sola barra. En60Hz el presupuesto orientativo es16,7ms por frame; en 120 Hz es8,3ms. Debes registrar la frecuencia/objetivo, no usar16ms como ley de cualquier pantalla.
+Para rendimiento móvil, usa modo profile en un **móvil físico**; Flutter deshabilita profile en emuladores y simuladores. El emulador sí sirve en debug para interacción de RA2.g. En web se utiliza Chrome DevTools, no la vista Performance de Dart DevTools en profile. Por eso, los tiempos debug no representan el rendimiento de release. Mantén dispositivo/modo/carga y recorrido iguales entre variantes, deja una fase de calentamiento y repite. Un primer frame puede incluir compilación/preparación; no extraigas una conclusión universal de una sola barra. En 60 Hz el presupuesto orientativo es 16,7 ms por frame; en 120 Hz es 8,3 ms. Debes registrar la frecuencia/objetivo, no usar 16 ms como ley de cualquier pantalla.
 
-El trabajo UI y raster representan partes distintas del frame. Una lista con1500hijos construidos de golpe puede aumentar trabajo del árbol; ListView.builder crea lo necesario de forma perezosa. Para probarlo, prepara una copia eager y una builder, usa la misma lista y recorrido, registra trazas y explica qué se modificó. No inventes una mejora porcentual si no se observó. Tampoco declares que builder garantiza60fps en cualquier equipo.
+El trabajo UI y raster representan partes distintas del frame. Una lista con 1500 hijos construidos de golpe puede aumentar trabajo del árbol; ListView.builder crea lo necesario de forma perezosa. Para probarlo, prepara una copia eager y una builder, usa la misma lista y recorrido, registra trazas y explica qué se modificó. No inventes una mejora porcentual si no se observó. Tampoco declares que builder garantiza 60 fps en cualquier equipo.
 
 ## 8. Memoria, retención y límites
 
 La vista Memory ayuda a observar asignaciones, retención y evolución. Una lista history que guarda cada snapshot mantiene referencias: esas listas no se liberan mientras sigan alcanzables. El GC puede liberar objetos inalcanzables, pero no deduce que ya no necesitas una colección a la que tu programa sigue apuntando.
 
-La práctica limita history a20snapshots como política didáctica. Una prueba verifica número/retención lógica. Para hablar de memoria real, toma cortes antes/después de un recorrido definido, repite cargas y observa objetos/referencias con las limitaciones del entorno. El RSS del proceso incluye más que heap Dart y puede no bajar de inmediato al quitar referencias. No confundas «history está acotado» con «se observaron exactamente X MB liberados».
+La práctica limita history a 20 snapshots como política didáctica. Una prueba verifica número/retención lógica. Para hablar de memoria real, toma cortes antes/después de un recorrido definido, repite cargas y observa objetos/referencias con las limitaciones del entorno. El RSS del proceso incluye más que heap Dart y puede no bajar de inmediato al quitar referencias. No confundas «history está acotado» con «se observaron exactamente X MB liberados».
 
 Si la herramienta no está disponible, entrega procedimiento y marca PENDIENTE_DEVTOOLS; luego realiza la observación en un entorno docente. Una gráfica de un ejemplo ajeno no es tu medición. El informe distingue observación, hipótesis y prueba adicional necesaria.
 
@@ -80,7 +97,7 @@ Si la herramienta no está disponible, entrega procedimiento y marca PENDIENTE_D
 
 Empaquetar produce un artefacto instalable con código/recursos/configuración. Desplegar implica instalarlo y comprobarlo en un destino concreto. `flutter build apk --debug` produce APK de práctica, no una release firmada para publicar en una tienda. La firma de producción y publicación comercial quedan fuera del alcance; no subas keystores ni contraseñas.
 
-La plataforma Android se genera con Flutter fijado mediante `flutter create --platforms=android --org org.aulaflow.training --project-name quality_gate .` desde una copia de la práctica. Conserva lib/test/pubspec; revisa diff y evita mantener el test contador generado por la plantilla, que no corresponde a esta app. La generación no convierte el código del starter en solución. Comprueba `flutter doctor -v`, Java/SDK y licencias en tu entorno autorizado; no aceptes acuerdos ajenos sin autorización.
+La plataforma Android se genera con Flutter fijado mediante `python3 tool/prepare_platform.py android` desde la carpeta de la práctica. El preparador conserva lib/test/pubspec y no copia pruebas de la plantilla; revisa el diff. La generación no convierte el código del starter en solución. Comprueba `flutter doctor -v`, Java/SDK y licencias en tu entorno autorizado; no aceptes acuerdos ajenos sin autorización.
 
 Después de construir, identifica SHA del código y huella SHA256 de la APK. En un emulador ejecuta el recorrido DEMO y registra API/arquitectura/modo. En dispositivo real habilita la conexión de depuración solo con autorización del propietario, selecciona el destino correcto e instala la APK de práctica. El flujo debe cargar, mostrar error recuperable, reintentar y modificar un trabajo. Registra lo observado y cualquier diferencia. No publiques seriales o capturas de notificaciones personales.
 
@@ -90,6 +107,13 @@ Si una instalación falla por firma incompatible, comprueba primero el ID de est
 
 Un pipeline ejecuta comprobaciones sobre un commit. Debe fijar toolchain, recuperar dependencias, comprobar formato/análisis, ejecutar tests y construir lo que corresponda. Un job falla para informar de una condición concreta; eliminar la aserción o ignorar todos los códigos de salida no corrige el defecto.
 
-El SHA importa: si validas A y luego cambias código aB, el verde deA es histórico. Un checkout de una referencia de merge puede ser distinto del HEAD de la PR. El workflow docente hace checkout del SHA exacto que informa y verifica esa identidad. Después de una corrección repite los controles afectados y antes de entregar certifica el conjunto necesario.
+El SHA importa: si validas A y luego cambias código a B, el verde de A es histórico. Un checkout de una referencia de merge puede ser distinto del HEAD de la PR. El workflow docente hace checkout del SHA exacto que informa y verifica esa identidad. Después de una corrección repite los controles afectados y antes de entregar certifica el conjunto necesario.
 
 Separa resultados: formato/analyzer, unit/widget, integración en emulador, build APK, instalación física, DevTools y accesibilidad real. El runner puede confirmar el baseline rojo esperado del starter en una copia temporal y la solución verde; lo registra explícitamente. Esa excepción didáctica no autoriza ignorar fallos inesperados. La CI nunca asigna nota ni concede puerta del proyecto por sí sola.
+
+
+## 11. Un criterio profesional para cerrar una corrección
+
+Una regresión útil comprueba un contrato que el usuario reconoce. Si comparas solo un campo privado del controlador, puedes impedir una reorganización válida sin proteger la pantalla. Empieza por la regla, controla la dependencia y observa la salida mínima que distingue el fallo. Mantén pocas pruebas de integración para los recorridos que cruzan capas; los casos de orden de respuestas se diagnostican mejor en host con `Completer`.
+
+Un CI rojo no autoriza borrar el test. Un CI verde tampoco decide la aceptación de todo AulaFlow: aquí solo informa sobre el código y los controles ejecutados de PM6. PI II conserva el seguimiento y la aceptación del proyecto.

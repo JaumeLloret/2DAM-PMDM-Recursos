@@ -1,40 +1,31 @@
-# Ampliación opcional · PM3
+# PM3 · Ampliación opcional
 
-Estas rutas no son obligatorias, no añaden minutos al presupuesto y no adelantan
-el núcleo de otras UDs.
+Estas propuestas son voluntarias, no añaden minutos obligatorios ni mejoran por sí solas la calificación. Elige una únicamente después de cerrar la autoevaluación.
 
-## A1 · Adaptación de detalle
+## A1 · Lista y detalle coordinados
 
-En ancho suficiente, muestra lista y detalle coordinados sin cambiar el modelo.
-Justifica si el mismo breakpoint del shell sirve o necesita otro local.
+En ancho suficiente, muestra lista y detalle sin cambiar el modelo. Decide si el shell y el detalle necesitan el mismo breakpoint.
 
-## A2 · Foco tras diálogo
+## A2 · Recuperar el foco tras un diálogo
 
-Usa `FocusNode` para devolver foco al control que abrió el diálogo. Documenta
-ciclo de vida y `dispose`. No introduzcas automatización de testing como contenido.
+Usa `FocusNode` para devolver el foco al control que abrió el diálogo. Documenta ciclo de vida y `dispose`.
 
-## A3 · Preferencia de tema solo en memoria
+## A3 · Tema en memoria
 
-Eleva claro/oscuro a estado de aplicación con `ChangeNotifier`. Se pierde al
-reiniciar deliberadamente: persistencia pertenece a PM4.
+Eleva claro/oscuro a estado de aplicación con `ChangeNotifier`. Se pierde deliberadamente al reiniciar: persistencia pertenece a PM4.
 
-## A4 · Navegación con query pequeña
+## A4 · Filtro como query pequeña
 
-Representa el filtro como `?filter=pending`, valida valores desconocidos y
-explica diferencia entre path y query. Sin auth ni redirecciones protegidas.
+Representa `?filter=pending`, valida valores desconocidos y explica path frente a query, sin autenticación ni redirecciones protegidas.
 
-## A5 · Sustituir provider manualmente
+## A5 · Comprender qué simplifica `provider`
 
-Implementa un `InheritedNotifier` mínimo para comprender qué simplifica
-`provider`. Compara coste y decide cuál dejarías. No construyas un framework.
+Implementa un `InheritedNotifier` mínimo, compara coste y decide cuál conservarías. No construyas un framework.
 
 ## A6 · Accesibilidad ampliada
 
-Revisa con lector de pantalla, contraste, teclado y texto 200/300 %. Produce una
-lista de hallazgos y corrige los dos de mayor impacto.
+Prueba lector de pantalla, contraste, teclado y texto grande; registra hallazgos y corrige los dos de mayor impacto. Indica herramienta y alcance real de la prueba.
 
 ## Límite
 
-No uses la ampliación para REST/auth/persistencia, sensores/permisos/multimedia,
-CI/DevTools profesional, SDD/agentes o arquitectura contractual de PI II.
-
+No uses ampliación para adelantar REST/auth/persistencia, sensores/permisos/multimedia, CI profesional, SDD/agentes o arquitectura contractual de PI II.

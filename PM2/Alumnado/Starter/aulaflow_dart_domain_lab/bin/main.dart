@@ -24,4 +24,3 @@ Future<void> main() async {
     print('SNAPSHOT ERROR · $error');
   }
 }
-

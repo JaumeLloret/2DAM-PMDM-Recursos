@@ -1,0 +1,23 @@
+name: pm5_capacidades_guiadas
+description: Ejemplos públicos PM5, separados del producto evaluable.
+publish_to: none
+version: 1.0.0+1
+environment:
+  sdk: '>=3.13.0 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  image: 4.9.2
+  permission_handler: 12.0.3
+  flutter_reactive_ble: 5.5.0
+  sensors_plus: 7.1.0
+  image_picker: 1.2.3
+  path_provider: 2.1.6
+  just_audio: 0.10.6
+dependency_overrides:
+  reactive_ble_mobile: 5.5.0
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter:
+  uses-material-design: true

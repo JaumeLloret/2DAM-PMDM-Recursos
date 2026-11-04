@@ -41,4 +41,3 @@ Baseline comprobado el **05/09/2026**:
 
 La versión es evidencia del corte de producción, no una promesa eterna. AULES no
 debe publicar «última versión» sin reconfirmar poco antes de impartir.
-

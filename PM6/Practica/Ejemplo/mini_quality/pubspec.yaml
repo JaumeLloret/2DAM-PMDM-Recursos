@@ -1,0 +1,16 @@
+name: mini_quality
+description: Ejemplo público de lectura de pruebas PM6, independiente del producto evaluado.
+publish_to: none
+version: 1.0.0+1
+environment:
+  sdk: '>=3.13.7 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+flutter:
+  uses-material-design: true

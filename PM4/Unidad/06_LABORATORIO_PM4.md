@@ -1,70 +1,112 @@
-# Laboratorio integrado · AulaFlow Flutter Data Client
+# PM4 · Laboratorio AulaFlow Flutter Data Client
 
-## Reto
+## La misión
 
-Completa el starter para que la frontera de datos deje de ser remote-only y sea segura, observable y recuperable. El producto es una demo docente; no implementa contrato ni backend real de AulaFlow 2.0.
+El starter ya hace login y lista datos, pero es `remote-only`: sesión en memoria, sin timeout, sin cache, sin preferencia persistente y con todos los fallos mezclados. Vas a completar la frontera de datos sin convertirla en una arquitectura ceremonial.
 
-## Criterios de aceptación
+La app es una demo con datos `DEMO-*`. No implementa el backend ni el contrato futuro de AulaFlow 2.0.
 
-- login ficticio y token opaco;
-- `GET /tasks`, detalle y `PATCH /tasks/:id/toggle`;
-- Service con URI, headers, timeout, códigos y JSON;
-- DTO → dominio con opcionalidad y estado desconocido;
-- token persistido solo mediante `SessionStore` seguro;
-- preferencia/cache pequeña mediante LocalStore no sensible;
-- logout y 401 borran sesión;
-- Repository remote-first con fallback cache en fallos recuperables;
-- ViewModel representa booting/loading/data/empty/error/sessionExpired;
-- retry explícito y aviso de cache antigua;
-- `API_BASE_URL` por `--dart-define`;
-- ninguna lógica HTTP/JSON/almacén en widgets;
-- prueba HTTPS controlada sin bypass TLS.
+## Antes de tocar código
 
-## Deudas reales del starter
+- completa la práctica **Debugging PM4**;
+- conserva una copia limpia de `lib/`;
+- confirma dos terminales, `/health` 200 y app inicial;
+- ejecuta `flutter analyze` y `flutter test`;
+- abre la carpeta que contiene `pubspec.yaml`.
 
-El starter ya arranca, hace login y lista remoto. Su `RemoteOnlyRepository` conserva token solo en memoria, no tiene timeout, muestra errores genéricos, no restaura preferencia/cache y no distingue 401. No hay comentarios que contengan la solución. Haz un diff y resuelve desde el contrato.
+## Hito 0 · baseline · 10 min
 
-## Secuencia sugerida · dentro de 120 min
+- **Objetivo:** demostrar que API y starter funcionan.
+- **Acción:** health, login y listado; registra URL efectiva saneada.
+- **Mínimo verificable:** tres tareas `DEMO-*` o un bloqueo con capa identificada.
+- **Escenario:** normal.
+- **Evidencia:** comandos y primer resultado.
+- **Rescate:** si health falla, vuelve a API/puerto; si solo falla Flutter, revisa destino/URL.
 
-1. 0–15: ejecutar health/login/lista y capturar contrato saneado.
-2. 15–35: DTO y fallos tipados.
-3. 35–55: SessionStore seguro; restauración/logout/401.
-4. 55–80: preference/cache LocalStore y re-instanciación.
-5. 80–100: Repository remote-first/fallback y `stale`.
-6. 100–115: estados ViewModel, empty/error/retry.
-7. 115–120: registro mínimo y siguiente riesgo.
+## Hito 1 · DTO y fallos · 20 min
 
-Las fases anteriores ya entrenan cada bloque; no debes aprenderlo todo aquí desde cero.
+- **Objetivo:** impedir que JSON dinámico y errores crudos escapen.
+- **Estado inicial:** casts directos y mensajes genéricos.
+- **Acción:** DTO → dominio; tipos transporte/protocolo/formato/timeout/auth.
+- **Mínimo verificable:** normal mapea; `invalid-json` produce `FormatFailure`.
+- **Escenarios:** normal, JSON inválido y timeout.
+- **Evidencia:** prueba pequeña y tabla de fallos.
+- **Rescate:** empieza por un único DTO y un único fallo.
 
-## Escenarios de aceptación
+## Hito 2 · sesión segura · 20 min
 
-| Caso | Activación | Observable |
-|---|---|---|
-| normal | sin query | datos frescos y operación toggle |
-| vacío | `scenario=empty` | estado vacío, no error |
-| 401 | `scenario=unauthorized` | sesión borrada y login |
-| 404 | id inexistente | mensaje de recurso no encontrado |
-| 500 | `scenario=server-error` | retry; cache si existe |
-| formato | `scenario=invalid-json` | error de contrato |
-| timeout | `scenario=slow` | estado timeout sin spinner infinito |
-| offline tras cache | detener API | datos `stale` claramente marcados |
-| persistencia | recrear stores/app | preferencia y sesión según política |
+- **Objetivo:** restaurar y borrar token sin persistir contraseña.
+- **Acción:** `SessionStore` seguro, login, Bearer, boot, logout y 401.
+- **Mínimo verificable:** nueva instancia puede restaurar token; logout confirmado lo elimina.
+- **Escenarios:** login correcto, credencial errónea, 401 y fallo de borrado.
+- **Evidencia:** estados antes/después sin token completo.
+- **Rescate:** prueba store aislado antes de conectarlo a UI.
 
-## Evidencia I2
+## Hito 3 · preferencia y cache · 20 min
 
-Entrega código, decisiones, comandos y registro de casos. Capturas aisladas no sustituyen ejecución. El token se sanea como `DEMO-…<redacted>` incluso siendo ficticio para practicar el hábito.
+- **Objetivo:** persistir solo datos no sensibles y pequeños.
+- **Acción:** `showCompleted` + cache demo en LocalStore.
+- **Mínimo verificable:** otra instancia recupera preferencia/cache; password nunca aparece.
+- **Escenario:** write/read/delete y re-instanciación.
+- **Evidencia:** matriz dato → almacén → motivo.
+- **Rescate:** separa primero preferencia; añade cache después.
 
-## I3 · 23 min simultáneos
+## Hito 4 · Repository remoto/local · 20 min
 
-Recibirás una variante no anunciada. Haz el cambio sin agente, ejecuta al menos una comprobación focalizada y explica la capa. Después hay 15 min para ejecución/debugging y 10 min de explicación/cierre dentro del taller de 55 min. Variantes exactas son reservadas.
+- **Objetivo:** aplicar remote-first sin ocultar sesión caducada.
+- **Acción:** remoto; cache tras éxito; fallback en fallo recuperable; `stale=true`.
+- **Mínimo verificable:** API caída tras una carga muestra cache antigua identificada.
+- **Escenarios:** normal, 500/offline y 401.
+- **Evidencia:** traza de decisiones sin `Authorization`.
+- **Rescate:** prueba Repository con fakes antes de la app completa.
 
-## Errores que no se aceptan
+## Hito 5 · estados ViewModel · 15 min
 
-- `badCertificateCallback => true`;
-- token en preferencias, constante o log;
-- contraseña persistida;
-- red dentro de `build()`;
-- cache ocultando 401;
-- afirmar que HTTP local valida HTTPS;
-- capturas o resultados fabricados.
+- **Objetivo:** representar `booting/loading/data/empty/error/sessionExpired` sin booleanos incompatibles.
+- **Acción:** coordina comandos y retry fuera de `build()`.
+- **Mínimo verificable:** vacío no es error; timeout termina; 401 vuelve a login.
+- **Escenarios:** empty, slow, invalid-json y unauthorized.
+- **Evidencia:** tabla evento → estado → acción.
+- **Rescate:** conecta un escenario cada vez.
+
+## Hito 6 · comprobación integrada · 15 min
+
+| Caso | Resultado esperado |
+|---|---|
+| normal | datos frescos y toggle |
+| vacío | estado vacío, no error |
+| 401 | sesión borrada y login |
+| 404 | recurso no encontrado con salida |
+| 500/503 | retry; cache visible si procede |
+| JSON inválido | error de contrato |
+| timeout | no spinner infinito |
+| API detenida tras cache | datos `stale` claramente marcados |
+| reinicio/re-instanciación | sesión/preferencia/cache según política |
+| logout fallido | error representado; no éxito fingido |
+| HTTPS, cuando proceda | TLS válido sin bypass |
+
+## Producto mínimo I2
+
+- login/listado/detalle/toggle/logout;
+- RemoteService con URI, headers, timeout, códigos y JSON;
+- DTO → dominio;
+- SessionStore seguro;
+- LocalStore para preferencia/cache no sensible;
+- Repository remote-first/fallback visible;
+- estados ViewModel y retry;
+- `API_BASE_URL` por entorno;
+- registro saneado de escenarios;
+- `flutter analyze` y `flutter test` reales.
+
+Entrega código, decisiones, diff, comandos y registro. No entregues `build/`, `.dart_tool/`, `.env`, password, token completo, IP pública, datos reales ni material docente.
+
+## I3 con o sin asistencia
+
+La microvariación individual dura 23 minutos y se realiza sin agente. En taller puede observarse en directo; si no asistes se asigna por AULES con la misma finalidad, tiempo y clase de evidencia.
+
+Debes conservar: predicción previa, cambio mínimo, ejecución, regresión y explicación de la capa. La variante exacta permanece reservada.
+
+## Parada
+
+Cuando el producto mínimo funciona y puedes explicar sus decisiones, detente. No añadas SQL/ORM, OAuth/JWT completo, sensores, multimedia, testing profesional, CI curricular, agentes ni arquitectura global del proyecto.
 

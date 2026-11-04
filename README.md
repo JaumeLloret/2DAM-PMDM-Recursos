@@ -49,3 +49,9 @@ Estos materiales forman la biblioteca pública de apoyo. El curso institucional 
 ## Preparación de la prueba global
 
 [Formato y entrenamiento público diferente](Preparacion_global/README.md). Las pruebas oficiales se distribuyen por el docente en su momento; estos materiales permiten preparar el formato.
+
+## Edición consolidada v1 · 04/11/2026
+
+Los índices de PM2–PM9 enlazan los materiales ordinarios conciliados. PM3 comienza por los libros integrados; su README explica la revisión del test de plantilla después de cada generación de plataformas. PM7 incluye [Si quieres profundizar](PM7/Profundizacion/00_RUTA_PROFUNDIZACION.md), ampliación voluntaria fuera de las seis horas y sin nota.
+
+[Procedencia y alcance](PROCEDENCIA_V1.md). AULES conserva las actividades y fechas vigentes; los materiales históricos se reconocen como tales.

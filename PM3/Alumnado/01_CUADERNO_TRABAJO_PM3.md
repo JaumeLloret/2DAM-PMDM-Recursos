@@ -75,4 +75,3 @@ Resultado:
 Explica un flujo completo control → evento → estado → rebuild:
 
 > 
-

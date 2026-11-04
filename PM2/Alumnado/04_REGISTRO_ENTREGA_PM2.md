@@ -1,10 +1,10 @@
-# EVIDENCIA · plantilla PM2
+# EVIDENCIA.md · plantilla PM2
 
 ## Identidad
 
-- Alumno/a:
+- Identificador de AULES:
 - Fecha:
-- Variante individual:
+- Microvariación individual:
 
 ## Entorno
 
@@ -15,17 +15,17 @@ PEGAR SALIDA REAL
 
 ## Validaciones
 
-| Comando | Resultado | Incidencia/decisión |
+| Comando | Resultado real | Incidencia o decisión |
 |---|---|---|
 | `dart pub get` | | |
 | `dart format --output=none --set-exit-if-changed .` | | |
 | `dart analyze` | | |
-| `dart run` | | |
+| `dart run bin/main.dart` | | |
 | `dart test` | | |
 
-Si una herramienta no está disponible, escribe `NO EJECUTADO`, comando y error. No conviertas un bloqueo en PASS.
+Si una herramienta no está disponible, escribe `NO EJECUTADO`, el comando y el error. Si no hay tests propios, escribe `NO APLICA`; no inventes un PASS.
 
-## Salida antes/después
+## Baseline y resultado
 
 ```text
 ANTES
@@ -35,11 +35,17 @@ ANTES
 DESPUÉS
 ```
 
-## Explicación
+## Microvariación I3
 
-- Cambio realizado:
-- Clases/reglas afectadas:
+- Predicción del impacto:
+- Fichero/clase/método afectado:
+- Cambio o debugging realizado:
+- Comando y salida:
+- Explicación de la regla o alternativa descartada:
+
+## Cierre
+
 - Riesgo que comprobé:
-- Resultado:
-
+- Clase que no creé y motivo:
+- Bloqueo pendiente, si existe:
 

@@ -1,5 +1,36 @@
 # Evaluación y autenticidad · PM9
 
+## Qué debes enviar
+
+**Entrega:** 07/03/2027 23:59 · **Cierre:** 10/03/2027 23:59 (Madrid).
+Feedback previsto el 11/03. Una sola tarea para todo el producto.
+
+1.  **Proyecto_PM9.zip:** fuentes modificables con project.godot en la
+    raíz, scenes/, scripts/, materials/, ui/, assets/, README y
+    licencias. Excluye .godot/, claves y archivos temporales. Añade tus
+    pruebas en tests/.
+2.  **Dossier_PM9:** un único documento con G01--G08. Puedes usar la
+    plantilla Markdown descargada y conservar ese formato, o entregar
+    ODT/PDF. Los registros parciales se actualizan aquí; no hace falta
+    volver a escribirlos.
+
+Si conservas las fuentes en Git, indica también el enlace autorizado y
+el commit final en G08; el ZIP permite revisar tu corte aunque el
+repositorio no esté accesible. El APK de entrenamiento y su hash se
+registran en G06. Si lo facilitas para la comprobación de instalación,
+utiliza el adjunto o enlace de artefactos acordado con el docente, sin
+introducir claves ni seriales en las fuentes.
+
+### Comprueba antes de enviar
+
+Extrae el ZIP en otra carpeta e importa su project.godot; comprueba el
+arranque, tus archivos propios y el dossier. El lector debe poder
+repetir las pruebas con las instrucciones de G08. Si falta móvil,
+entorno o una cita individual, registra el pendiente concreto y la
+petición de acceso; el docente programa la comprobación que falte. No lo
+sustituyas por una observación inventada.
+
+
 | CE primario | Literal exacto de matriz |
 |---|---|
 | RA5.a | Se ha establecido la lógica de un nuevo juego. |
@@ -52,3 +83,4 @@ La rúbrica orienta juicio por CE; no se promedian diez filas para crear un peso
 M4 autónoma de 45 min: recorrido 8 min, predicción 10, cambio individual nuevo 15, prueba/explicación 8 y registro 4. La cita observada sustituye el tramo correspondiente de M4, sin sumar tiempo. Otras verificaciones individuales se reprograman por tutoría. Registrar predicción, diff, comando/resultado, documento afectado y observación docente. Si falta supervisión, PENDIENTE_SUPERVISION. La prueba presencial global sigue separada y sin ayuda generativa.
 
 Feedback: CE afectado, evidencia que falta o error concreto, acción de corrección y nueva comprobación. No exigir toda la recuperación cuando la insuficiencia es focal, pero mantener evidencia suficiente del criterio. Tardanza ≤72 h no recorta automáticamente nota; después se aplica recuperación canónica. No usar cantidad de prompts, commits, tests o arte como nota.
+

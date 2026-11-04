@@ -10,7 +10,7 @@ Estos ejercicios se distribuyen dentro de A02/A03/T1/A05/A06; no son horas adici
 | 2 | E4 Formula dos preguntas que cambien código | Pregunta, alternativas y efecto | Campo de búsqueda y conservar estado son decisiones distintas |
 | 2 | E5 Divide una tarea demasiado grande | Dos incrementos con archivos/criterios/comandos | La política puede verificarse antes de UI |
 | 2 | E6 Reduce contexto de un agente | Lista mínima permitida y exclusiones | Spec + archivos de tarea; sin secretos ni soluciones docentes |
-| 2 | E7 Revisa una aserción débil | Contraejemplo y nueva entrada | Consulta vacía no distingue OR de AND |
+| 2 | E7 Ejecuta el ensayo de una aserción débil | Verde débil, rojo independiente y corrección en Avisos DEMO; después S3 | Usa el libro Trabajo con agente; el ensayo ocupa los 15 min iniciales de T1 |
 | 3 | E8 Examina una desviación de diff | Ubicación, efecto, criterio y acción | Un cambio de dependencia puede estar fuera de alcance aunque compile |
 | 3 | E9 Reconstruye una cadena rota | Corrige Sx→decisión→tarea→prueba→resultado | Un test renombrado debe seguir localizable |
 | 3 | E10 Defiende una decisión y una limitación | Explicación de ñ y búsqueda solo por título | No prometas normalización universal o búsqueda por ID |
@@ -18,3 +18,9 @@ Estos ejercicios se distribuyen dentro de A02/A03/T1/A05/A06; no son horas adici
 Si E1–E3 no salen, vuelve al capítulo 2 y escribe un caso concreto con las cuatro entradas. Si E4–E7 fallan, consulta la tarjeta después de conservar tus preguntas. Si E8–E10 fallan, reduce el diff a una sola regla y explica qué entrada distingue dos alternativas. El docente usa la duda para orientar feedback, no el número de ejercicios como porcentaje de nota.
 
 Miniensayo individual de 8 min dentro de A06: explica qué cambiarías si limpiar volviera también al estado todas, señala documentos y prueba afectados y predice el contador. No modifiques tu spec oficial por este ensayo; el cambio formal requiere decisión y registro. La variante I3 del taller será nueva.
+
+## Preguntas de profundidad integradas, sin otra entrega
+
+Antes de aceptar tu incremento, explica en D03/D06 las decisiones que realmente lo afecten: ¿qué parte hace el modelo y cuál la herramienta?, ¿qué contexto sobra?, ¿por qué una instrucción no limita permisos del sistema?, ¿qué test detecta que código y test comparten un error?, ¿qué responsabilidad justifica una nueva capa? Una explicación concreta con archivo y contraejemplo vale más que repetir los cinco términos.
+
+Para el contrato MCP simulado del ZIP, identifica lectura frente a escritura y justifica por qué no necesitas conectar ninguno para filtrar cuatro datos locales. Para la regla persistente de ejemplo, separa convención estable de tarea puntual. Son decisiones de entrenamiento que se registran dentro del dossier, no una instalación o integración obligatoria.

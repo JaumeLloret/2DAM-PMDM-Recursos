@@ -1,30 +1,42 @@
-# Ejemplos guiados PM2
+# PM2 · Ejemplos guiados
 
-Los ejemplos ejecutables están en [Alumnado/Ejemplos/dart_moderno_examples/](../Alumnado/Ejemplos/dart_moderno_examples). Cada bloque sigue `predice → ejecuta → modifica → explica`.
+Estos ejemplos convierten cada concepto de la teoría en una acción pequeña. No edites el original directamente: duplica `dart_moderno_examples` y llama a la copia `dart_moderno_examples_trabajo`.
 
-## Preparación
+## Preparar la copia
+
+1. Abre VS Code o Android Studio.
+2. Selecciona **Abrir carpeta / Open Folder**.
+3. Elige `dart_moderno_examples_trabajo`, la carpeta que contiene `pubspec.yaml`.
+4. Abre una terminal integrada en esa carpeta.
+5. Ejecuta:
 
 ```bash
-cd dart_moderno_examples
 dart pub get
-dart run
+dart analyze
+dart run bin/main.dart
 dart test
 ```
 
-Salida esencial esperada:
+Salida esencial:
 
 ```text
 null-safety: SIN RESPONSABLE
 colecciones: [DART, MODELADO]
-record: true · DART
+record: true · Dart
 switch: 1
 clase: C-1 · Dart seguro · sin responsable
 async: snapshot:board-demo:2
 ```
 
-Los milisegundos no forman parte de la evidencia.
+Debes obtener también cinco tests correctos. Los milisegundos no forman parte de la evidencia.
 
-## E1 · Una referencia final puede apuntar a una lista mutable
+Si `dart run` busca otro fichero, utiliza siempre `dart run bin/main.dart`. Si los imports aparecen rotos, comprueba que has abierto la carpeta con `pubspec.yaml` y repite `dart pub get`.
+
+## E1 · `final` no vuelve inmutable una lista
+
+### Antes de ejecutar
+
+Predice si `add` compila:
 
 ```dart
 final tags = <String>['dart'];
@@ -32,109 +44,217 @@ tags.add('domain');
 print(tags);
 ```
 
-Predicción correcta: `[dart, domain]`. `final` impide reasignar `tags`, no mutar la lista. Modifica el ejemplo con `List.unmodifiable` y comprueba que `add` lanza en ejecución.
+### Ejecuta
+
+Puedes crear temporalmente `bin/e1.dart` y ejecutar:
+
+```bash
+dart run bin/e1.dart
+```
+
+Salida:
+
+```text
+[dart, domain]
+```
+
+### Modifica
+
+Crea `final safeTags = List.unmodifiable(tags);` e intenta añadir otro valor.
+
+### Checkpoint
+
+Explica por qué una referencia `final` y una lista no modificable resuelven problemas distintos.
+
+### Si falla antes de tiempo
+
+Si no encuentra `bin/e1.dart`, confirma que el fichero está dentro de `bin/` y que la terminal está en la raíz del paquete.
 
 ## E2 · Promoción antes que `!`
 
-```dart
-String ownerLabel(String? owner) {
-  final normalized = owner?.trim();
-  if (normalized == null || normalized.isEmpty) return 'SIN RESPONSABLE';
-  return normalized.toUpperCase();
-}
+Localiza `ownerLabel` en `lib/examples.dart`.
+
+### Predice
+
+¿Qué devuelve para `null`, `'   '` y `' ada '`?
+
+### Modifica
+
+Añade temporalmente tres llamadas en `bin/main.dart` y comprueba:
+
+```text
+SIN RESPONSABLE
+SIN RESPONSABLE
+ADA
 ```
 
-La comprobación permite que analyzer trate `normalized` como `String` en la última línea. Variante: devuelve `RESPONSABLE: ...`.
+### Variación
 
-## E3 · Transformación legible
+Haz que el resultado válido sea `RESPONSABLE: ADA`.
 
-```dart
-final result = titles
-    .map((title) => title.trim())
-    .where((title) => title.length >= 4)
-    .map((title) => title.toUpperCase())
-    .toList(growable: false);
+### Checkpoint
+
+Señala la línea que permite la promoción de `String?` a `String`.
+
+## E3 · Transformar sin ocultar los pasos
+
+Localiza `normalizedTitles`.
+
+### Predice
+
+Para `[' Dart ', '', 'modelado', 'Dart']`, escribe primero:
+
+1. valores tras `trim`;
+2. valores que pasan el filtro;
+3. resultado final y duplicados.
+
+### Ejecuta
+
+La salida final es:
+
+```text
+[DART, MODELADO]
 ```
 
-Se separan los pasos si la cadena requiere comentarios para descifrarse. Variante: conservar el orden y eliminar duplicados conscientemente.
+### Modifica
+
+Conserva mayúsculas/minúsculas originales, pero elimina duplicados ignorando el caso. Divide el problema en pasos si una cadena larga deja de ser legible.
+
+### Checkpoint
+
+Justifica qué colección conserva el primer orden y cuál detecta pertenencia.
 
 ## E4 · Record o clase
 
-```dart
-({bool ok, String normalized}) normalizeTitle(String raw) {
-  final value = raw.trim();
-  return (ok: value.length >= 3, normalized: value);
-}
-```
+Localiza `validateTitle`.
 
-Record es suficiente porque el resultado es pequeño, local y no tiene comportamiento. Si aparecen errores múltiples, reglas o vida propia, valora una clase.
-
-## E5 · Switch exhaustivo sobre enum
+### Predice
 
 ```dart
-enum Priority { low, normal, high, urgent }
-
-int workInProgressLimit(Priority priority) => switch (priority) {
-  Priority.low => 10,
-  Priority.normal => 8,
-  Priority.high => 4,
-  Priority.urgent => 1,
-};
+validateTitle(' a ')
+validateTitle(' Dart ')
 ```
 
-Añade temporalmente un valor al enum: analyzer obliga a decidir su comportamiento. Esa es la ventaja sobre un `String`.
+Resultados:
+
+```text
+(ok: false, message: Mínimo 3 caracteres)
+(ok: true, message: Dart)
+```
+
+### Modifica
+
+Añade un tercer dato local `normalizedLength`. Después responde: ¿sigue siendo un resultado pequeño sin vida propia o empieza a justificar una clase?
+
+### Checkpoint
+
+Tu decisión menciona identidad, reglas o comportamiento; no solo número de campos.
+
+## E5 · Enum y switch exhaustivo
+
+Localiza `Priority` y `priorityLimit`.
+
+### Predice
+
+¿Qué devuelve cada prioridad? Ejecuta y compara.
+
+### Modifica
+
+Añade temporalmente `blocked` al enum sin tocar el switch. Ejecuta `dart analyze`.
+
+Debes ver un error que indica que el switch no cubre todos los casos.
+
+### Repara
+
+Añade el caso que falta o revierte el experimento.
+
+### Checkpoint
+
+Explica qué error podría admitir un string libre que el enum evita.
 
 ## E6 · Clase que protege una regla
 
+Localiza `Card`.
+
+### Predice
+
+¿Qué ocurre con este caso?
+
 ```dart
-class Card {
-  final String id;
-  final String title;
-
-  Card({required this.id, required String title})
-      : title = _validateTitle(title);
-
-  static String _validateTitle(String raw) {
-    final value = raw.trim();
-    if (value.length < 3) {
-      throw ArgumentError.value(raw, 'title', 'Mínimo 3 caracteres');
-    }
-    return value;
-  }
-}
+Card(id: 'C-1', title: '  ');
 ```
 
-Prueba `Card(id: 'C-1', title: '  ')`. La clase existe para nombrar tarjeta y mantener un título válido, no para envolver dos campos sin criterio.
+### Ejecuta
+
+Añádelo en un bloque `try` temporal o utiliza el test existente. Debe lanzar `ArgumentError`.
+
+### Modifica
+
+Protege también un `id` vacío. No añadas una clase nueva: la propia tarjeta conoce esa regla.
+
+### Checkpoint
+
+Puedes indicar qué estados inválidos son imposibles después del constructor.
 
 ## E7 · Copia defensiva
 
+Crea esta clase en un fichero temporal:
+
 ```dart
 class Column {
-  final List<Card> _cards;
-  Column(Iterable<Card> cards) : _cards = List.of(cards);
-  List<Card> get cards => List.unmodifiable(_cards);
+  Column(Iterable<String> ids) : _ids = List.of(ids);
+
+  final List<String> _ids;
+
+  List<String> get ids => List.unmodifiable(_ids);
 }
 ```
 
-El llamador no puede vaciar la lista interna mediante el getter. Decide si el método `add` pertenece a la columna o si prefieres una versión inmutable.
+### Predice y prueba
 
-## E8 · Future local y fallo observable
+Intenta modificar la lista recibida por el getter.
 
-```dart
-Future<String> snapshot(String boardId) async {
-  await Future<void>.delayed(const Duration(milliseconds: 10));
-  if (boardId.isEmpty) throw ArgumentError('boardId vacío');
-  return 'snapshot:$boardId';
-}
+### Compara
+
+Compara con `List<String> get ids => _ids;` y explica qué regla podría romper un llamador externo.
+
+### Checkpoint
+
+La colección interna no puede cambiarse a través del getter.
+
+## E8 · `Future` normal y fallo observable
+
+Localiza `createLocalSnapshot`.
+
+### Predice
+
+1. salida con `boardId: 'board-demo'`;
+2. tipo devuelto antes de usar `await`;
+3. error con `boardId: ''`.
+
+### Ejecuta
+
+Prueba ruta válida e inválida. En la inválida, captura `ArgumentError` y añade contexto; no uses un `catch` vacío.
+
+### Checkpoint
+
+No aparece `Instance of 'Future<String>'` y puedes explicar qué espera exactamente `await`.
+
+## Cierre de los ejemplos
+
+Ejecuta de nuevo:
+
+```bash
+dart format .
+dart analyze
+dart run bin/main.dart
+dart test
 ```
 
-El `Future` simula una espera local controlada. No hay HTTP, archivo ni base de datos. Variante: captura el error en `main` y escribe un mensaje útil.
+Conserva en el cuaderno:
 
-## Preguntas de cierre
-
-1. ¿Qué ejemplo impide un estado inválido?
-2. ¿Cuál usa un record porque una clase sería excesiva?
-3. ¿Qué diferencia hay entre colección no modificable y referencia final?
-4. ¿Dónde puede fallar E8 y quién debe decidir cómo mostrarlo?
-
+- una predicción que no acertaste;
+- la diferencia observada;
+- una regla que ahora puedes explicar;
+- un error que sabes diagnosticar.
 

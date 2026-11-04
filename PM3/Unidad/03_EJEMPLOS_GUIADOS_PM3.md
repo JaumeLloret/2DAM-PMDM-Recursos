@@ -1,9 +1,37 @@
-# Ejemplos guiados · PM3
+# PM3 · Ejemplos guiados reproducibles
 
-En todos: predice, ejecuta, observa, explica y cambia una condición. Los ejemplos
-completos viven en [Alumnado/Ejemplos/adaptive_navigation_example/](../Alumnado/Ejemplos/adaptive_navigation_example).
+> Fuente anterior conservada para trazabilidad. La publicación vigente se define en el manifiesto AULES v3 y usa los libros integrados 13–16; este documento no se exporta como una actividad separada.
 
-## E1 · Un overflow que no se arregla con deseo
+
+Los ejemplos no se leen como recetas. En cada uno vas a **localizar, predecir, ejecutar, modificar, verificar y explicar**.
+
+## Prepara el paquete de ejemplos
+
+Abre como proyecto la carpeta:
+
+```text
+30 - PMDM/Unidades/PM3/Alumnado/Ejemplos/adaptive_navigation_example/
+```
+
+Desde la carpeta que contiene `pubspec.yaml`:
+
+```bash
+flutter create . --platforms=android --project-name adaptive_navigation_example
+flutter pub get
+flutter analyze
+flutter test
+flutter run
+```
+
+Estado inicial esperado: tres destinos; `NavigationBar` en espacio compacto, `NavigationRail` desde 600 px y un contador local.
+
+## E1 · Reparar un overflow comprendiendo las constraints
+
+**Localiza:** `lib/main.dart` y el widget que compone texto y controles en horizontal.
+
+**Predice:** qué ocurrirá a 280 px o con fuente grande si un `Row` contiene un texto largo sin flexibilidad.
+
+**Prueba este estado en una copia:**
 
 ```dart
 Row(children: [
@@ -12,92 +40,106 @@ Row(children: [
 ]);
 ```
 
-1. Predice qué ocurre a 280 px y con texto al 200 %.
-2. Ejecuta y lee el mensaje de constraints.
-3. Envuelve el `Text` en `Expanded` y permite varias líneas.
-4. Verifica 280, 390 y 900 px.
-5. Explica qué constraint cambió. «He puesto Expanded» no basta.
+**Modifica:** envuelve el `Text` en `Expanded` y permite varias líneas.
 
-## E2 · Mismos destinos, representación distinta
+**Verifica:** 280, 390 y 900 px; ejecuta también `flutter analyze`.
 
-El ejemplo comparte tres `NavigationDestination`. Bajo 600 px los muestra en
-`NavigationBar`; desde 600 los transforma en `NavigationRailDestination`.
+**Explica:** qué constraint recibió el texto antes y después. «He puesto `Expanded`» no basta.
 
-Puntos de lectura:
+**Si falla:** reduce el ejemplo a icono + texto y revisa que `Expanded` sea hijo directo del `Row`.
 
-- `LayoutBuilder` mide el espacio del shell, no adivina dispositivo;
-- bar y rail comparten orden, iconos y etiquetas;
-- solo existe una representación a la vez;
-- el body usa `Expanded` en la variante ancha.
+## E2 · Los mismos destinos, dos representaciones
 
-Cambia el breakpoint a 720 y registra en qué anchura deja de ser cómoda cada
-representación. Decide con evidencia cuál conservarías para esas etiquetas.
+**Localiza:** `lib/main.dart`, la lista compartida de destinos y el `LayoutBuilder`.
+
+**Predice:** qué navegación aparece a 599 y 600 px.
+
+**Ejecuta:** prueba 390 × 800 y 900 × 700 con el procedimiento de la Ruta.
+
+**Modifica:** cambia temporalmente el breakpoint a 720.
+
+**Verifica:** solo existe bar o rail, el orden y las etiquetas coinciden y el destino seleccionado se conserva al redimensionar.
+
+**Explica:** por qué medimos el espacio del contenedor y no preguntamos si el dispositivo «es una tablet».
 
 ## E3 · Estado efímero legítimo
 
-El contador del ejemplo solo interesa a la pantalla y no modela datos de la
-feature. `setState` es suficiente. Haz que se reinicie al cambiar de destino y
-explica por qué eso sería correcto o incorrecto según el requisito.
+**Localiza:** el contador del ejemplo y su `setState`.
 
-Los apartados E4–E8 comparan decisiones de refactorización para aplicar al laboratorio. Los nombres de la propuesta no corresponden a archivos ya implementados en el starter.
+**Predice:** si el valor debería sobrevivir al cambiar de destino según dos requisitos distintos: contador visual temporal o dato de la feature.
 
-## E4 · Estado de feature
+**Modifica:** reinícialo al cambiar de destino.
 
-Compara:
+**Verifica:** describe cuándo ese reinicio es correcto y cuándo indicaría que el estado vive demasiado abajo.
 
-```dart
-final visible = fixtures.where(matchesFilter).toList(); // dentro de build
-```
+## E4 · Estado de feature fuera de `build`
 
-con:
+**Lee y compara:**
 
 ```dart
-List<DemoTask> get visibleTasks => ...; // en TasksViewModel
+final visible = fixtures.where(matchesFilter).toList();
 ```
 
-El segundo diseño concentra fuente, filtro y orden, permite probar el resultado
-sin bombear widgets y evita que cada vista invente su interpretación. No mueve al
-ViewModel decisiones puramente visuales como el icono de un estado.
+```dart
+List<DemoTask> get visibleTasks => ...;
+```
+
+**Predice:** qué widgets necesitarían duplicar la primera regla.
+
+**Modifica:** mueve filtro y orden a getters del ViewModel sin crear una segunda lista mutable.
+
+**Verifica:** cambia el filtro desde dos consumidores y comprueba en tu app que ambos reflejan la misma decisión. El starter incluye una prueba de arranque; no incluye un test del ViewModel para esta modificación. Si ya has creado uno en tu copia puedes ejecutarlo, pero aquí no se exige escribir tests nuevos.
+
+**Explica:** qué es regla de feature y qué sigue siendo una decisión visual de la View.
 
 ## E5 · Ruta por id
 
-Starter: `context.go('/detail', extra: taskMap)`. Propuesta de refactorización:
-`context.go('/tasks/${task.id}')`. Dibuja qué necesita cada destino si se abre
-directamente. En tu refactorización, la pantalla consultará `findById`; en el starter
-depende de que otra pantalla le entregue un objeto vivo.
+**Localiza en el starter:** `context.go('/detail', extra: taskMap)`.
 
-Prueba `/tasks/DEMO-INVALID`: debe aparecer una salida comprensible, no un crash.
+**Predice:** qué necesita el detalle si se abre directamente.
+
+**Modifica:** usa `/tasks/${task.id}` y consulta la fuente compartida por id.
+
+**Verifica:** `/tasks/DEMO-201` muestra el dato correcto y `/tasks/DEMO-INVALID` ofrece una salida comprensible.
+
+**Explica:** por qué un id pequeño reduce acoplamiento y evita datos obsoletos.
 
 ## E6 · Confirmación y feedback
 
-Implementa una confirmación que abra `AlertDialog`, devuelva `bool?`, ejecute el comando y muestre
-`SnackBar`. Cancela y verifica que no cambia nada. Confirma y comprueba que el
-estado cambia también al volver a la lista. Prueba pulsación por teclado.
+**Predice:** qué debe cambiar al cancelar y al confirmar.
+
+**Modifica:** abre `AlertDialog`, recupera `bool?`, comprueba `context.mounted`, ejecuta el comando y muestra `SnackBar`.
+
+**Verifica:** cancelar no modifica datos; confirmar actualiza detalle y lista; el control se alcanza con teclado.
+
+**Si falla el SnackBar:** revisa el `ScaffoldMessenger` ancestro y el subárbol de navegación antes de mover código al azar.
 
 ## E7 · Arquitectura que termina donde termina el problema
+
+**Dibuja antes de modificar:**
 
 ```text
 TasksView → TasksViewModel → TaskRepository ← InMemoryTaskRepository
 ```
 
-Se puede sustituir el repositorio en un test. No se añade `Service`: los fixtures
-ya están dentro de Dart. Añadir una clase `DemoService` que solo devuelve la
-misma lista duplicaría nombres, no aislaría una frontera externa.
+**Modifica:** inyecta `TaskRepository` por constructor.
 
-## E8 · Error y vacío son estados diferentes
+**Verifica:** puedes sustituirlo por un fake que falla sin tocar la ViewModel.
 
-Representa el fallo con `LoadPhase.failed` y ofrece reintento. Un filtro sin resultados
-renderiza un estado vacío, no el mismo error. En el test, un repositorio fake
-falla sin red. Explica qué control debe permanecer disponible en cada estado.
+**Explica:** por qué no existe `Service`: no hay fuente externa en PM3.
 
-## Checklist de reproducción
+## E8 · Vacío y error no son lo mismo
 
-- [ ] predije antes de ejecutar;
-- [ ] registré tamaño lógico y escala de texto;
-- [ ] identifiqué padre, constraint e hijo en el layout;
-- [ ] pude recorrer bar/rail con teclado;
-- [ ] una ruta inválida no bloqueó la app;
-- [ ] cancelar el diálogo no modificó datos;
-- [ ] el estado sobrevivió al cambio de vista cuando debía;
-- [ ] no añadí servicios externos.
+**Predice:** qué controles deberían seguir disponibles en un filtro sin resultados y en un fallo de carga.
 
+**Modifica:** representa `ready` con lista vacía y `failed` con mensaje y reintento.
+
+**Verifica:** ambos estados se distinguen sin depender solo del color y el reintento no se lanza desde `build`.
+
+## Cierre de ejemplos
+
+- [ ] He ejecutado el estado inicial.
+- [ ] He escrito una predicción antes de cada cambio.
+- [ ] He hecho una modificación pequeña, no una reescritura completa.
+- [ ] He comprobado una salida esperada y una regresión cercana.
+- [ ] Puedo explicar la relación entre evento, estado y reconstrucción.

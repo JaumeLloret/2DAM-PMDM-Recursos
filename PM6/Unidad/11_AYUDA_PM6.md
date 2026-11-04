@@ -17,7 +17,7 @@ Busca el **primer** fallo, anota comando/acción, expected/actual y capa A host,
 | Widget no encontrado | Key/texto, montaje, `pump` | Asegura estado visible y usa selector estable. | Selector y árbol/resultado. |
 | Notificación tras dispose | Completar petición después de liberar | Invalida generación, repite test de lifecycle. | Test/diff/regresión. |
 | DevTools no conecta | App viva, proceso/destino correcto, enlace del IDE/terminal | Reinicia app, abre DevTools para ese proceso; solicita turno si sigue bloqueado. | Primer error o `PENDIENTE_DEVTOOLS`. |
-| Gráfica en debug no comparable | Modo y destino | Reinicia en profile, misma carga y recorrido. | Protocolo, no porcentaje inventado. |
+| Gráfica en debug no comparable | Modo y destino | Usa móvil físico en profile; un emulador móvil no admite ese modo. Mantén carga y recorrido. | Protocolo, no porcentaje inventado. |
 | AVD no arranca | Virtualización, RAM/espacio, SDK, primer error | Corrige causa o solicita equipo del centro. | `PENDIENTE_EMULADOR` y error saneado. |
 | `flutter devices` no muestra destino | AVD encendido/USB autorizado/cable datos | Revisa destino; sigue host sin atribuir Android. | Tipos de destino, sin serial. |
 | Gradle/build falla | Java 17, SDK/licencias, espacio y primer error | Corrige primero esa causa; repite build. | Resultado o `PENDIENTE_BUILD`. |

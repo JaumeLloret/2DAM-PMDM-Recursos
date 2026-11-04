@@ -25,4 +25,12 @@ Marca cada punto **observado**, **por corregir** o **pendiente con cita/acción*
 - [ ] Mi entrega contiene código, tests, dossier y límites del mismo corte; he eliminado secretos, datos personales y salidas ajenas.
 - [ ] No conté prompts, proveedor, commits ni número de documentos como peso de RA2.i.
 
-**Antes de abrir AULES:** el docente confirmará apertura, entrega objetivo y cierre/cutoff en portada, Ruta, sección y tarea. T1 26/01/2027 y T2 02/02/2027 no son plazos de entrega. La recuperación Préstamo DEMO se asigna por separado; la [ampliación](09_AMPLIACION_PM7.md) es opcional. La prueba práctica presencial global PMDM sigue siendo independiente.
+**Calendario en AULES:** el calendario ya fija apertura, entrega objetivo y cierre de envíos en portada, Ruta, sección y tarea. T1 26/01/2027 y T2 02/02/2027 no son plazos de entrega. La recuperación Préstamo DEMO se asigna por separado; la [ampliación](09_AMPLIACION_PM7.md) es opcional. La prueba práctica presencial global PMDM sigue siendo independiente.
+
+## Comprender el trabajo con agentes
+
+- [ ] Distingo modelo, harness, herramienta y permisos efectivos; una frase «probado» no es un log.
+- [ ] Puedo seleccionar contexto y recuperar una decisión tras reinicio sin sustituirla por una memoria contradictoria.
+- [ ] Ejecuté el ensayo verde débil→rojo independiente→verde corregido, o contrasté el caso con herramienta autorizada, y sé explicar el error.
+- [ ] Justifico qué mecanismo necesito: regla persistente, plantilla, skill, herramienta, MCP o subagente; no instalé piezas por cumplir una cuota.
+- [ ] Puedo señalar una complejidad innecesaria y explicar cómo modificar mi solución sin agente.

@@ -4,14 +4,14 @@
 
 **Tiempo único:** 8 h = 480 min: **390 min autónomos + dos misiones de 45 min efectivos**. La franja presencial nominal sigue siendo 19:30–20:25 (55 min); sus 10 min restantes son margen de acceso, arranque y transición, no una segunda tarea. Los 20 min efectivos liberados del diseño anterior pasan a A04 (+10) y A05 (+10). Haz cada bloque una sola vez: taller **o** misión desde casa, nunca ambas. T1 es el **12/01/2027** y T2 el **19/01/2027**. Si I3 necesita supervisión, la cita/tutoría individual se reprograma sin exigir asistencia a esa fecha. Las fechas de los talleres no son plazos de entrega.
 
-**Calendario operativo de esta edición.** Apertura de PM6, entrega objetivo y cierre técnico/de la unidad: **pendientes de confirmación docente**. No inventes esas fechas ni confundas el 19/01 con la entrega. Antes de abrir PM6 en AULES, deben figurar aquí, en la portada, en la sección de la unidad y en la tarea evaluable.
+**Calendario de esta unidad.** Disponible desde 21/12/2026 00:00. Fecha de entrega final: 24/01/2027 23:59. Cierre de envíos: 27/01/2027 23:59. Hora de Europe/Madrid. El temario permanece disponible para consulta después del cierre de los envíos.
 
 Primero lee [Empieza aquí](../AULES/01_EMPIEZA_AQUI_PM6.html). Usa [Entorno y fuentes](06_ENTORNO_Y_FUENTES_PM6.md) para abrir la carpeta correcta. Guarda un único [dossier de calidad](01_REGISTRO_CALIDAD_PM6.md); Q01–Q05 son sus apartados, no cinco entregas.
 
 | Bloque | Paso humano: lee, haz, comprueba y conserva | Min | Modalidad | Ventana |
 |---|---|---:|---|---|
 | A01 | **1. Arranca y conoce el fallo.** Prepara la copia del starter; `flutter pub get`, `flutter analyze --fatal-infos`, `flutter test`. Verde de humo = arranca, no lógica correcta. Conserva versión, comando y salida. | 30 | AUTONOMA | Inicio |
-| A02 | **2. Aprende a probar lo que importa.** Lee [teoría](../Unidad/02_CONTENIDOS_PM6.md) §§1–6 y el mapa de niveles; predice contador/error/orden. Escribe en Q01 qué conducta debe distinguir tu test. | 65 | AUTONOMA | Antes de E1 |
+| A02 | **2. Aprende a probar lo que importa.** Ejecuta el ejemplo pequeño de reservas (15 min dentro de este bloque), lee [teoría](../Unidad/02_CONTENIDOS_PM6.md) §§0–6 y el mapa de niveles; predice contador/error/orden. Escribe en Q01 qué conducta debe distinguir tu test. | 65 | AUTONOMA | Antes de E1 |
 | A03 | **3. Provoca el rojo esperado.** Sigue [ejemplos](../Unidad/03_EJEMPLOS_GUIADOS_PM6.md) E1–E2 y [entrenamiento](../Unidad/04_ENTRENAMIENTO_PM6.md) K1–K3. Ejecuta el caso aislado; conserva expected/actual. Si no compila, es rojo de entorno: [debugging](../Unidad/05_DEBUGGING_PM6.md). | 45 | AUTONOMA | Antes de T1 |
 | T1 | **4. Diseña con fakes.** Taller opcional o [misión desde casa](../Unidad/10_TALLERES_Y_EQUIVALENCIAS_PM6.md): fallo, aserción, corrección mínima y regresión. Cierra Q01 y un primer Q02. | 45 | COLECTIVA | 2027-01-12 |
 | A04 | **5. Corrige sin romper.** Completa [laboratorio](../Unidad/06_LABORATORIO_PM6.md) hitos de async, error/retry, dispose, identidad y retención; usa K4–K7. Repite host y registra en Q02 qué no demuestra. Incluye 10 min antes atribuidos a T1. | 80 | AUTONOMA | Después de T1 |

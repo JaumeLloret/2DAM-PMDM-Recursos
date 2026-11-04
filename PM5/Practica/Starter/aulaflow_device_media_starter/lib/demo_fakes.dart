@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'dart:typed_data';
 
 import 'device_ports.dart';
+import 'fixtures.dart';
 
 final class DemoPermissionPort implements PermissionPort {
   PermissionState next = PermissionState.denied;
@@ -45,10 +45,8 @@ final class DemoSensorPort implements SensorPort {
 
 final class DemoMediaPort implements MediaPort {
   @override
-  Future<DemoMedia> pickFixture() async => DemoMedia(
-    bytes: Uint8List.fromList(<int>[0x44, 0x45, 0x4d, 0x4f]),
-    mimeType: 'image/png',
-  );
+  Future<DemoMedia> pickFixture() async =>
+      DemoMedia(bytes: demoPng(), mimeType: 'image/png');
 
   @override
   Future<DemoMedia> convert(DemoMedia source) async {
@@ -56,4 +54,3 @@ final class DemoMediaPort implements MediaPort {
     return source;
   }
 }
-

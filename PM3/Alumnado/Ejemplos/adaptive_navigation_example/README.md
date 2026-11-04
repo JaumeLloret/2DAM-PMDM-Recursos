@@ -1,9 +1,10 @@
 # Adaptive navigation example
 
-Ejemplo mínimo de PM3: las mismas tres destinaciones se representan mediante
-`NavigationBar` en espacio compacto y `NavigationRail` cuando el contenedor
-dispone de 600 píxeles lógicos o más. El estado del contador es efímero y por
-eso vive localmente con `setState`.
+Ejemplo mínimo y ejecutable: los mismos tres destinos aparecen en una `NavigationBar` en espacio compacto y en una `NavigationRail` desde 600 píxeles lógicos. El contador es estado local porque solo importa a su pantalla.
+
+## Abrir y ejecutar
+
+Abre esta carpeta —la que contiene `pubspec.yaml`— en VS Code o Android Studio. Desde una terminal situada aquí:
 
 ```bash
 flutter create . --platforms=android --project-name adaptive_navigation_example
@@ -13,6 +14,14 @@ flutter test
 flutter run
 ```
 
-La frontera de 600 es una decisión del ejemplo basada en espacio disponible,
-no una clasificación universal de dispositivos.
+Estado esperado: tres destinos; bar por debajo de 600 px, rail desde 600 px y contador funcional.
 
+## Práctica breve
+
+1. Predice la navegación a 599 y 600 px.
+2. Ejecuta a 390 × 800 y 900 × 700.
+3. Cambia temporalmente el breakpoint a 720.
+4. Verifica que selección, iconos, etiquetas y orden coinciden.
+5. Explica qué anchura resulta más cómoda para estas etiquetas.
+
+La frontera de 600 es una decisión basada en espacio disponible, no una clasificación universal de dispositivos.

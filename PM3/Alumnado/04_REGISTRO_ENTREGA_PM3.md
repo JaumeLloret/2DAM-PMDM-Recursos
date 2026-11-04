@@ -1,36 +1,45 @@
-# Registro reproducible de entrega · PM3
+# PM3 · Registro reproducible de entrega
 
 | Campo | Valor |
 |---|---|
 | estudiante |  |
 | fecha/hora |  |
-| sistema |  |
+| sistema operativo |  |
+| editor |  |
 | `flutter --version` |  |
 | `dart --version` |  |
-| dispositivo/AVD/navegador |  |
+| destino utilizado |  |
 | tamaño compacto |  |
 | tamaño ancho |  |
-| commit/archivo entregado |  |
+| configuración de texto ampliado |  |
+| archivo/ZIP entregado |  |
 
-## Comandos y resultados
+## Comandos y resultados reales
 
-| Comando | Resultado | Evidencia breve |
+| Comando | Resultado | Primer mensaje relevante o evidencia |
 |---|---|---|
 | `flutter pub get` |  |  |
 | `flutter analyze` |  |  |
 | `flutter test` |  |  |
 | `flutter run` |  |  |
 
+## Comprobaciones manuales
+
+| Caso | Resultado observado | Corrección o límite |
+|---|---|---|
+| 390 px |  |  |
+| 900 px |  |  |
+| texto ampliado |  |  |
+| teclado/foco |  |  |
+| id inválido |  |  |
+| cancelar/confirmar |  |  |
+
 ## I3
 
-| Variación recibida | Predicción | Resultado | Estado docente |
-|---|---|---|---|
-|  |  |  | `OBSERVADA / PENDIENTE_EVIDENCIA / PENDIENTE_ENTORNO` |
+| Variación | Predicción previa | Cambio | Ejecución/resultado | Estado |
+|---|---|---|---|---|
+|  |  |  |  | `OBSERVADA / PENDIENTE_EVIDENCIA / PENDIENTE_ENTORNO` |
 
 ## Declaración
 
-Confirmo que puedo explicar las decisiones, que los datos son ficticios y que he
-declarado las ayudas utilizadas.
-
-Firma/validación: ____________________
-
+Puedo explicar mis decisiones, los datos son ficticios y he declarado las ayudas utilizadas y cómo comprobé sus propuestas.

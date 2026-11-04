@@ -37,4 +37,4 @@ Marca **observado**, **pendiente con cita solicitada** o **por corregir**. Una c
 - [ ] Eliminé cuentas, tokens, seriales, keystores, datos personales y logs crudos.
 - [ ] Separé lo observado de lo inferido y lo pendiente; conozco el límite de cada prueba.
 
-La recuperación **Museo Access Queue** es distinta y restringida si se asigna. La [ampliación](09_AMPLIACION_PM6.md) es opcional. El feedback y el plazo de entrega los confirma el docente; la prueba presencial práctica global sigue separada.
+La recuperación **Museo Access Queue** es distinta y restringida si se asigna. La [ampliación](09_AMPLIACION_PM6.md) es opcional. La entrega es el 24/01/2027 a las 23:59 y el cierre el 27/01/2027 a las 23:59; el feedback está previsto para el 28/01/2027; la prueba presencial práctica global sigue separada.

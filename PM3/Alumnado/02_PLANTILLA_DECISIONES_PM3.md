@@ -25,4 +25,3 @@ Confirma qué no has implementado y por qué no pertenece a RA2.b:
 - [ ] testing/CI como contenido;
 - [ ] SDD/agentes;
 - [ ] contrato/AulaTokens de PI II.
-

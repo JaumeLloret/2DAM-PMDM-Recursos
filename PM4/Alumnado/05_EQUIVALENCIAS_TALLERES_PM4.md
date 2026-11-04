@@ -1,43 +1,39 @@
-# Equivalencias de talleres · PM4
+# PM4 · Hoja de misiones autónomas equivalentes
 
-Estas actividades sustituyen el taller correspondiente cuando no puedes asistir. **No debes hacer taller presencial y equivalencia a la vez**: ambas ocupan los mismos 55 min ya incluidos en las 840 min de PM4.
+Esta hoja permite completar fuera del aula la misma finalidad, los mismos 45 minutos efectivos (55 nominales en la franja presencial, con 10 de margen) y la misma clase de evidencia que cada taller opcional. Elige taller o misión autónoma; no hagas ambos.
 
-## Taller 1 · 27/10 · HTTP, errores y arranque
+La misión autónoma sustituye al taller y no se suma. Los 10 min de cada bloque se redistribuyen en las fases 5, 9 y 10 de la Ruta (105, 130 y 70 min).
 
-Reproduce durante 55 min el mismo objetivo del taller presencial:
+## Misión 1 · 03/11 · red, errores y arranque
 
-1. arranca la API didáctica y comprueba `/health`;
-2. ejecuta una petición normal y registra método, URI, código y duración sin mostrar `Authorization`;
-3. reproduce los escenarios `invalid-json` y `slow`;
-4. clasifica cada fallo como transporte, protocolo, formato o timeout y señala la capa responsable;
-5. arranca el starter contra la API local con la URL adecuada a tu entorno;
-6. entrega un checkpoint breve: **fallo → capa → prueba → siguiente acción**.
+1. Arranca la API y comprueba `/health`.
+2. Reproduce normal, `invalid-json` y `slow`.
+3. Registra método, URI saneada, código, duración y estado.
+4. Escribe dos hipótesis para un fallo.
+5. Ejecuta una prueba mínima, aplica un cambio y comprueba una regresión.
 
-Como evidencia puedes usar una grabación breve o capturas acompañadas del registro técnico saneado. Las capturas solas no sustituyen la explicación.
+**Entrega:** `síntoma → capa → hipótesis → prueba → cambio/resultado`. No incluyas `Authorization`.
 
-## Taller 2 · 03/11 · sesión, persistencia y Repository
+## Misión 2 · 10/11 · sesión, persistencia y Repository
 
-Durante 55 min:
+1. Clasifica token, preferencia, cache y contraseña.
+2. Demuestra una preferencia con nueva instancia.
+3. Carga datos, detén la API y observa fallback con `stale`.
+4. Provoca 401 y confirma que se borra sesión.
+5. Explica remote-first y cuándo no se usa cache.
 
-1. reproduce login y una respuesta 401 sin registrar credenciales ni token;
-2. clasifica token, preferencia y cache como sensibles/no sensibles y asigna el almacén adecuado;
-3. demuestra que una preferencia no sensible puede recuperarse tras re-instanciar la capa local;
-4. explica con un ejemplo la política **remote-first con fallback a cache**;
-5. registra qué debe ocurrir con sesión y cache ante 401.
+**Entrega:** matriz dato/almacén/motivo + re-instanciación + flujo normal/fallback/401.
 
-Entrega el registro técnico y una explicación breve de la política remoto/local. No hace falta programar backend ni añadir un almacén distinto al del laboratorio.
+## Misión 3 · 17/11 · I3 individual
 
-## Taller 3 · 10/11 · autenticidad individual
+La variante exacta no se publica aquí. Se asigna por AULES con la misma ventana que en el taller:
 
-La equivalencia de I3 **no publica la variante concreta**. Si faltas al taller, el docente te asignará una variante equivalente por el canal acordado. Dispondrás de:
+- 23 min de microcambio sin agente;
+- 12 min de ejecución/depuración;
+- 7 min de explicación;
+- 3 min de registro; la revisión final está en la fase 10 de la Ruta.
 
-- 23 min de microcambio individual sin agente;
-- hasta 15 min de ejecución/depuración;
-- hasta 10 min de explicación focalizada y cierre;
-- 2 min de registro final.
+**Entrega:** predicción previa, diff mínimo, comando/salida, regresión y explicación de la capa. Si el entorno bloquea, registra `PENDIENTE_ENTORNO`; no fabriques la ejecución.
 
-Si el entorno impide verificar la ejecución, se registra `PENDIENTE_ENTORNO`. Si falta evidencia auténtica, `PENDIENTE_EVIDENCIA`. No se da una evidencia por observada sin comprobación.
+Usa solo datos `DEMO-*`. Nunca entregues credenciales reales, token completo, `Authorization`, `.env`, IP pública ni datos personales.
 
-## Seguridad
-
-Usa solo datos `DEMO-*`. No entregues contraseñas reales, tokens completos, IP pública, secretos ni logs con `Authorization`. HTTP local es únicamente el carril reproducible del laboratorio; no sustituye la comprobación HTTPS controlada de la unidad.

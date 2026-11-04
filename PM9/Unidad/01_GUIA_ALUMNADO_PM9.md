@@ -2,11 +2,11 @@
 
 Vas a construir y explicar tu propio juego 3D para móvil en **720 min = 540 de A01–A11 + 45 de M4 + 135 de T1–T3**. En el Starter puedes iniciar y mover al personaje, pero solo existe CellA y faltan CellB/CellC, reglas completas y audio de varios eventos. No copies la solución. Empieza en la [Ruta y primeros 20 minutos](../Alumnado/00_RUTA_PM9.md); usa [Godot 4.7.2 Standard/GDScript/Compatibility](../Alumnado/02_ENTORNO_ANDROID_Y_QA_PM9.md). Guarda un único [dossier G01–G08](../Alumnado/01_DOSSIER_G01_G08_PM9.md) con tus versiones y observaciones.
 
-**Fechas:** apertura, entrega objetivo y cierre/cutoff PENDIENTE_CONFIRMACION_DOCENTE en la portada, Ruta y sección/tarea AULES antes de publicar. Los martes 16/02, 23/02 y 02/03/2027 son talleres opcionales, no entregas. En cada T eliges presencial o misión desde casa de 45 min. M4 es autónoma. Si cursas todo desde casa, los 720 min son autónomos. Los cortes parciales son feedback; la entrega calificada es una sola.
+**Fechas:** apertura 09/02/2027 00:00; entrega 07/03/2027 23:59; cierre de envíos 10/03/2027 23:59 (Europe/Madrid). Los martes 16/02, 23/02 y 02/03/2027 son talleres opcionales, no entregas. En cada T eliges presencial o misión desde casa de 45 min. M4 es autónoma. Si cursas todo desde casa, los 720 min son autónomos. Los cortes parciales son feedback; la entrega calificada es una sola.
 
 ## A01 · 35 min · Arranque y diagnóstico
 
-**Propósito:** abrir una fuente completa y distinguir lo visto de lo que falta. **Recurso:** [Ruta §primer paso](../Alumnado/00_RUTA_PM9.md), [entorno](../Alumnado/02_ENTORNO_ANDROID_Y_QA_PM9.md), ZIP «Balizas del muelle · Starter completo» de AULES. **Haz:** descomprime, conserva copia intacta, importa project.godot, comprueba 4.7.2/Compatibility, pulsa F5, Iniciar y mueve con teclado. Los primeros 20 min deben alcanzar una primera observación o un bloqueo preciso. **Resultado/evidencia:** G01/G02 indica versión, escena, CellA, control, contador y modo OBSERVADO_EDITOR o PENDIENTE_ENTORNO. **Rescate:** si faltan carpetas descarga otra vez; si falla importación guarda error y solicita equipo/cita. Los 10 min adicionales respecto del histórico financian importación y diagnóstico.
+**Propósito:** abrir una fuente completa y distinguir lo visto de lo que falta. **Recurso:** [Ruta §primer paso](../Alumnado/00_RUTA_PM9.md), [entorno](../Alumnado/02_ENTORNO_ANDROID_Y_QA_PM9.md), ZIP «PM9_STARTER.zip» de AULES. **Haz:** descomprime, conserva copia intacta, importa project.godot, comprueba 4.7.2/Compatibility, pulsa F5, Iniciar y mueve con teclado. Los primeros 20 min deben alcanzar una primera observación o un bloqueo preciso. **Resultado/evidencia:** G01/G02 indica versión, escena, CellA, control, contador y modo OBSERVADO_EDITOR o PENDIENTE_ENTORNO. **Rescate:** si faltan carpetas descarga otra vez; si falla importación guarda error y solicita equipo/cita. 
 
 ## A02 · 45 min · Diseño y mapa de responsabilidades
 
@@ -62,6 +62,7 @@ Vas a construir y explicar tu propio juego 3D para móvil en **720 min = 540 de 
 
 ## A11 · 20 min · Entrega única
 
-**Propósito:** permitir una revisión auténtica y reproducible. **Recurso:** [plantilla G01–G08](../Alumnado/01_DOSSIER_G01_G08_PM9.md) y tarea AULES «PM9 · Juego y dossier final». **Haz:** revisa G01–G08, enlaces/licencias, corte final, pendientes y acceso al proyecto; entrega una vez por el canal indicado y conserva justificante. **Resultado/evidencia:** una tarea calificada con fuente propia y un dossier, feedback por CE. **Rescate:** si no puedes subir un archivo, informa antes del cutoff confirmado y conserva el error; no uses un ZIP de solución.
+**Propósito:** permitir una revisión auténtica y reproducible. **Recurso:** [plantilla G01–G08](../Alumnado/01_DOSSIER_G01_G08_PM9.md) y tarea AULES «Entrega tu producto y el dossier único». **Haz:** revisa G01–G08, enlaces/licencias, corte final, pendientes y acceso al proyecto; entrega una vez por el canal indicado y conserva justificante. **Resultado/evidencia:** una tarea calificada con fuente propia y un dossier, feedback por CE. **Rescate:** si no puedes subir un archivo, informa antes del cutoff confirmado y conserva el error; no uses un ZIP de solución.
 
 La evaluación mantiene RA5 con 20 % global, todos los RA ≥5 y la prueba práctica presencial global ≥5 separada del I3 local. No se inventan porcentajes para APK, juego, tests, capturas o dossier. Clasificador orbital es un carril restringido, solo por asignación; su enlace aparece únicamente al alumnado asignado.
+

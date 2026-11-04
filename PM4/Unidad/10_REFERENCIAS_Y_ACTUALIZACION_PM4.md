@@ -25,3 +25,6 @@ La API local HTTP existe para reproducibilidad. Si la política Android impide c
 
 Android 17/API 37 introduce permiso runtime de red local para apps que apunten a 37 o superior. El baseline actual de PM4 no obliga a incorporarlo. Si el target cambia antes de clase, se coordina como contingencia técnica/prepublicación y con la propiedad curricular de PM5, en lugar de introducir silenciosamente `permission_handler` en PM4.
 
+## Prepublicación
+
+Reconfirmar stable y dependencias, toolchain Android, `minSdk`/`compileSdk`/`targetSdk`, permiso INTERNET, política debug de HTTP local, posible permiso de red local si targetSdk llega a 37, URL HTTPS válida, secure storage en AVD/dispositivo, restauración real, accesibilidad, XML Moodle y vista estudiante. Un cambio de versión obliga a repetir análisis/tests/build y actualizar esta tabla.

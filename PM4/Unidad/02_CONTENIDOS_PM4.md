@@ -10,6 +10,17 @@ El recorrido de referencia es:
 
 La View representa estado y eventos. El ViewModel coordina la interacción. El Repository decide la fuente y la política. RemoteService conoce HTTP/JSON. LocalStore conoce persistencia. Si un widget construye headers, decodifica JSON y escribe claves locales, las responsabilidades vuelven a mezclarse.
 
+## Cómo estudiar este recurso
+
+No intentes memorizar la arquitectura completa. Recorre cuatro problemas en orden:
+
+1. **conversación HTTP**: qué se pide y qué responde;
+2. **contrato externo**: cómo se convierte JSON en tipos controlados;
+3. **sesión y persistencia**: qué dato sobrevive y dónde;
+4. **política remoto/local**: qué muestra la app cuando falla una fuente.
+
+En cada parada ejecuta el escenario, observa una salida, toma una decisión y conserva una explicación breve. Si todavía no puedes mostrar el comportamiento, no declares el checkpoint como superado.
+
 ## 2. Anatomía de una petición
 
 Una URI como `https://api.example.org/tasks/DEMO-1?include=owner` contiene esquema (`https`), host, ruta y query. El puerto suele derivarse del esquema. DNS traduce nombres a direcciones; basta saber que también puede fallar.
@@ -66,24 +77,34 @@ GET /tasks
 Authorization: Bearer DEMO-TOKEN
 
 200 application/json
-{"items":[{"id":"DEMO-1","title":"Revisar contraste","completed":false}]}
+{"items":[{"id":"DEMO-1","title":"Revisar contraste","status":"doing","note":null}]}
 ```
 
-Preguntas obligatorias: ¿qué campos son requeridos?, ¿cuáles opcionales?, ¿qué códigos existen?, ¿puede venir una lista vacía?, ¿hay body en 204?, ¿qué cambia de forma compatible? Añadir un campo opcional suele ser compatible; renombrar `id` o cambiar `completed` de booleano a texto puede romper clientes.
+Preguntas obligatorias: ¿qué campos son requeridos?, ¿cuáles opcionales?, ¿qué códigos existen?, ¿puede venir una lista vacía?, ¿hay body en 204?, ¿qué cambia de forma compatible? En esta API `id`, `title` y `status` son cadenas; `note` puede faltar o ser null. Añadir un campo opcional suele ser compatible; renombrar `id` o cambiar el tipo de `status` puede romper clientes. Los casos con `completed` booleano de algunas katas son contratos pequeños para comparar, no el contrato de esta API.
+
+### Parada 1 · petición, respuesta y seguridad del canal
+
+- **Problema:** un mismo «no funciona» puede ser transporte, 401, 404, 500 o JSON inválido.
+- **Acción:** ejecuta E1–E5 y completa K1–K5.
+- **Resultado esperado:** clasificas cada escenario por código, body y capa sin mostrar secretos.
+- **Checkpoint:** explicas por qué HTTP local es una excepción reproducible y no una prueba de HTTPS.
+- **Rescate:** si `/health` falla, vuelve a proceso/puerto; no depures todavía el cliente.
 
 ## 6. JSON, DTO y dominio
 
 `jsonDecode` devuelve estructuras dinámicas. El DTO convierte el contrato externo en tipos controlados. El dominio representa lo que la app necesita. Separarlos aporta valor cuando nombres, opcionalidad o estados externos no coinciden.
 
 ```dart
-factory TaskDto.fromJson(Map<String, Object?> json) => switch (json) {
-  {'id': String id, 'title': String title, 'completed': bool done} =>
-    TaskDto(id: id, title: title, completed: done),
-  _ => throw const FormatException('Contrato Task inválido'),
-};
+final dto = TaskDto.fromJson({
+  'id': 'DEMO-1', 'title': 'Revisar contraste',
+  'status': 'doing', 'note': null,
+});
+final task = dto.toDomain(); // task.status == TaskStatus.doing
 ```
 
 Después, `toDomain()` puede normalizar un estado desconocido, descartar un campo de transporte o construir una invariante. Si DTO y dominio son idénticos en un ejemplo diminuto, una sola clase puede ser honesta; no crees capas por ceremonia. En el laboratorio se separan porque la API expresa `status` como texto y el dominio usa un enum con `unknown`.
+
+La clase completa está en `lib/datos.dart` del ejemplo público. Abre su test de DTO: prueba `note` ausente, `note: null`, un `note` numérico, `id` ausente y un estado futuro. Deben producir resultados diferentes: los dos primeros son válidos, el número y el id ausente rompen el contrato, y el estado futuro se convierte en `unknown`.
 
 ## 7. RemoteService/API client
 
@@ -99,6 +120,8 @@ El Service recibe una `http.Client` por constructor. Eso reutiliza conexiones, p
 
 No devuelve `dynamic` a capas superiores. Tampoco decide cache-first o muestra diálogos: esas decisiones pertenecen a Repository y View.
 
+Para verlo ejecutarse, abre `DemoService.tasks` en `lib/datos.dart` del ejemplo. Busca en orden: `baseUrl.replace`, Bearer, `_send(...).timeout`, `_check`, `jsonDecode`, `TaskDto.fromJson` y `toDomain`. Ejecuta `flutter test test/datos_test.dart`. El test inyecta un cliente HTTP controlado: puedes comprobar la URI y el comportamiento de cada respuesta sin depender de Internet. Después los botones de la app usan la API local real.
+
 ## 8. Taxonomía de fallos
 
 - transporte: DNS, conexión, socket o cliente;
@@ -111,6 +134,14 @@ No devuelve `dynamic` a capas superiores. Tampoco decide cache-first o muestra d
 Un `catch (e) { mensaje='Algo salió mal'; }` pierde información. Tampoco filtres `e.toString()` directamente a UI. Convierte a tipos como `TimeoutFailure`, `UnauthorizedFailure` o `FormatFailure`; el ViewModel los traduce a estado y mensaje.
 
 `Future.timeout` hace que el Future devuelto termine por timeout, pero la operación fuente puede seguir completándose después. Para este laboratorio basta evitar que el ViewModel espere indefinidamente; cancelación real es ampliación.
+
+### Parada 2 · contrato externo controlado
+
+- **Problema:** un 200 puede contener JSON roto o un DTO incompatible.
+- **Acción:** ejecuta E6–E7 y K6–K8.
+- **Resultado esperado:** RemoteService devuelve dominio o un fallo estable, nunca `dynamic` ni stack trace a UI.
+- **Checkpoint:** dibuja `bytes → JSON → DTO → dominio` y señala dónde se valida cada paso.
+- **Rescate:** reduce el caso a un único objeto y una única condición de formato.
 
 ## 9. Autenticación y sesión
 
@@ -141,6 +172,19 @@ Clasifica antes de elegir:
 
 `shared_preferences` no garantiza persistencia crítica y admite tipos simples. No es una base de datos. Una cache grande, búsquedas estructuradas o integridad transaccional requieren otro almacén; eso queda en ampliación/Acceso a Datos.
 
+### Del mecanismo al código
+
+En `lib/almacenes.dart` del ejemplo, `PreferenceStrings` usa `getString`, `setString` y `remove`; `SecureStrings` usa `read`, `write` y `delete`. `ShowCompletedPreference` y `TokenSession` añaden claves distintas y traducen un fallo del complemento a `PersistenceFailure`. La contraseña no se pasa a esas clases.
+
+El ejemplo ya declara los complementos. Cuando llegues al hito de persistencia del starter, conserva `http` y añade a su bloque `dependencies`:
+
+```yaml
+flutter_secure_storage: 10.3.1
+shared_preferences: ^2.5.5
+```
+
+Ejecuta `flutter pub get` y reinicia la app para registrar los complementos. No añadas un segundo bloque `dependencies` ni actualices el SDK. Una preferencia se prueba con otra instancia sobre el mismo backend y después cerrando/abriendo la app. Una prueba de memoria no demuestra por sí sola persistencia real: registra ambos resultados por separado.
+
 ## 11. Repository remoto/local
 
 El Repository es la fuente para el ViewModel. En remote-first:
@@ -153,6 +197,14 @@ El Repository es la fuente para el ViewModel. En remote-first:
 Cache-first muestra cache primero y refresca después. Mejora tiempo percibido, pero puede presentar datos antiguos. Offline-first y sincronización de conflictos requieren más reglas; no se inventan aquí.
 
 La política se justifica por necesidad. Para tareas demo elegimos remote-first con fallback, porque el estado remoto es pequeño y la actualidad importa.
+
+### Parada 3 · decidir qué sobrevive y qué fuente manda
+
+- **Problema:** token, preferencia y cache parecen «datos locales», pero no tienen la misma sensibilidad ni la misma política.
+- **Acción:** ejecuta E8–E10 y K9–K13.
+- **Resultado esperado:** token en almacenamiento seguro; preferencia/cache no sensible en LocalStore; contraseña en ninguno.
+- **Checkpoint:** re-instancias los stores, provocas 401 y un fallo recuperable, y explicas por qué la cache solo aparece con `stale=true`.
+- **Rescate:** prueba cada store aislado antes de conectarlo al Repository.
 
 ## 12. Estados de ViewModel
 
@@ -188,3 +240,14 @@ flutter run --dart-define=API_BASE_URL=http://10.0.2.2:8080
 
 Para cada flujo responde: contrato, código esperado, fallo posible, capa responsable, dato persistido, sensibilidad, estado de UI, retry, prueba reproducible y criterio de borrado. Si puedes explicarlo y cambiarlo, estás trabajando RA2.e/f; si solo «funciona en mi móvil», falta evidencia.
 
+## Parada final antes del laboratorio
+
+Puedes avanzar cuando:
+
+- `/health`, login y una petición protegida son reproducibles;
+- distingues vacío, 401, 404, 500, timeout y formato;
+- puedes narrar `View → ViewModel → Repository → RemoteService + LocalStore`;
+- sabes por qué una contraseña no se persiste y un 401 no se esconde tras cache;
+- has completado una reparación con síntoma, hipótesis, cambio mínimo y regresión.
+
+Si una condición falla, utiliza **Debugging PM4** o **Ayuda PM4** y conserva el bloqueo exacto.

@@ -1,161 +1,227 @@
-# Contenidos PM2 · Dart moderno con propósito
+# PM2 · Dart para modelar un problema
 
-Este texto es suficiente para realizar los ejemplos, katas y laboratorio sin una explicación presencial completa. Los enlaces oficiales y la fecha de contraste están en [09_REFERENCIAS_Y_ACTUALIZACION_PM2.md](09_REFERENCIAS_Y_ACTUALIZACION_PM2.md).
+## El problema que vamos a resolver
 
-## 1. Modelo mental: tipos antes que recetas
-
-Dart usa tipado estático: cada expresión tiene un tipo que las herramientas pueden razonar antes de ejecutar. La inferencia evita repetir el tipo cuando el valor inicial ya lo deja claro.
+Un prototipo suele empezar con datos fáciles de escribir:
 
 ```dart
-var title = 'Revisar starter';       // String
-final attempts = <int>[1, 2];        // List<int>
-Object visible = title;               // acepta cualquier objeto no nulo
-Object? maybeVisible;                 // acepta objeto o null
+final card = <String, dynamic>{
+  'id': 'C-1',
+  'title': 'Dart',
+  'priority': 'HIGH',
+  'owner': null,
+};
 ```
 
-Un programa Dart puede ejecutarse con compilación JIT durante desarrollo y compilarse AOT para distribución. Para PM2 importa la consecuencia práctica: analyzer y compilador detectan muchos contratos rotos antes de que el flujo llegue al usuario.
+Funciona, pero no responde preguntas importantes:
 
-### `Object`, `Object?`, `dynamic`, `Never` y `void`
+- ¿puede faltar `title`?;
+- ¿`priority` admite `HGIH` por error?;
+- ¿qué tipo tiene `owner`?;
+- ¿quién impide un título vacío?;
+- ¿qué ocurre si otra parte modifica el map?
 
-| Tipo | Lectura útil en PM2 |
-|---|---|
-| `Object` | algún valor no nulo; solo permite operaciones comunes a todos los objetos |
-| `Object?` | algún valor, incluido `null`; obliga a comprobar antes de usar |
-| `dynamic` | desactiva gran parte de la comprobación estática en esa expresión; desplaza fallos a runtime |
-| `Never` | una expresión que no termina normalmente, por ejemplo una función que siempre lanza |
-| `void` | el llamador no usa un valor de retorno |
+En PM2 aprenderás sintaxis Dart para resolver esas preguntas. La meta no es memorizar el lenguaje: es conseguir que el código haga visible el contrato del problema.
+
+Trabaja con el paquete `dart_moderno_examples`. Antes de cada cambio, predice la salida; después ejecútalo y explica la diferencia.
+
+## 1. Tipos: acercar el error a su causa
+
+Dart usa tipado estático. Cada expresión tiene un tipo que el analyzer puede comprobar antes de ejecutar.
+
+```dart
+var title = 'Revisar starter'; // Dart infiere String
+final attempts = <int>[1, 2];  // List<int>
+```
+
+`var` no significa «cualquier cosa». El tipo se infiere una vez:
+
+```dart
+var title = 'Dart';
+// title = 3; // error: int no se puede asignar a String
+```
+
+### `Object`, `Object?` y `dynamic`
+
+```dart
+Object visible = 'texto';  // cualquier objeto no nulo
+Object? maybeVisible;      // también admite null
+dynamic unchecked = {'points': 'five'};
+```
+
+- `Object` conserva comprobación estática, pero solo permite operaciones comunes.
+- `Object?` obliga a tratar la posible ausencia.
+- `dynamic` desactiva comprobaciones en esa expresión y puede desplazar el fallo a ejecución.
+
+Ejemplo débil:
+
+```dart
+dynamic points = 'five';
+print(points.isEven);
+```
+
+Puede compilar la llamada y fallar al ejecutarse. Con un tipo real, el error aparece donde nace:
+
+```dart
+final int points = 5;
+print(points.isEven);
+```
+
+Salida:
+
+```text
+false
+```
+
+### `void` y `Never`
+
+`void` indica que el llamador no usa un resultado. `Never` describe una función que no termina normalmente:
 
 ```dart
 Never invalid(String message) => throw ArgumentError(message);
 
 void show(Object? value) {
   if (value is String) {
-    print(value.toUpperCase()); // promoción a String
+    print(value.toUpperCase());
   }
 }
 ```
 
-`dynamic` tiene usos de frontera en código legado o datos no tipados, pero no es una salida rápida:
+La comprobación `value is String` permite que Dart lo trate como `String` dentro del bloque.
 
-```dart
-dynamic weak = {'points': 'five'};
-// Compila la llamada; puede fallar en ejecución.
-print(weak['points'].isEven);
-```
+### Acción
 
-Con tipo explícito el error aparece cerca del origen:
+1. Predice el resultado de `show('dart')` y `show(null)`.
+2. Ejecuta ambos casos.
+3. Cambia el parámetro a `dynamic` y explica qué protección has perdido.
 
-```dart
-final Map<String, int> points = {'team': 5};
-print(points['team']?.isEven); // bool?
-```
+### Checkpoint
 
-### Analyzer, compilación y runtime
+Puedes explicar por qué sustituir un error por `dynamic` no lo resuelve: solo lo retrasa.
 
-- El analyzer avisa de tipos incompatibles, código muerto y reglas de lint.
-- Un error de compilación impide producir el programa.
-- Un error de runtime aparece al recorrer una rama válida en tipos pero inválida por datos o estado, como un `ArgumentError`.
+### Error frecuente
 
-El objetivo no es «cero excepciones», sino colocar el fallo en la frontera que puede explicarlo mejor.
+**Síntoma:** el analyzer marca una incompatibilidad y cambias el tipo a `dynamic`.  
+**Comprueba:** cuál es el tipo real de entrada y qué operaciones necesitas.  
+**Actúa:** corrige el contrato o valida en la frontera; no apagues el analyzer.
 
-## 2. Variables, referencias e inmutabilidad
+## 2. `final`, `const` y mutabilidad
 
-### `var` o tipo explícito
-
-Usa `var` cuando la derecha revela el tipo:
-
-```dart
-var owner = 'Ada';
-final cards = <String>['A-01', 'A-02'];
-```
-
-Usa tipo explícito cuando comunica una abstracción o evita una inferencia demasiado concreta:
-
-```dart
-Iterable<String> visibleCards = cards.where((id) => id.startsWith('A'));
-num estimate = 3;
-```
-
-### `final` no vuelve inmutable al objeto
+`final` fija una referencia después de asignarla, pero el objeto apuntado puede seguir siendo mutable:
 
 ```dart
 final labels = <String>['dart'];
-labels.add('modelado'); // permitido
-// labels = [];         // no permitido: la referencia es final
+labels.add('modelado');
+print(labels);
 ```
 
-Una referencia `final` se asigna una vez. La lista sigue siendo mutable. Para no exponerla:
+Salida:
+
+```text
+[dart, modelado]
+```
+
+Esta línea no compilaría:
+
+```dart
+// labels = <String>[];
+```
+
+### Colección no modificable
+
+```dart
+final safeLabels = List.unmodifiable(labels);
+```
+
+Intentar `safeLabels.add('otro')` produce un error en ejecución. Si una clase no debe exponer su lista interna:
 
 ```dart
 class Column {
+  Column(Iterable<String> ids) : _cardIds = List.of(ids);
+
   final List<String> _cardIds;
 
-  Column(Iterable<String> ids) : _cardIds = List.unmodifiable(ids);
-
-  List<String> get cardIds => _cardIds;
+  List<String> get cardIds => List.unmodifiable(_cardIds);
 }
-```
-
-`List.unmodifiable` hace una copia/vista no modificable del contenido recibido. Si quieres una nueva versión:
-
-```dart
-Column addCard(Column current, String id) =>
-    Column([...current.cardIds, id]);
 ```
 
 ### `const`
 
-`const` crea un valor conocido en tiempo de compilación:
+`const` crea un valor conocido en compilación:
 
 ```dart
 const timeout = Duration(seconds: 2);
-const allowed = {'todo', 'doing', 'done'};
+const allowedStates = {'todo', 'doing', 'done'};
 ```
 
-No uses `const` como decoración. Si el valor llega al ejecutar, usa `final`:
+Un valor calculado al ejecutar usa `final`:
 
 ```dart
 final startedAt = DateTime.now();
 ```
 
-Preferir inmutabilidad reduce estados intermedios, alias inesperados y necesidad de defensas; una colección mutable encapsulada puede ser correcta si el comportamiento necesita cambiarla.
+### Acción
 
-## 3. Null safety: representar ausencia
+1. Ejecuta una lista `final` y añade un elemento.
+2. Crea una vista `List.unmodifiable`.
+3. Predice el error de `add` sobre esa vista antes de provocarlo en una copia de prueba.
 
-`String` excluye `null`; `String?` lo admite.
+### Checkpoint
+
+Distingues estas dos afirmaciones:
+
+- «no puedo reasignar la variable»;
+- «nadie puede modificar el objeto».
+
+### Error frecuente
+
+**Síntoma:** una regla se rompe desde fuera mediante un getter.  
+**Comprueba:** si el getter devuelve la lista interna.  
+**Actúa:** devuelve una vista/copia no modificable o una nueva versión del objeto.
+
+## 3. Null safety: representar una ausencia legítima
+
+`String` no admite `null`; `String?` sí:
 
 ```dart
-String owner = 'Lin';
+String owner = 'Ada';
 String? reviewer;
 ```
+
+La pregunta de diseño es: ¿la ausencia tiene sentido en el dominio? Una tarjeta puede estar sin responsable; su `id` no debería faltar.
 
 ### Promoción
 
 ```dart
-String label(String? owner) {
-  if (owner == null) return 'Sin responsable';
-  return owner.toUpperCase(); // promovido a String
+String ownerLabel(String? owner) {
+  final normalized = owner?.trim();
+  if (normalized == null || normalized.isEmpty) {
+    return 'SIN RESPONSABLE';
+  }
+  return normalized.toUpperCase();
 }
 ```
 
-### Operadores esenciales
+Después de la comprobación, Dart sabe que `normalized` es `String`.
+
+### Operadores útiles
 
 ```dart
 final display = reviewer?.trim().toUpperCase() ?? 'SIN REVISOR';
 reviewer ??= 'Pendiente';
 ```
 
-- `?.` llama solo si no es nulo.
-- `??` aporta alternativa si la izquierda es nula.
-- `??=` asigna solo si aún es nulo.
+- `?.` llama solo si el valor no es nulo.
+- `??` aporta una alternativa.
+- `??=` asigna solo cuando todavía es nulo.
 
-### El peligro de `!`
+### Por qué `!` no valida
 
 ```dart
 String shout(String? text) => text!.toUpperCase();
 ```
 
-`!` no valida: promete al compilador que tú garantizas un valor. Si la promesa es falsa, falla en runtime. Sustituye la promesa por un contrato:
+`!` promete al compilador que el valor no será nulo. Si la promesa es falsa, el programa falla. Es más seguro validar:
 
 ```dart
 String shout(String? text) {
@@ -169,41 +235,54 @@ String shout(String? text) {
 
 ### `late`
 
-`late` aplaza la inicialización y traslada parte de la responsabilidad a runtime:
+`late` aplaza la inicialización y mueve parte del riesgo a ejecución:
 
 ```dart
 late final String sessionId;
 ```
 
-Úsalo solo si el ciclo de vida garantiza que se asignará antes de leer. En modelos pequeños, un constructor completo suele ser más seguro.
+Úsalo solo si el ciclo de vida garantiza la asignación antes de leer. En los modelos pequeños de PM2 suele ser mejor un constructor completo.
 
-### Parámetros opcionales
+### Acción
 
-```dart
-String cardLabel({
-  required String title,
-  String? owner,
-  String prefix = 'CARD',
-}) => '$prefix · $title · ${owner ?? 'sin responsable'}';
+Trabaja K1. Prueba `null`, una cadena de espacios y `'  Ada'`.
+
+Salida esperada:
+
+```text
+?
+?
+A
 ```
 
-Un parámetro nombrado opcional es anulable o tiene valor por defecto. `required` obliga al llamador sin convertirlo en posicional.
+### Checkpoint
+
+Puedes señalar qué campos de una tarjeta admiten ausencia y cuáles deben validarse al construir.
+
+### Error frecuente
+
+**Síntoma:** `Null check operator used on a null value`.  
+**Comprueba:** dónde aparece `!` y qué entrada real llegó.  
+**Actúa:** promoción, validación o alternativa explícita; no añadas otro `!`.
 
 ## 4. Funciones que expresan intención
+
+Una función breve puede usar `=>`:
 
 ```dart
 int remaining({required int capacity, required int used}) =>
     capacity - used;
 ```
 
-Usa `=>` cuando la función es una expresión clara. Si necesita validación o varios pasos, usa bloque.
-
-### Posicionales y nombrados
+Los parámetros nombrados hacen legible la llamada:
 
 ```dart
-String truncate(String text, [int max = 20]) =>
-    text.length <= max ? text : '${text.substring(0, max)}…';
+remaining(capacity: 5, used: 2);
+```
 
+Para valores opcionales, usa nulabilidad o valor por defecto:
+
+```dart
 bool canMove({
   required int currentSize,
   required int capacity,
@@ -213,9 +292,7 @@ bool canMove({
 }
 ```
 
-Los posicionales convienen para argumentos obvios y breves. Los nombrados evitan llamadas opacas como `move(3, 4, true)`.
-
-### Funciones como valores y closures
+### Funciones como valores
 
 ```dart
 typedef CardRule = bool Function(String title);
@@ -224,19 +301,42 @@ List<String> accepted(
   Iterable<String> titles, {
   required CardRule rule,
 }) => titles.where(rule).toList(growable: false);
+```
 
+Uso:
+
+```dart
 final minLength = 4;
 final result = accepted(
   ['UI', 'Dart', 'Modelado'],
   rule: (title) => title.length >= minLength,
 );
+print(result);
 ```
 
-La función anónima captura `minLength`: es una closure. No extraigas una función si el nuevo nombre no aclara intención o si obliga a saltar de archivo sin beneficio.
+Salida:
 
-## 5. Colecciones tipadas y legibles
+```text
+[Dart, Modelado]
+```
 
-### `List`, `Set`, `Map`
+La función anónima captura `minLength`: es una closure.
+
+### Acción
+
+Trabaja K3. Compara `canEnter(3, 4, true)` con una llamada que nombre sus argumentos.
+
+### Checkpoint
+
+Otra persona puede leer la llamada sin memorizar el orden de tres valores.
+
+### Error frecuente
+
+**Síntoma:** una llamada como `move(3, 4, true)` no se entiende.  
+**Comprueba:** si los argumentos representan reglas distintas.  
+**Actúa:** usa parámetros nombrados; no añadas comentarios a cada llamada.
+
+## 5. Colecciones: elegir por la regla
 
 ```dart
 final ordered = <String>['todo', 'doing', 'done'];
@@ -248,34 +348,28 @@ final capacityByColumn = <String, int>{
 ```
 
 - `List`: orden y posibles duplicados.
-- `Set`: pertenencia/elementos únicos.
-- `Map`: clave → valor.
+- `Set`: pertenencia sin duplicados.
+- `Map`: asociación clave → valor.
 
-### Iterar o transformar
+### Transformaciones legibles
 
 ```dart
-final longTitles = titles
-    .where((title) => title.length >= 5)
+final result = titles
+    .map((title) => title.trim())
+    .where((title) => title.length >= 4)
     .map((title) => title.toUpperCase())
     .toList(growable: false);
 ```
 
-Una cadena corta y nombrable es legible. Si encadenas cinco operaciones y cuesta depurar, divide:
+Si una cadena cuesta narrarla, divide los pasos:
 
 ```dart
-final visible = titles.where((title) => title.isNotEmpty);
+final visible = titles.where((title) => title.trim().isNotEmpty);
 final normalized = visible.map((title) => title.trim());
 final result = normalized.toList(growable: false);
 ```
 
-`fold` acumula, pero un bucle puede ser más claro:
-
-```dart
-var total = 0;
-for (final estimate in estimates) {
-  total += estimate;
-}
-```
+Un bucle también puede ser la opción más clara. No se premia usar más métodos.
 
 ### Spreads y collection-if/for
 
@@ -289,28 +383,29 @@ final flow = <String>[
 ];
 ```
 
-Úsalos si la construcción se lee mejor que varios `add`.
+### Acción
 
-### Identidad e igualdad
+Trabaja K4 con `[' dart ', '', 'Flutter', 'dart']`. Conserva el primer orden y elimina vacíos y duplicados.
 
-Dos objetos creados por separado suelen no ser iguales si la clase no redefine `==`:
+Salida esperada:
 
-```dart
-class MemberRef {
-  final String id;
-  const MemberRef(this.id);
-}
-
-final a = MemberRef('m1');
-final b = MemberRef('m1');
-print(a == b); // false con la implementación mínima
+```text
+[dart, Flutter]
 ```
 
-En PM2 basta razonar la decisión. Si el dominio exige igualdad por valor, se puede implementar conscientemente o dejarlo como ampliación; no añadir boilerplate sin necesidad observable.
+### Checkpoint
 
-## 6. Records, patterns y switch expressions con moderación
+Puedes explicar por qué utilizaste lista, set o ambos.
 
-### Record para retorno pequeño
+### Error frecuente
+
+**Síntoma:** una cadena de transformaciones funciona pero no sabes localizar un fallo.  
+**Comprueba:** si puedes nombrar cada estado intermedio.  
+**Actúa:** divide la cadena o usa un bucle claro.
+
+## 6. Record, enum y switch: herramientas pequeñas
+
+### Record para un resultado local
 
 ```dart
 ({bool ok, String message}) validateTitle(String raw) {
@@ -320,13 +415,24 @@ En PM2 basta razonar la decisión. Si el dominio exige igualdad por valor, se pu
   }
   return (ok: true, message: title);
 }
-
-final (:ok, :message) = validateTitle(' Dart ');
 ```
 
-Un record es agregado anónimo, inmutable y tipado. Es adecuado para dos o tres valores locales que viajan juntos. Si el concepto tiene identidad, invariantes o comportamiento estable, crea una clase.
+Uso con destructuring:
 
-### Switch expression
+```dart
+final (:ok, :message) = validateTitle(' Dart ');
+print('$ok · $message');
+```
+
+Salida:
+
+```text
+true · Dart
+```
+
+Un record encaja cuando pocos valores viajan juntos, son locales y no tienen identidad ni reglas propias.
+
+### Enum para un vocabulario cerrado
 
 ```dart
 enum Priority { low, normal, high, urgent }
@@ -334,42 +440,49 @@ enum Priority { low, normal, high, urgent }
 int limitFor(Priority priority) => switch (priority) {
   Priority.low => 10,
   Priority.normal => 8,
-  Priority.high => 5,
+  Priority.high => 4,
   Priority.urgent => 1,
 };
 ```
 
-Un `switch` exhaustivo sobre enum evita strings libres y obliga a decidir cada caso. No conviertas una condición simple en pattern matching ornamental.
+El `switch` es exhaustivo: si añades un valor al enum, el analyzer te obliga a decidir su comportamiento.
 
-### Patterns
+### Acción
 
-```dart
-final result = (ok: true, message: 'movida');
-final (:ok, :message) = result;
-print('$ok · $message');
-```
+Trabaja K5 y K6. Después responde:
 
-El pattern describe la forma y extrae valores. PM2 usa destructuring de records y casos simples; sealed classes y patrones avanzados quedan en ampliación.
+- ¿por qué `Priority` no es un string escrito por el usuario?;
+- ¿por qué `(ok, message)` no necesita todavía una clase?
 
-## 7. Clases necesarias: el centro de RA2.a
+### Checkpoint
 
-### Responsabilidad y cohesión
+No eliges una construcción porque «es moderna», sino porque hace visible una regla.
 
-Una clase agrupa datos y comportamiento que cambian por la misma razón:
+### Error frecuente
+
+**Síntoma:** todo se convierte en clase o todo se convierte en record.  
+**Comprueba:** identidad, invariantes, comportamiento y vida propia.  
+**Actúa:** conserva la opción más pequeña que exprese el contrato.
+
+## 7. Clases necesarias e invariantes
+
+Una clase agrupa estado y comportamiento que pertenecen al mismo concepto:
 
 ```dart
 class TaskCard {
-  final String id;
-  final String title;
-  final Priority priority;
-  final String? assigneeId;
-
   TaskCard({
     required this.id,
     required String title,
     this.priority = Priority.normal,
     this.assigneeId,
   }) : title = _validTitle(title);
+
+  final String id;
+  final String title;
+  final Priority priority;
+  final String? assigneeId;
+
+  bool get isAssigned => assigneeId != null;
 
   static String _validTitle(String raw) {
     final value = raw.trim();
@@ -378,95 +491,105 @@ class TaskCard {
     }
     return value;
   }
-
-  bool get isAssigned => assigneeId != null;
 }
 ```
 
-La clase existe porque una tarjeta tiene un nombre estable y protege la regla del título. El getter deriva estado; no duplica un boolean mutable.
+La clase existe porque una tarjeta tiene identidad y protege la regla del título. `isAssigned` es calculado; no duplica estado.
 
-### Constructores y fronteras
+### Invariante
 
-- Constructor generativo: crea y valida una instancia.
-- Constructor nombrado: expresa una variante real de creación.
-- `factory`: devuelve una instancia con lógica que no se resuelve con una lista de inicializadores.
-
-```dart
-class Estimate {
-  final int minutes;
-
-  Estimate(this.minutes) {
-    if (minutes <= 0) {
-      throw ArgumentError.value(minutes, 'minutes', 'Debe ser positivo');
-    }
-  }
-
-  Estimate.hour() : this(60);
-}
-```
-
-No añadas `factory` solo porque existe en Dart.
-
-### Invariantes
-
-Una invariante es una condición que todo objeto válido debe cumplir siempre. Si una columna tiene capacidad:
+Una invariante debe cumplirse para todo objeto válido, no solo al construirlo:
 
 ```dart
 class BoardColumn {
-  final int capacity;
-  final List<TaskCard> _cards;
-
   BoardColumn({required this.capacity, Iterable<TaskCard> cards = const []})
       : _cards = List.of(cards) {
-    if (capacity <= 0) throw ArgumentError('Capacidad positiva requerida');
-    if (_cards.length > capacity) throw StateError('Capacidad superada');
+    if (capacity <= 0) {
+      throw ArgumentError.value(capacity, 'capacity', 'Debe ser positiva');
+    }
+    if (_cards.length > capacity) {
+      throw StateError('Capacidad superada');
+    }
   }
+
+  final int capacity;
+  final List<TaskCard> _cards;
 
   List<TaskCard> get cards => List.unmodifiable(_cards);
 
   void add(TaskCard card) {
-    if (_cards.length >= capacity) throw StateError('Columna llena');
+    if (_cards.length >= capacity) {
+      throw StateError('Columna llena');
+    }
     _cards.add(card);
   }
 }
 ```
 
-Validar solo en el constructor no basta si una operación pública puede romper la regla después.
+Validar solo en el constructor no basta: `add` también puede romper la capacidad.
 
-### Método o función externa
+### Constructor nombrado y `factory`
 
-Coloca un método en la clase cuando necesita su estado y protege su responsabilidad. Usa función externa para una transformación que no pertenece claramente a un objeto o combina varias abstracciones sin convertir una clase en «Dios».
-
-### Composición frente a herencia
-
-Una tarjeta urgente no necesita ser subclase de tarjeta si solo cambia prioridad:
+Un constructor nombrado expresa una creación real:
 
 ```dart
-class TaskCard {
-  final Priority priority; // composición de un valor
-  // ...
+class Estimate {
+  Estimate(this.minutes) {
+    if (minutes <= 0) throw ArgumentError('Minutos positivos');
+  }
+
+  Estimate.hour() : this(60);
+
+  final int minutes;
 }
 ```
 
-Herencia es apropiada cuando existe una relación «es-un» estable y el subtipo respeta el contrato del padre. Reutilizar dos métodos no basta.
+Usa `factory` solo si la creación necesita devolver otra instancia, cachear o decidir una implementación. No lo añadas como decoración.
 
-### Identidad frente a valor
+### Composición antes que herencia
 
-- `TaskCard` suele tener identidad (`id`) y cambia de columna sin convertirse en otra tarjeta.
-- `Priority` es un conjunto cerrado de valores.
-- Un pequeño resultado `(ok, message)` no necesita identidad: un record basta.
+Una tarjeta urgente no necesita un subtipo `UrgentCard` si solo cambia su prioridad:
 
-### Nombres que explican
+```dart
+class TaskCard {
+  final Priority priority;
+  // resto del modelo
+}
+```
 
-Evita `BoardManager`, `CardHelper`, `Utils`. Pregunta qué acción concreta coordina. `Board.moveCard` o una función `moveCard` suelen ser más claros.
+Herencia requiere una relación «es-un» estable y un subtipo que respete el contrato del padre. Reutilizar dos líneas no basta.
 
-## 8. Asincronía básica sin red
+### Acción
 
-Un `Future<T>` representa un resultado `T` que llegará o un error que se completará más tarde.
+Trabaja K7–K9 y K11. Para cada clase completa la frase:
+
+> Esta clase existe porque protege… / coordina… / representa…
+
+Después trabaja K12 y elimina al menos una clase decorativa.
+
+### Checkpoint
+
+Puedes señalar:
+
+1. una regla protegida en constructor;
+2. una regla protegida al modificar;
+3. una colección no expuesta;
+4. una relación resuelta por composición;
+5. una clase que decidiste no crear.
+
+### Error frecuente
+
+**Síntoma:** aparecen `Manager`, `Utils` o clases sin comportamiento.  
+**Comprueba:** qué regla o responsabilidad tendría cada una.  
+**Actúa:** mueve el comportamiento al concepto que posee los datos o usa una función con nombre concreto.
+
+## 8. `Future`, `async` y errores locales
+
+Un `Future<T>` representa un resultado `T` que llegará más tarde o una finalización con error.
 
 ```dart
 Future<String> createLocalSnapshot(String boardId) async {
-  await Future<void>.delayed(const Duration(milliseconds: 50));
+  await Future<void>.delayed(const Duration(milliseconds: 10));
   if (boardId.trim().isEmpty) {
     throw ArgumentError('boardId vacío');
   }
@@ -474,7 +597,7 @@ Future<String> createLocalSnapshot(String boardId) async {
 }
 ```
 
-Consumirlo:
+Para obtener el resultado:
 
 ```dart
 Future<void> main() async {
@@ -487,6 +610,14 @@ Future<void> main() async {
 }
 ```
 
+Salida normal:
+
+```text
+snapshot:board-1
+```
+
+Si llamas con una cadena vacía, obtendrás un mensaje de error con contexto.
+
 ### Secuencia no es concurrencia
 
 ```dart
@@ -494,54 +625,47 @@ final first = await createLocalSnapshot('a');
 final second = await createLocalSnapshot('b');
 ```
 
-La segunda operación empieza después de la primera. PM2 solo necesita reconocerlo. Optimización concurrente, isolates y Streams no son núcleo.
+La segunda operación empieza después de terminar la primera. PM2 no necesita optimizar esto ni introducir red, isolates o Streams.
 
-### Errores
+### Acción
 
-- lanza un error cerca de la regla que falla;
-- captura donde puedas añadir contexto o decidir recuperación;
-- no uses `catch (_) {}` vacío;
-- no conviertas toda excepción en `false` si se pierde la causa.
+Trabaja K10. Corrige firma, `await` y manejo de error. Ejecuta una ruta válida y otra inválida.
 
-## 9. Del map a las clases
+### Checkpoint
 
-Punto de partida:
+- No imprimes un `Future` sin esperar.
+- No usas un `catch` vacío.
+- La capa que captura puede añadir contexto útil.
 
-```dart
-final cards = <Map<String, dynamic>>[
-  {'id': 'C1', 'title': 'Dart', 'priority': 'HIGH', 'owner': null},
-];
-```
+### Error frecuente
 
-Preguntas de refactor:
+**Síntoma:** aparece `Instance of 'Future<String>'`.  
+**Comprueba:** si la función llamadora es `async`.  
+**Actúa:** espera el resultado con `await` y decide dónde manejar el error.
 
-1. ¿Qué claves son obligatorias?
-2. ¿Qué valores posibles están cerrados?
-3. ¿Qué ausencia es legítima?
-4. ¿Qué estado nunca debe existir?
-5. ¿Qué operación modifica el conjunto?
-6. ¿Qué clase protege cada regla?
+## 9. Del map a un modelo defendible
 
-Posible resultado:
+Antes de crear clases, responde:
 
-- `TaskCard`: identidad, título válido, prioridad y responsable opcional.
-- `Priority`: valores cerrados y quizá una regla pequeña.
-- `BoardColumn`: capacidad y pertenencia de tarjetas.
-- `Board`: mover conservando unicidad y capacidad.
+1. ¿Qué datos son obligatorios?
+2. ¿Qué ausencias son legítimas?
+3. ¿Qué vocabularios están cerrados?
+4. ¿Qué estados serían inválidos?
+5. ¿Quién modifica las colecciones?
+6. ¿Qué operación necesita coordinar varias reglas?
+7. ¿Qué clase no aporta nada y debería desaparecer?
 
-No es la única solución. Una clase que no protege una regla, no nombra un concepto útil y no concentra comportamiento puede sobrar.
+Un posible modelo puede usar `TaskCard`, `BoardColumn`, `Priority` y `Board`, pero no es la única respuesta. Lo evaluable es que cada elemento tenga una responsabilidad, proteja reglas y permita un cambio pequeño sin romper el conjunto.
 
-## 10. Checklist de lectura de un diseño
+## Cierre rápido
 
-- ¿Puedo construir un objeto inválido?
-- ¿Puedo romperlo desde una lista expuesta?
-- ¿El nulo significa ausencia real?
-- ¿Hay strings libres con vocabulario cerrado?
-- ¿Cada clase tiene una razón de cambio?
-- ¿La composición expresa la relación real?
-- ¿Un record local evita una clase sin identidad?
-- ¿El `Future` se espera y el error se observa?
-- ¿La salida es reproducible?
-- ¿Puedo explicar qué clase eliminaría?
+Antes de pasar al laboratorio, explica sin mirar:
 
+- diferencia entre `final` y colección inmutable;
+- por qué `dynamic` y `!` necesitan una frontera justificada;
+- cuándo elegir record y cuándo clase;
+- qué es una invariante;
+- por qué composición suele encajar mejor que una herencia oportunista;
+- qué representa un `Future` y dónde se observa su error.
 
+Si una respuesta no está clara, vuelve al checkpoint de esa sección y realiza la kata indicada.

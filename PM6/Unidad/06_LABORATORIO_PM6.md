@@ -6,7 +6,7 @@ En cada hito trabaja así: **problema → predicción → test/acción → rojo 
 
 ## Hito 1 · El verde que no detecta el contador (A01–A03, capa A)
 
-**Entrada:** copia inicial, Flutter 3.47.2 y `pubspec.yaml`. Ejecuta `flutter pub get`, `flutter analyze --fatal-infos`, `flutter test test/smoke_test.dart`; ese verde solo verifica arranque. En `lib/quality.dart` lee `pendingCount`. Predice 2 para A abierta, B terminada, C abierta. Copia el [test guiado E1](03_EJEMPLOS_GUIADOS_PM6.md) y ejecútalo aislado. **Resultado esperado del starter:** aserción que esperaba 2 y obtiene 1. Corrige solo la selección de abiertas, repite y añade vacío/todos terminados. Conserva baseline, diferencia y regresión en Q01/Q02. Si no compila, revisa carpeta/imports; no «corrijas» expected a 1.
+**Entrada:** copia inicial, Flutter 3.47.8 y `pubspec.yaml`. Ejecuta `flutter pub get`, `flutter analyze --fatal-infos`, `flutter test test/smoke_test.dart`; ese verde solo verifica arranque. En `lib/quality.dart` lee `pendingCount`. Predice 2 para A abierta, B terminada, C abierta. Copia el [test guiado E1](03_EJEMPLOS_GUIADOS_PM6.md) y ejecútalo aislado. **Resultado esperado del starter:** aserción que esperaba 2 y obtiene 1. Corrige solo la selección de abiertas, repite y añade vacío/todos terminados. Conserva baseline, diferencia y regresión en Q01/Q02. Si no compila, revisa carpeta/imports; no «corrijas» expected a 1.
 
 ## Hito 2 · Dos Futures y una política (T1/A04, capa A)
 
@@ -14,11 +14,11 @@ En cada hito trabaja así: **problema → predicción → test/acción → rojo 
 
 ## Hito 3 · Error, retry, identidad y dispose (A04, capa A)
 
-Completa una solicitud con error. Predice `error` visible y `loading == false`; el starter deja loading activo. Ejecuta un widget test con `pump` controlado, pulsa *Reintentar*, completa con lista vacía y comprueba mensaje y acción disponible. No aumentes un timeout de `pumpAndSettle` para ocultar el spinner. Después alterna un trabajo por **ID**, no índice. Inicia una solicitud, libera el controlador y completa el Future: no debe avisar ni publicar estado tras dispose. Ejecuta un caso normal tras cada corrección. Conserva salidas y regresiones; el host no acredita Android.
+Completa una solicitud con error. Predice `error` visible y `loading == false`; el starter deja loading activo. Ejecuta un widget test con `pump` controlado, pulsa *Reintentar*, completa con lista vacía y comprueba mensaje y acción disponible. No aumentes un timeout de `pumpAndSettle` para ocultar el spinner. Después comprueba la alternancia por **ID** que el starter ya implementa; no es un fallo que debas inventar. Inicia una solicitud, libera el controlador y completa el Future: no debe avisar ni publicar estado tras dispose. Ejecuta un caso normal tras cada corrección. Conserva salidas y regresiones; el host no acredita Android.
 
 ## Hito 4 · Retención y observación (A04–A05, capas A y B)
 
-Carga 25 snapshots de prueba con IDs distinguibles. La política de referencia conserva **20**: comprueba longitud y qué entrada antigua sale. Esto mide referencias lógicas. Sigue [Inspector, Performance y Memory](08_DEVTOOLS_Y_CI_PM6.md) con destino real de trabajo: mismo dataset/recorrido, calentamiento, tres repeticiones comparables de eager/builder en profile y cortes de memoria. Conserva Q03 con traza/protocolo y límite. Si DevTools no se ejecutó, `PENDIENTE_DEVTOOLS` y turno de observación; no calcules MB imaginarios.
+Carga 25 snapshots de prueba con IDs distinguibles. La política de referencia conserva **20**: comprueba longitud y qué entrada antigua sale. Esto mide referencias lógicas. Sigue [Inspector, Performance y Memory](08_DEVTOOLS_Y_CI_PM6.md) con destino real de trabajo: mismo dataset/recorrido, calentamiento y tres repeticiones comparables de eager/builder en profile **sobre móvil físico**, usando `--dart-define=EAGER_LIST=true` o `false` y cortes de memoria. Conserva Q03 con traza/protocolo y límite. Si DevTools no se ejecutó, `PENDIENTE_DEVTOOLS` y turno de observación; no calcules MB imaginarios.
 
 ## Hito 5 · Android, CI y cuatro capas (A06/T2, capas B, C y D)
 

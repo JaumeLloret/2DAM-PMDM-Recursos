@@ -1,35 +1,39 @@
 # PM3 · Índice del alumnado
 
-1. Lee [Unidad/01_GUIA_ALUMNADO_PM3.md](../Unidad/01_GUIA_ALUMNADO_PM3.md).
-2. Usa [Unidad/02_CONTENIDOS_PM3.md](../Unidad/02_CONTENIDOS_PM3.md) como teoría autosuficiente.
-3. Reproduce [Unidad/03_EJEMPLOS_GUIADOS_PM3.md](../Unidad/03_EJEMPLOS_GUIADOS_PM3.md) y el paquete
-   [Ejemplos/adaptive_navigation_example/](Ejemplos/adaptive_navigation_example).
-4. Resuelve las 12 katas de [Unidad/04_GIMNASIO_PM3.md](../Unidad/04_GIMNASIO_PM3.md) dentro de su fase.
-5. Descarga/copia [Starter/aulaflow_flutter_ui_shell/](Starter/aulaflow_flutter_ui_shell) y sigue el laboratorio.
-6. Completa [01_CUADERNO_TRABAJO_PM3.md](01_CUADERNO_TRABAJO_PM3.md) y [02_PLANTILLA_DECISIONES_PM3.md](02_PLANTILLA_DECISIONES_PM3.md).
-7. Revisa evaluación, checklist y registro antes de entregar.
-8. Usa recuperación o ampliación solo cuando corresponda.
+## Empieza aquí
 
-## Paquete público
+1. **Ruta PM3:** objetivo, herramientas, primera ejecución y mapa de 720 minutos.
+2. **Diagnóstico Q01–Q04:** localiza tu punto de partida; no es una prueba sumativa.
+3. **Teoría y ejemplos:** comprende el problema antes de elegir widget o capa.
+4. **12 katas:** lee, predice, modifica, verifica y explica; no son doce entregas.
+5. **Debugging PM3:** repara un fallo completo antes del laboratorio.
+6. **Laboratorio:** avanza por hitos sobre el starter.
+7. **Evaluación, ayuda y autoevaluación:** comprueba y prepara la entrega.
+8. **Talleres opcionales:** asiste o realiza la misión autónoma equivalente.
+9. **Recuperación o ampliación:** usa cada recurso únicamente cuando corresponda.
 
-- guías, teoría, ejemplos, gimnasio, laboratorio, evaluación y referencias;
-- ejemplo Flutter;
-- starter ordinario;
-Recuperación: el docente asignará el material correspondiente en AULES.
-- cuaderno, decisiones, checklist y registro.
+## Proyectos públicos de trabajo
 
-Consulta en AULES las consignas y entregas de evaluación.
+- ejemplo: `Alumnado/Ejemplos/adaptive_navigation_example/`;
+- starter: `Alumnado/Starter/aulaflow_flutter_ui_shell/`;
+- recuperación asignada: `Alumnado/Recuperacion/repair_desk_ui/`.
+
+Abre siempre la carpeta que contiene `pubspec.yaml`.
 
 ## Primera comprobación
 
 ```bash
 flutter --version
 flutter doctor -v
+flutter devices
 flutter pub get
 flutter analyze
 flutter test
 flutter run
 ```
 
-Si falla, anota el error exacto; no ocultes el bloqueo con una captura ajena.
+Consulta Ayuda PM3 si falla. Conserva comando y primer error; no uses una captura ajena como sustituto de tu ejecución.
 
+## Lo que no necesitas
+
+No debes recibir `Docente/`, soluciones, auditorías ni QA de producción. Tampoco necesitas REST, autenticación, persistencia, sensores, multimedia, CI como contenido ni agentes.

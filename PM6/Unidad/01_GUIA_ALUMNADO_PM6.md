@@ -4,13 +4,13 @@ Vas a recibir una app que arranca y contiene defectos intencionales. Tu trabajo 
 
 ## Prepara tu copia
 
-Descarga solo [Starter](../Practica/Starter/quality_gate/README.md) y conserva una versión inicial. Usa Flutter 3.47.2/Dart 3.13.2. La [preparación de entorno e IDE](../Alumnado/06_ENTORNO_Y_FUENTES_PM6.md) explica VS Code/Android Studio y la carpeta `quality_gate` que contiene `pubspec.yaml`. Ejecuta `flutter pub get`, `flutter analyze --fatal-infos` y `flutter test`. Debe pasar el humo inicial; eso no significa que la app sea correcta. Si falla la herramienta, usa [Debugging](05_DEBUGGING_PM6.md) y [Ayuda](11_AYUDA_PM6.md), sin reinstalar un SDK distinto por ensayo y error.
+Para tu producto descarga [Starter](../Practica/Starter/quality_gate/README.md) y conserva una versión inicial. Usa Flutter 3.47.8/Dart 3.13.7. La [preparación de entorno e IDE](../Alumnado/06_ENTORNO_Y_FUENTES_PM6.md) explica VS Code/Android Studio y la carpeta `quality_gate` que contiene `pubspec.yaml`. Ejecuta `flutter pub get`, `flutter analyze --fatal-infos` y `flutter test`. Debe pasar el humo inicial; eso no significa que la app sea correcta. Si falla la herramienta, usa [Debugging](05_DEBUGGING_PM6.md) y [Ayuda](11_AYUDA_PM6.md), sin reinstalar un SDK distinto por ensayo y error.
 
 ## Ruta por tramos
 
 | Tramo | Qué haces | Qué conservas | Si falla |
 |---|---|---|---|
-| A01–A03 | Arranca; lee teoría1–5; reproduce contador con dos abiertas y una completada; escribe expected/actual | Primer fallo y prueba mínima, versión del SDK | Error de dependencia no es fallo funcional: resolver entorno y repetir |
+| A01–A03 | Arranca; lee teoría 1–5; reproduce contador con dos abiertas y una completada; escribe expected/actual | Primer fallo y prueba mínima, versión del SDK | Error de dependencia no es fallo funcional: resolver entorno y repetir |
 | T1/A04 | Completa estrategia unit/widget; controla respuestas fuera de orden; reintento y dispose | Tests de regresión y explicación de cada cambio | Usa Completer para controlar orden, no temporizadores aleatorios |
 | A05 | Sigue el guion DevTools: inspector, lista eager/perezosa, history y memoria | Registro de entorno, recorridos, observaciones y límites | Si no hay modo profile/entorno adecuado, registra pendiente, no inventes tiempos |
 | A06 | Genera plataforma Android con SDK fijado; construye APK; prepara CI y emulador/dispositivo | Comandos, versión, artefacto/huella y errores reales | Verifica SDK/licencias/espacio; no borres datos ajenos |
@@ -25,4 +25,4 @@ Las variantes de evaluación y solución son reservadas. Durante I3 trabajas sin
 
 ## Ausencia y entregas
 
-Consulta las [consignas completas de T1 y T2](10_TALLERES_Y_EQUIVALENCIAS_PM6.md): eliges taller opcional o misión desde casa de **45 min efectivos** (franja nominal 55), nunca ambos. T1 es el 12/01/2027 y T2 el 19/01/2027, 19:30–20:25. T2 permite preparar el recorrido desde casa, pero I3 requiere **22 min de microcambio no preparado sin agente y 10 min de explicación individual supervisada**; si no asistes, solicita cita reprogramada dentro del mismo bloque de 45 min. La apertura, entrega objetivo y cierre de PM6 aún requieren confirmación docente y deben publicarse aquí y en AULES antes de abrir la unidad; los talleres no son plazos de entrega. La fecha de entrega debe permitir A07/A08 tras T2. Retraso justificado se reprograma; no justificado ≤72 h se acepta tardío sin rebaja automática; más de 72 h pasa a recuperación de los CE afectados.
+Consulta las [consignas completas de T1 y T2](10_TALLERES_Y_EQUIVALENCIAS_PM6.md): eliges taller opcional o misión desde casa de **45 min efectivos** (franja nominal 55), nunca ambos. T1 es el 12/01/2027 y T2 el 19/01/2027, 19:30–20:25. T2 permite preparar el recorrido desde casa, pero I3 requiere **22 min de microcambio no preparado sin agente y 10 min de explicación individual supervisada**; si no asistes, solicita cita reprogramada dentro del mismo bloque de 45 min. La apertura, la entrega objetivo y el cierre de PM6 ya están planificados y configurados aquí y en AULES; los talleres no son plazos de entrega. La fecha de entrega debe permitir A07/A08 tras T2. Retraso justificado se reprograma; no justificado ≤72 h se acepta tardío sin rebaja automática; más de 72 h pasa a recuperación de los CE afectados.

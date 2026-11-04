@@ -43,4 +43,3 @@ abstract interface class MediaPort {
   Future<DemoMedia> pickFixture();
   Future<DemoMedia> convert(DemoMedia source);
 }
-

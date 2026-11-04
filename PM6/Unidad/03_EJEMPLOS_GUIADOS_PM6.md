@@ -1,8 +1,12 @@
 # Ejemplos guiados · PM6
 
+## Un ejemplo pequeño antes de reparar el producto
+
+En la página de preparación descarga el **ejemplo de reservas** `PM6_EJEMPLO.zip`. Su README explica archivo, comando, resultado esperado y un cambio guiado. Tiene tres pruebas legibles y una pantalla que se puede ejecutar; ocupa 15 minutos ya incluidos en A02. Después vuelve a la práctica Quality Gate: sus correcciones las decides tú.
+
 ## Antes de E1 · Preparar una prueba que puedas ejecutar
 
-En tu copia de `quality_gate`, crea `test/guided_example_test.dart` con el bloque siguiente. `ControlledStore` es un doble local: cada llamada a `fetch` guarda un `Completer` cuyo resultado decides desde la prueba. No necesita red ni un paquete nuevo. Este ejemplo enseña a construir pruebas; no incluye las correcciones del controlador ni la suite docente completa.
+En tu copia de `quality_gate`, copia `guided/guided_example_test.dart` a `test/guided_example_test.dart` (o crea ese archivo con el bloque siguiente). `ControlledStore` es un doble local: cada llamada a `fetch` guarda un `Completer` cuyo resultado decides desde la prueba. No necesita red ni un paquete nuevo. Este ejemplo enseña a construir pruebas; no incluye las correcciones del controlador ni la suite docente completa.
 
 <!-- PM6_GUIDED_TEST_BEGIN -->
 ```dart
@@ -44,9 +48,7 @@ void main() {
   testWidgets('guided: a tap completes the selected task', (tester) async {
     final store = ControlledStore();
     await tester.pumpWidget(QualityApp(store: store));
-    store.requests.single.complete([
-      const TaskItem('A', 'Abierta A'),
-    ]);
+    store.requests.single.complete([const TaskItem('A', 'Abierta A')]);
     await tester.pump();
 
     await tester.tap(find.byKey(const ValueKey('A')));
@@ -75,7 +77,7 @@ Después de corregir el contador, ambas deben pasar. Ahora escribe tú los casos
 
 **Localiza → predice → ejecuta → observa:** abre `lib/quality.dart`, busca `pendingCount` y anota A abierta/B terminada/C abierta. Ejecuta el archivo aislado anterior, no solo `smoke_test.dart`. Clasifica `expected: 2 / actual: 1` como rojo esperado; un import roto o una aserción ya verde exige revisar montaje/entrada. **Modifica → verifica:** cambia el predicado mínimo, repite ambos tests y añade vacío/todos terminados. **Límite:** todavía no has tocado Android ni probado respuestas simultáneas.
 
-Entrada: A abierto, B completado, C abierto. Predicción:2pendientes. Lee pendingCount y señala qué predicado selecciona. Escribe una prueba que cargue esa lista mediante TaskStore controlado y compare el resultado con2. Primero observa el fallo esperado1frente a2; después corrige el predicado y añade caso vacío. Una prueba que espere1solo para ponerse verde consolida el defecto.
+Entrada: A abierto, B completado, C abierto. Predicción:2pendientes. Lee pendingCount y señala qué predicado selecciona. Escribe una prueba que cargue esa lista mediante TaskStore controlado y compare el resultado con2. Primero observa el fallo esperado 1 frente a 2; después corrige el predicado y añade caso vacío. Una prueba que espere 1 solo para ponerse verde consolida el defecto.
 
 ## E2 · Ordenar Futures sin red
 
@@ -93,10 +95,10 @@ Completa la primera solicitud con error. Después de esperar load, error debe se
 
 **Localiza → predice → ejecuta:** inspecciona `history.add(items)`, carga 25 listas con identificadores 0–24 y comprueba que se retienen como máximo 20 y que la primera es la del corte 5. El starter conserva 25: rojo esperado. **Modifica/verifica:** aplica un límite, repite 25 y prueba 0/1/20 cargas. **Después** abre Memory según la guía, compara cortes de una ejecución real y guarda hipótesis. **Límite:** el test de `history` no mide heap ni demuestra MB liberados.
 
-Carga25snapshots y observa history.length. La política de producto de este laboratorio conserva20, por lo que el primer ID retenido debe ser5si las entradas empiezan en 0. Este test comprueba referencias lógicas. En DevTools repite el recorrido y observa objetos/heap; el resultado esperado es poder explicar la retención, no una cifra de memoria preescrita. Registra cualquier discrepancia y cómo la investigarías.
+Carga 25 snapshots y observa history.length. La política de producto de este laboratorio conserva 20, por lo que el primer ID retenido debe ser 5 si las entradas empiezan en 0. Este test comprueba referencias lógicas. En DevTools repite el recorrido y observa objetos/heap; el resultado esperado es poder explicar la retención, no una cifra de memoria preescrita. Registra cualquier discrepancia y cómo la investigarías.
 
 ## E5 · Un verde de un SHA distinto
 
 **Localiza → predice → ejecuta:** anota el SHA A que imprimió Actions. Haz el cambio de retry en B y comprueba `git rev-parse HEAD` de tu copia/commit. Si A≠B, clasifica el run verde como histórico. **Modifica/verifica:** ejecuta controles sobre B y localiza un run cuyo SHA ejecutado sea B. **Regresión:** repite el caso que motivó el cambio. **Límite:** aunque CI y APK sean verdes, todavía faltan observaciones en emulador/DevTools y dispositivo cuando corresponden.
 
-Tu pipeline validó códigoA, pero entregasBtras cambiar retry. Escribe en Q05 que el run deAes histórico, ejecuta los controles del nuevo corte y vincula B. Si solo cambió documentación, explica qué controles correspondían; antes del cierre final no uses un resultado de otro SHA como certificación deB.
+Tu pipeline validó código A, pero entregas B tras cambiar retry. Escribe en Q05 que el run de A es histórico, ejecuta los controles del nuevo corte y vincula B. Si solo cambió documentación, explica qué controles correspondían; antes del cierre final no uses un resultado de otro SHA como certificación de B.

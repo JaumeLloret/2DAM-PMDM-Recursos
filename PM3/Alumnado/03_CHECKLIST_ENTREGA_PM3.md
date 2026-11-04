@@ -1,35 +1,38 @@
-# Checklist de entrega · PM3
+# PM3 · Checklist de entrega
 
-## Producto
+## Proyecto
 
-- [ ] el proyecto arranca desde instrucciones limpias;
-- [ ] `flutter analyze` finaliza sin incidencias;
-- [ ] `flutter test` conserva las barandillas;
-- [ ] lista, tablero, ajustes y detalle son recorribles;
-- [ ] detalle navega por id;
-- [ ] bar compacta y rail ancho comparten destinos;
-- [ ] ViewModel contiene estado de feature;
-- [ ] repositorio abstracto entra por constructor;
-- [ ] diálogo se puede cancelar;
-- [ ] confirmación produce cambio y feedback;
-- [ ] fallo y vacío no son el mismo estado.
+- [ ] Abro la carpeta que contiene `pubspec.yaml` y la app arranca.
+- [ ] `flutter pub get`, `flutter analyze` y `flutter test` reflejan el estado real.
+- [ ] Lista, tablero, ajustes y detalle son recorribles.
+- [ ] Detalle navega por id y un id inválido no bloquea.
+- [ ] Bar compacta y rail ancho comparten destinos.
+- [ ] ViewModel contiene el estado de feature.
+- [ ] El repositorio abstracto se inyecta por constructor.
+- [ ] Diálogo cancelable, cambio y feedback funcionan.
+- [ ] Loading, vacío y error no se confunden.
 
-## Evidencia
+## Comprobaciones
 
-- [ ] mapa antes/después;
-- [ ] plantilla de decisiones;
-- [ ] registro de versión/comandos;
-- [ ] pruebas 390/900 px;
-- [ ] texto 200 % y teclado;
-- [ ] dos capturas sin datos personales;
-- [ ] declaración de ayuda/IA;
-- [ ] microvariación I3 hecha sin agente.
+- [ ] 390 × 800: bar, sin overflow y acciones visibles.
+- [ ] 900 × 700: rail y cuerpo ocupando el resto.
+- [ ] Texto ampliado: acciones y etiquetas siguen disponibles.
+- [ ] Teclado/foco: he indicado qué pude comprobar y con qué destino.
+- [ ] He repetido una regresión después del último cambio.
 
-## Higiene
+## Evidencias
 
-- [ ] todos los ids/datos son `DEMO-*`;
-- [ ] no hay secretos, tokens, datos personales ni `.env`;
-- [ ] no se incluye `build/` ni plataformas generadas innecesarias;
-- [ ] no se copiaron solución, oráculo o fuentes reservadas;
-- [ ] no se adelantaron contenidos fuera de PM3.
+- [ ] Mapa antes/después.
+- [ ] Plantilla de decisiones.
+- [ ] Registro de versiones y comandos.
+- [ ] Dos capturas sin datos personales.
+- [ ] Declaración de ayuda/IA y verificación.
+- [ ] I3: predicción, cambio, ejecución y explicación sin agente.
 
+## Higiene del envío
+
+- [ ] Incluyo `pubspec.yaml`, `lib/`, `test/` y documentos pedidos.
+- [ ] No incluyo `build/`, `.env`, secretos, datos reales ni solución docente.
+- [ ] No he inventado PASS de AVD, dispositivo o accesibilidad que no observé.
+- [ ] Todos los datos ordinarios son `DEMO-*`.
+- [ ] No he adelantado PM4+.

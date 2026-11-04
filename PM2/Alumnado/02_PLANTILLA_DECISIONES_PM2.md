@@ -1,8 +1,8 @@
-# DECISIONES · plantilla del laboratorio
+# DECISIONES.md · plantilla del laboratorio
 
 ## Problema en una frase
 
-<!-- Qué comportamiento debe conservar/proteger tu estructura. -->
+<!-- Qué comportamiento debe conservar o proteger tu estructura. -->
 
 ## Estructura
 
@@ -12,9 +12,9 @@
 
 ## Invariantes
 
-| Regla | Dónde se protege | Entrada que la demuestra |
-|---|---|---|
-| | | |
+| Regla | Dónde se protege al crear | Dónde se protege al modificar | Entrada que la demuestra |
+|---|---|---|---|
+| | | | |
 
 ## Nulabilidad
 
@@ -24,12 +24,12 @@
 
 ## Colecciones y mutabilidad
 
-- Colección elegida:
-- ¿Quién puede modificarla?
-- Copia/vista defensiva:
-- Alternativa:
+- Colección elegida y motivo:
+- Quién puede modificarla:
+- Copia o vista defensiva:
+- Alternativa descartada:
 
-## Composición/herencia
+## Composición o herencia
 
 - Relación:
 - Decisión:
@@ -38,9 +38,9 @@
 ## Clase que NO creé
 
 - Nombre propuesto:
-- Por qué no protege una regla ni aporta responsabilidad/vida propia:
+- Por qué no protege una regla ni aporta responsabilidad o vida propia:
 
-## Record/pattern/switch
+## Record, pattern o switch
 
 - Uso:
 - Qué simplifica:
@@ -48,9 +48,9 @@
 
 ## IA, si se utilizó
 
-- Ayuda solicitada:
-- Qué acepté/rechacé:
-- Cómo lo verifiqué y corregí:
-- Datos que confirmé no compartir:
-
+- Para qué la utilicé:
+- Qué acepté:
+- Qué rechacé o corregí:
+- Cómo verifiqué el resultado:
+- Confirmación de que no compartí datos personales, credenciales ni material reservado:
 

@@ -5,7 +5,7 @@ Cuando te bloquees, detente en el **primer** error. Anota archivo/carpeta, herra
 | Síntoma | Qué comprobar | Qué hacer | Qué conservar |
 |---|---|---|---|
 | `flutter` no se encuentra | `flutter --version`, ubicación de `bin` y PATH | Sigue [Entorno](../Alumnado/02_ENTORNO_Y_FUENTES_PM7.md); reabre terminal e IDE. | Primer error y versión posterior, sin ruta personal. |
-| Dart/Flutter distinto | `flutter --version` y `command -v flutter` o `where.exe flutter` | Selecciona SDK Flutter 3.47.2 y Dart 3.13.2; no cambies lock para ocultarlo. | Versiones y acción. |
+| Dart/Flutter distinto | `flutter --version` y `command -v flutter` o `where.exe flutter` | Selecciona SDK Flutter 3.47.8 y Dart 3.13.7; no cambies lock para ocultarlo. | Versiones y acción. |
 | `pub get` falla | Estás en `spec_search` con `pubspec.yaml`; primer error de red/dependencia | Corrige carpeta o conexión; repite `flutter pub get`. | Error y reintento. |
 | El starter tiene humo verde pero no busca | `test/smoke_test.dart` solo cuenta cuatro entradas | Escribe spec y prueba discriminante S3 antes de implementar. | Predicción y límite del humo. |
 | La prueba S3 no compila | Firma/import de `selectEntries`, `test/search_test.dart` | Alinea la API de tu tarea; separa error de montaje de aserción roja. | Primer error, corrección y comando. |
@@ -22,4 +22,4 @@ Cuando te bloquees, detente en el **primer** error. Anota archivo/carpeta, herra
 | I3 no fue observado | Cita solicitada, corte propio y variante aún reservada | Concerta tutoría individual; docente comunica cambio al iniciar supervisión. | `PENDIENTE_SUPERVISION`; no declares aprobado. |
 | CI verde sobre SHA anterior | SHA de run y corte final | Repite validación del nuevo corte si cambió entrada/código. | Ambos SHA y límite del histórico. |
 
-Si necesitas ayuda, comunica al docente fase, SO/editor, carpeta relativa, primer error, predicción y qué intentaste. Elimina cuentas, tokens, seriales, rutas personales y mensajes ajenos. La issue #58 conserva la QA real de agente, emulador, supervisión y AULES institucional; una CI verde no la cierra.
+Si necesitas ayuda, comunica al docente fase, SO/editor, carpeta relativa, primer error, predicción y qué intentaste. Elimina cuentas, tokens, seriales, rutas personales y mensajes ajenos. Una CI verde no acredita por sí sola una sesión real de agente, una interacción en emulador ni una supervisión individual.

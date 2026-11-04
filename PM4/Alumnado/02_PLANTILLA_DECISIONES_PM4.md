@@ -27,4 +27,3 @@ Comando `--dart-define`, URL efectiva por entorno y evidencia de `https://` vál
 ## D7 · asistencia
 
 Herramientas/personas utilizadas, sugerencias rechazadas/corregidas y pruebas que realizaste tú.
-

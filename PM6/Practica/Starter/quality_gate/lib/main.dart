@@ -28,6 +28,13 @@ class _QualityAppState extends State<QualityApp> {
     super.dispose();
   }
 
+  Widget taskTile(TaskItem item) => CheckboxListTile(
+    key: ValueKey(item.id),
+    title: Text(item.title),
+    value: item.done,
+    onChanged: (_) => controller.toggle(item.id),
+  );
+
   @override
   Widget build(BuildContext context) => MaterialApp(
     title: 'AulaFlow Mobile Quality Gate',
@@ -77,18 +84,17 @@ class _QualityAppState extends State<QualityApp> {
                 key: Key('empty'),
               ),
             Expanded(
-              child: ListView.builder(
-                itemCount: controller.items.length,
-                itemBuilder: (context, index) {
-                  final item = controller.items[index];
-                  return CheckboxListTile(
-                    key: ValueKey(item.id),
-                    title: Text(item.title),
-                    value: item.done,
-                    onChanged: (_) => controller.toggle(item.id),
-                  );
-                },
-              ),
+              child: const bool.fromEnvironment('EAGER_LIST')
+                  ? ListView(
+                      children: [
+                        for (final item in controller.items) taskTile(item),
+                      ],
+                    )
+                  : ListView.builder(
+                      itemCount: controller.items.length,
+                      itemBuilder: (context, index) =>
+                          taskTile(controller.items[index]),
+                    ),
             ),
           ],
         ),

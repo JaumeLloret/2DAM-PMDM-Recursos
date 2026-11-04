@@ -96,4 +96,3 @@ class _AdaptiveCounterShellState extends State<AdaptiveCounterShell> {
 
   void _select(int index) => setState(() => _selectedIndex = index);
 }
-

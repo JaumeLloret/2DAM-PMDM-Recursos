@@ -11,12 +11,12 @@
 <body>
 <main>
   <h1>PM6 · Una app que arranca también puede estar equivocada</h1>
-  <p>Mejorarás <strong>AulaFlow Mobile Quality Gate</strong>, una app de trabajos ficticios. El primer test de humo pasa, pero el contador da un resultado incorrecto. Tu reto es <strong>predecir, probar, observar el rojo correcto, corregir y dejar una regresión</strong>. Después distinguirás lo observado en ordenador, emulador, CI y móvil real.</p>
+  <p>Mejorarás <strong>AulaFlow Mobile Quality Gate</strong>, una app de trabajos ficticios. El primer test de humo pasa, pero el contador da un resultado incorrecto. Tu reto es <strong>predecir, probar, observar el rojo correcto, corregir y dejar una regresión</strong>. Antes puedes ejecutar el ejemplo pequeño de reservas desde la página de preparación. Después distinguirás lo observado en ordenador, emulador, CI y móvil real.</p>
   <section class="card" aria-labelledby="inicio">
     <h2 id="inicio">Tus primeros 20 minutos</h2>
     <ol>
-      <li>Descarga el <a href="../Practica/Starter/quality_gate/README.md">starter Quality Gate</a> completo y haz una copia de trabajo. Busca <code>Practica/Starter/quality_gate/</code>; abre <strong>esa carpeta, la que contiene <code>pubspec.yaml</code></strong>, en VS Code o Android Studio. No abras solo <code>main.dart</code>.</li>
-      <li>En la terminal de esa carpeta ejecuta, por orden, <code>flutter --version</code>, <code>flutter pub get</code>, <code>flutter analyze --fatal-infos</code> y <code>flutter test</code>. Esperas Flutter 3.47.2 / Dart 3.13.2, dependencias recuperadas, análisis sin error y humo verde. Guarda comando, versión, salida y corte inicial.</li>
+      <li>Descarga el <a href="../Practica/Starter/quality_gate/README.md">starter Quality Gate</a> completo y haz una copia de trabajo. Descomprime <code>PM6_STARTER.zip</code> en una carpeta llamada <code>quality_gate</code>; abre <strong>esa carpeta, la que contiene <code>pubspec.yaml</code></strong>, en VS Code o Android Studio. No abras solo <code>main.dart</code>.</li>
+      <li>En la terminal de esa carpeta ejecuta, por orden, <code>flutter --version</code>, <code>flutter pub get</code>, <code>flutter analyze --fatal-infos</code> y <code>flutter test</code>. Esperas Flutter 3.47.8 / Dart 3.13.7, dependencias recuperadas, análisis sin error y humo verde. Guarda comando, versión, salida y corte inicial.</li>
       <li>Abre <code>lib/quality.dart</code> y busca <code>pendingCount</code>. Para A abierta, B terminada y C abierta, escribe tu predicción antes de cambiar nada: <strong>2 pendientes</strong>. Lee el <a href="../Unidad/03_EJEMPLOS_GUIADOS_PM6.md">primer ejemplo guiado</a> y ejecuta su prueba. El starter debería mostrar <strong>1 en lugar de 2</strong>: ese rojo es la primera evidencia útil.</li>
     </ol>
     <p class="note"><strong>Decide qué rojo ves.</strong> «Esperaba 2 y obtuve 1» con la prueba ejecutada es <strong>rojo esperado</strong> del bug. «flutter no se reconoce», import ausente o test que no compila es <strong>rojo inesperado</strong> de entorno; resuélvelo con <a href="../Unidad/05_DEBUGGING_PM6.md">Debugging</a> antes de corregir la lógica. Si la prueba ya es verde, comprueba archivo, datos, aserción y versión; un verde de humo no prueba el contador.</p>
@@ -24,15 +24,15 @@
   </section>
   <h2>Recorrido completo · 480 minutos</h2>
   <p><strong>390 min autónomos y dos bloques de 45 min efectivos.</strong> T1 (12/01/2027) y T2 (19/01/2027), franja nominal 19:30–20:25, ofrecen taller o misión desde casa: eliges una vía por bloque. Los 10 min restantes de cada franja presencial son margen de arranque y transición; los 20 min de aprendizaje pasan a corregir/regresar y observar/medir (A04 y A05). El microcambio individual I3 de T2 exige supervisión, con cita reprogramada si no asistes en la fecha ordinaria.</p>
-  <p><strong>Calendario pendiente:</strong> apertura de PM6, entrega objetivo y cierre técnico/de la unidad aún no están confirmados. Las fechas de los talleres no son fechas de entrega. Antes de abrir la unidad en AULES aparecerán aquí y en la actividad de entrega.</p>
-  <p><small>Última actualización · 25/09/2026: talleres 12 y 19 de enero; misiones efectivas de 45 min, con vía desde casa.</small></p>
+  <p>Disponible desde 21/12/2026 00:00. Fecha de entrega final: 24/01/2027 23:59. Cierre de envíos: 27/01/2027 23:59. Hora de Europe/Madrid. El temario permanece disponible para consulta después del cierre de los envíos.</p>
+  <p><small>Última actualización · 02/11/2026: talleres 12 y 19 de enero; misiones efectivas de 45 min, con vía desde casa.</small></p>
   <table>
     <caption>Orden de aprendizaje y salida principal</caption>
     <thead><tr><th>Ahora</th><th>Haz y comprueba</th><th>Guarda</th></tr></thead>
     <tbody>
       <tr><td>1. Arrancar y probar</td><td>Smoke verde; contador rojo esperado; unit/widget</td><td>Q01</td></tr>
       <tr><td>2. Corregir con control</td><td>Futures fuera de orden, retry, dispose, identidad y retención</td><td>Q02 y regresiones</td></tr>
-      <tr><td>3. Observar y medir</td><td>Inspector, Performance profile y Memory; emulador si disponible</td><td>Q03 y estado real</td></tr>
+      <tr><td>3. Observar y medir</td><td>Inspector, Inspector y Memory; Performance en móvil físico con profile</td><td>Q03 y estado real</td></tr>
       <tr><td>4. Android y CI</td><td>Workflow, SHA, APK; interacción en emulador; instalación en móvil</td><td>Q04–Q05 e I3</td></tr>
     </tbody>
   </table>

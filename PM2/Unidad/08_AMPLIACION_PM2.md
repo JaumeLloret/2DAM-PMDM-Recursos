@@ -1,37 +1,48 @@
-# Ampliación PM2 · rutas opcionales
+# PM2 · Ampliación opcional
 
-Estas rutas no forman parte de los 480 min, no son requisito de PM3 y no generan ventaja obligatoria.
+Estas propuestas son voluntarias, quedan fuera de las 480 min y no son requisito para PM3. Todas profundizan en las mismas decisiones de modelado de RA2.a; no introducen interfaz Flutter ni contenidos de unidades posteriores.
 
-## A1 · `copyWith` manual
+## A1 · Dos diseños válidos
 
-Crear una nueva `TaskCard` cambiando prioridad sin mutar la anterior. Analizar coste de boilerplate y campos anulables.
+Construye dos versiones pequeñas de una columna:
 
-## A2 · Igualdad por valor
+- mutable con operaciones controladas;
+- inmutable, donde cada operación devuelve una nueva columna.
 
-Decidir si `MemberRef('m1') == MemberRef('m1')` debe ser cierto. Implementar `==` y `hashCode` solo después de escribir la necesidad en colecciones.
+Compara facilidad de explicación, riesgo de alias y coste de cada cambio.
 
-## A3 · Genérico sencillo
+## A2 · Igualdad por identidad o por valor
 
-Diseñar `Result<T>` mínimo para valor o mensaje de error. Compararlo con el record local del laboratorio. Evitar jerarquías complejas.
+Decide si dos `MemberRef('m1')` deben considerarse iguales. Antes de implementar `==` y `hashCode`, escribe qué comportamiento observable necesitas en un `Set` o como clave de `Map`.
 
-## A4 · Extension
+## A3 · Índice por id
 
-Añadir una extensión pequeña sobre `Iterable<TaskCard>` para filtrar urgentes. Comparar con una función externa y conservar la opción más legible.
+Compara buscar una tarjeta en una lista con mantener un `Map<String, TaskCard>`. No hagas benchmarking ornamental: justifica cuándo el índice compensa la complejidad añadida.
 
-## A5 · Sealed + patterns
+## A4 · Cambiar una regla sin añadir clases
 
-Modelar `SnapshotState` como familia cerrada y usar switch exhaustivo. Es ampliación porque añade jerarquía y patterns más avanzados.
+Añade prioridad urgente con una capacidad especial. Intenta resolverla primero modificando el vocabulario y la regla existente. Crea una clase nueva solo si aparece una responsabilidad propia.
 
-## A6 · Stream conceptual
+## A5 · Segundo dominio pequeño
 
-Simular tres actualizaciones locales con `Stream.periodic`. Explicar diferencia `Future` (un resultado) / `Stream` (secuencia), sin conectividad ni estado Flutter.
+Transfiere el patrón a una agenda de reservas o inventario local:
 
-## A7 · Eficiencia razonada
+1. identifica tres estados inválidos;
+2. diseña el mínimo de clases/enums;
+3. escribe una clase que no crearías;
+4. añade una operación local `Future` con error observable.
 
-Comparar búsqueda lineal en lista con índice `Map<String, TaskCard>`. No hacer benchmarking ornamental: medir solo si el tamaño/caso justifica la decisión.
+## A6 · Mejorar la explicación
 
-## Regla
+Escribe un README para tu laboratorio que permita a otra persona:
 
-Cada ampliación debe responder «qué problema nuevo resuelve». Si solo demuestra sintaxis, queda como experimento, no como mejora del diseño base.
+- abrir la carpeta correcta;
+- ejecutar el baseline;
+- entender las reglas;
+- reproducir un fallo;
+- verificar una reparación.
 
+## Regla de ampliación
+
+Cada propuesta debe responder «qué problema nuevo resuelve». Si solo aumenta sintaxis o número de clases, conserva el experimento fuera del diseño base.
 

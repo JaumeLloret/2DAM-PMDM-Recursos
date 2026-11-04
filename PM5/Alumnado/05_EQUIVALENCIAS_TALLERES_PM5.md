@@ -1,13 +1,17 @@
-# Equivalencias de talleres · PM5
+# PM5 · Dos vías equivalentes para los talleres
 
-La equivalencia **sustituye** el taller; nunca se acumula a los 720 min. Requiere acuerdo/causa según las reglas del centro y puede dejar observación física pendiente.
+En cada bloque eliges **taller opcional** o **misión autónoma AULES**. No haces ambas. Cada vía dura 45 min efectivos (55 nominales en la franja, con 10 de margen), tiene la misma finalidad y produce la misma clase de evidencia.
 
-| Taller | Equivalencia de 55 min | Evidencia |
+Los talleres presenciales opcionales son el **24/11/2026** (bloque 1), **01/12/2026** (bloque 2) y **15/12/2026** (bloque 3), de 19:30 a 20:25. La misión correspondiente puede realizarse desde casa en lugar del taller.
+
+| Bloque | Vía autónoma de 45 min | Evidencia común |
 |---|---|---|
-| 1 · permisos/BLE | 10 min predicción + 25 min trazas fake + 15 min diagnóstico + 5 min ticket | transición, cleanup y `PENDIENTE_HARDWARE` si procede |
-| 2 · sensor/media | 10 min traza + 25 min conversión fixture + 15 min error corrupto + 5 min registro | diff, bytes/dimensiones y depuración |
-| 3 · I3 | sesión individual reprogramada de 55 min con 23 min sin agente | cambio, ejecución, explicación y estado |
+| 1 · permisos/BLE | estados de permiso + BLE fake + error + lifecycle + ticket | transición, secuencia, cleanup y estado FAKE/REAL/pendiente |
+| 2 · sensor/media | traza + JPEG real + corrupto + lifecycle + incidencia | diff, MIME/dimensiones/firma, debugging y estado |
+| 3 · I3 | 5 preparación + 23 sin agente + 10 ejecución + 5 explicación + 2 cierre | predicción, diff, resultado, regresión, explicación y estado |
 
-La equivalencia no convierte un fake en prueba real. Cuando el CE exija capacidad física, se agenda observación con equipo del centro.
+Los 10 min de cada bloque están redistribuidos en las fases 5, 8 y 11 de la Ruta; no se hacen las dos vías ni se suma otra tarea.
 
+La misión completa está en [Talleres opcionales y misiones autónomas](../Unidad/11_TALLERES_OPCIONALES_PM5.md).
 
+La vía autónoma permite completar el aprendizaje, pero no convierte un fake en observación física. Cuando un CE la necesite, se agenda una observación posterior con equipo del centro.

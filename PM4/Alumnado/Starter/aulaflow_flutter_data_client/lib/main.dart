@@ -77,4 +77,3 @@ class _StarterAppState extends State<StarterApp> {
     ),
   );
 }
-
